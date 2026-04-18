@@ -86,10 +86,10 @@ public sealed partial class GameManager : GameObjectSystem<GameManager>, Compone
 		player.PlayerData = playerData;
 		player.LoadRoleplayData();
 		player.EnsureValidJobDefinition();
-		AdminSystem.Current?.RefreshPlayerRole( player );
 
 		var owner = Connection.Find( playerData.PlayerId );
 		playerGo.NetworkSpawn( owner );
+		AdminSystem.Current?.RefreshPlayerRole( player );
 
 		IPlayerEvent.PostToGameObject( player.GameObject, x => x.OnSpawned() );
 		player.EquipBestWeapon();
