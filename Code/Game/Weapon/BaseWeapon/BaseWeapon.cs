@@ -26,7 +26,7 @@ public partial class BaseWeapon : BaseCarryable, IPlayerControllable
 	/// <summary>
 	/// The dry fire sound if we have no ammo
 	/// </summary>
-	private static SoundEvent DryFireSound = new SoundEvent( "audio/sounds/dry_fire.sound" );
+	private static SoundEvent DryFireSound = new SoundEvent( "sounds/dry_fire.sound" );
 
 	/// <summary>
 	/// Play a dry fire sound. You should only call this on weapons that can't auto reload - if they can, use <see cref="TryAutoReload"/> instead.
@@ -211,6 +211,12 @@ public partial class BaseWeapon : BaseCarryable, IPlayerControllable
 	/// The input that fires the secondary attack when this weapon is controlled via a seat.
 	/// </summary>
 	[Property, Sync, ClientEditable, Group( "Inputs" )] public ClientInput SecondaryInput { get; set; }
+
+	public bool CanControl( PlayerController player )
+	{
+		var inventory = player.GetComponent<PlayerInventory>();
+		return inventory is null || !inventory.ActiveWeapon.IsValid();
+	}
 
 	public void OnStartControl() { }
 

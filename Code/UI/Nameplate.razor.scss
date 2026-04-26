@@ -23,14 +23,33 @@ Nameplate
         gap: 20px;
         font-size: 32px;
 
+        .avatar-wrap
+        {
+            position: relative;
+            width: 64px;
+            height: 64px;
+            flex-shrink: 0;
+        }
+
+        .speaking-glow
+        {
+            position: absolute;
+            width: 96px;
+            height: 96px;
+            left: -16px;
+            top: -16px;
+            border-radius: 100%;
+            background: radial-gradient( rgba(0, 148, 255, 0.7) 0%, transparent 70% );
+        }
+
         .avatar
         {
             width: 64px;
             height: 64px;
-            flex-shrink: 0;
             background-position: center;
             background-size: cover;
             border-radius: 50%;
+            box-shadow: 1px 1px 5px rgba( black, 0.75 );
         }
 
         .name-block
@@ -43,7 +62,8 @@ Nameplate
         .name
         {
             font-family: $body-font;
-            color: #fff;
+            color: $color-accent;
+            text-shadow: 1px 1px 0px rgba( black, 0.75 );
 			text-overflow: ellipsis;
         }
 
