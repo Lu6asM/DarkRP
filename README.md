@@ -1,44 +1,75 @@
-# DarkRP for S&Box
+# Virtual Roleplay — DarkRP S&box
 
-DarkRP is an open-source project aimed at recreating the DarkRP experience in S&box with a modular and maintainable architecture.
-It is based on a fork of the official Sandbox mode, meaning it behaves very similarly to Garry’s Mod: you can use standard Sandbox entities, with a roleplay layer built on top.
-I don’t plan to maintain this project indefinitely, but my goal is to create a clean, solid, and reusable foundation.
+> Serveur DarkRP français sur S&box. Jobs, économie et roleplay dans une ville vivante.
 
-You can try it in-game here: https://sbox.game/sousoup/darkrp2
-
-## Contributors
-
-Thanks to all current and future contributors for your time, ideas, and contributions to the project.
+![S&box](https://img.shields.io/badge/S%26box-Compatible-blue)
+![License](https://img.shields.io/badge/License-MIT-green)
+![Language](https://img.shields.io/badge/Langage-C%23-purple)
 
 ---
 
-<div align="center">
-  <a href="https://github.com/Facepunch/sandbox">
-    <img src="https://cdn.sbox.game/org/facepunch/sandbox/thumb/8d0a5169-0ce3-4520-b9e7-23bcafddf7fc.png" alt="Logo" width="450">
-  </a>
+## À propos
 
-  <h3 align="center">Sandbox</h3>
+**Virtual Roleplay** est un serveur DarkRP francophone basé sur S&box. Forké depuis [sousou63/DarkRP](https://github.com/sousou63/DarkRP), ce projet apporte une expérience roleplay complète avec des modifications personnalisées adaptées à notre communauté.
 
-  <p align="center">
-    Our multiplayer sandbox built with the tools provided by <a href="https://sbox.facepunch.com">s&box</a>.
-    <br />
-    <a href="https://sbox.game/facepunch/sandbox"><strong>Play now »</strong></a>
-  </p>
-</div>
-<br/>
+- Serveur : hébergé sur [low.ms](https://low.ms)
+- Gamemode : `virtualroleplay/darkrp` sur sbox.game
 
-https://github.com/user-attachments/assets/f68c7011-6560-49c3-9d3a-ce2411885d08
+---
 
-## License
+## Fonctionnalités
 
-Feel free to learn and use parts in your own s&box games.
+- Jobs et métiers
+- Système économique
+- Système d'administration
+- Interface en français
+- Modifications gameplay exclusives
 
-[MIT](LICENSE) - Copyright (c) 2026 Facepunch
+---
 
-## Pull Requests
+## Installation (développement local)
 
-We accept pull requests, but ensure that you're using the same coding style and standards as us. We reserve the right to reject any pull request. Feel free to fork if you wish.
+### Prérequis
+- [S&box](https://sbox.facepunch.com/) installé
+- Git
 
-## Issues
+### Cloner le repo
 
-If you encounter any bugs, feel free to make an issue. Make sure that the issue doesn't already exist before making one.
+```bash
+git clone https://github.com/Lu6asM/DarkRP
+```
+
+Placer le dossier dans :
+```
+C:\Program Files (x86)\Steam\steamapps\common\sbox\addons\
+```
+
+Ouvrir le projet depuis l'éditeur S&box.
+
+---
+
+## Configuration admin
+
+Créer le fichier `server/admins.json` avec vos Steam ID 64 :
+
+```json
+{
+  "VOTRE_STEAMID64": "superadmin"
+}
+```
+
+---
+
+## Récupérer les mises à jour du repo original
+
+```bash
+git remote add upstream https://github.com/sousou63/DarkRP
+git fetch upstream
+git merge upstream/main
+```
+
+---
+
+## Licence
+
+MIT — basé sur le travail de [sousou63](https://github.com/sousou63) et [Facepunch](https://github.com/Facepunch).
