@@ -2,13 +2,103 @@
 @using Sandbox.UI;
 @inherits UtilityPage
 @namespace Sandbox
-@attribute [Icon( "🔧" )]
-@attribute [Title( "Utilities" )]
-@attribute [Group( "Utilities" )]
+@attribute [Icon( "shield" )]
+@attribute [Title( "Admin Panel" )]
+@attribute [Group( "Admin" )]
 @attribute [Order( 0 )]
 
-<root class="page" style="flex-direction: column;">
-    <div class="control-row" @onclick=@(() => ConsoleSystem.Run( "kill" ))>
-        <label class="left">🚿 Kill Me</label>
+<root class="page" style="flex-direction: column; gap: 15px; padding: 20px;">
+    
+    <div style="font-size: 24px; font-weight: bold; color: white;">Panneau d'Administration</div>
+
+    <!-- Catégorie Actions Joueur -->
+    <div style="background-color: rgba(20, 20, 20, 0.8); border-radius: 8px; padding: 15px; flex-direction: column; gap: 8px;">
+        <div style="color: #FF5733; font-weight: bold; font-size: 18px; margin-bottom: 5px;">Actions Personnelles</div>
+        
+        <div class="control-row" @onclick=@ToggleNoclip>
+            <label class="left">🕊️ Activer/Désactiver Noclip</label>
+        </div>
+
+        <!-- Remplacement du Switch par un bouton cliquable classique avec état visuel -->
+        <div class="control-row" @onclick=@ToggleInvisibility>
+            <label class="left">👻 Invisibilité</label>
+            <label class="right" style="font-weight: bold; color: @(IsInvisible ? "#33FF57" : "#FF5733");">
+                @(IsInvisible ? "ON" : "OFF")
+            </label>
+        </div>
+
+        <div class="control-row" @onclick=@ToggleGodmode>
+            <label class="left">⭐ Invincibilité (Godmode)</label>
+        </div>
     </div>
+
+    <!-- Catégorie Actions Serveur -->
+    <div style="background-color: rgba(20, 20, 20, 0.8); border-radius: 8px; padding: 15px; flex-direction: column; gap: 8px;">
+        <div style="color: #33FF57; font-weight: bold; font-size: 18px; margin-bottom: 5px;">Gestion du Serveur</div>
+        
+        <div class="control-row" @onclick=@CleanupMap>
+            <label class="left">🧹 Nettoyer la map (Cleanup)</label>
+        </div>
+    </div>
+
 </root>
+
+@code {
+    
+    // --- INVISIBILITÉ ---
+    public bool IsInvisible { get; set; } = false;
+    
+    // On crée une liste pour se souvenir des modèles qu'on a rendus invisibles
+    private List<SkinnedModelRenderer> _hiddenRenderers = new();
+
+    private void ToggleInvisibility()
+    {
+        IsInvisible = !IsInvisible;
+
+        if ( IsInvisible )
+        {
+            // On veut devenir invisible : on cherche et on cache
+            var renderers = Scene.GetAllComponents<SkinnedModelRenderer>();
+
+            foreach ( var renderer in renderers )
+            {
+                if ( !renderer.IsProxy && renderer.GameObject.Root.Tags.Has("player") )
+                {
+                    renderer.Enabled = false;
+                    _hiddenRenderers.Add( renderer ); // On sauvegarde ce composant
+                }
+            }
+        }
+        else
+        {
+            // On veut redevenir visible : on rallume tout ce qu'on avait sauvegardé
+            foreach ( var renderer in _hiddenRenderers )
+            {
+                if ( renderer.IsValid() )
+                {
+                    renderer.Enabled = true;
+                }
+            }
+            // On vide la liste maintenant qu'on est de nouveau visible
+            _hiddenRenderers.Clear();
+        }
+    }
+
+    // --- NOCLIP ---
+    private void ToggleNoclip()
+    {
+        ConsoleSystem.Run( "noclip" );
+    }
+
+    // --- GODMODE ---
+    private void ToggleGodmode()
+    {
+        ConsoleSystem.Run( "god" );
+    }
+
+    // --- CLEANUP ---
+    private void CleanupMap()
+    {
+        ConsoleSystem.Run( "cleanup" );
+    }
+}
