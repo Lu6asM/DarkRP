@@ -1,12 +1,12 @@
 {
-  "Title": "Police Chief",
-  "Description": "Leads Civil Protection and responds to high-risk situations with heavier gear.",
-  "Category": "Government",
+  "Title": "Commissaire",
+  "Description": "Dirige la Protection Civile et intervient dans les situations à haut risque avec un équipement lourd.",
+  "Category": "Gouvernement",
   "AccentColor": "0.251,0.651,0.9412,1",
   "Salary": 90,
   "MaxPlayers": 1,
   "RequiresVote": true,
-  "Command": "/chief",
+  "Command": "/commissaire",
   "Order": 20,
   "StartingItems": [
     "weapons/glock/glock.prefab",
@@ -20,6 +20,7 @@
     "models/citizen_clothes/vest/tactical_vest/models/tactical_vest.clothing",
     "models/citizen_clothes/shoes/boots/black_boots.clothing"
   ],
+  "IsDefault": false,
   "__references": [],
   "__version": 0
 }

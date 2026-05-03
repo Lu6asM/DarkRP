@@ -6,7 +6,10 @@
   "Schema": 1,
   "IncludeSourceFiles": false,
   "Resources": "/fonts/*\n/UI/*.png\n/ui/*.png\n/ui/*\n/ui/weapons/melee/*",
-  "PackageReferences": [],
+  "PackageReferences": [
+    "facepunch.sandbox",
+    "facepunch.citizenassets"
+  ],
   "EditorReferences": null,
   "Mounts": [],
   "IsStandaloneOnly": false,

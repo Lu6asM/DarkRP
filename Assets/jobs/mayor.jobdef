@@ -1,12 +1,12 @@
 {
-  "Title": "Mayor",
-  "Description": "Runs the city government, sets policy, and directs law enforcement priorities.",
-  "Category": "Government",
+  "Title": "Maire",
+  "Description": "Dirige le gouvernement de la ville, définit les politiques et oriente les priorités des forces de l'ordre.",
+  "Category": "Gouvernement",
   "AccentColor": "0.5451,0.8275,0.9922,1",
   "Salary": 110,
   "MaxPlayers": 1,
   "RequiresVote": true,
-  "Command": "/mayor",
+  "Command": "/maire",
   "Order": 30,
   "StartingItems": [],
   "Clothing": [
@@ -15,6 +15,7 @@
     "models/citizen_clothes/trousers/smarttrousers/trousers.smart.clothing",
     "models/citizen_clothes/shoes/boots/black_boots.clothing"
   ],
+  "IsDefault": false,
   "__references": [],
   "__version": 0
 }

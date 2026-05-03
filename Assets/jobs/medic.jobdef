@@ -1,11 +1,11 @@
 {
-  "Title": "Medic",
-  "Description": "Support role meant to stabilize injured players and move through active scenes safely.",
+  "Title": "Médecin",
+  "Description": "Rôle de soutien destiné à stabiliser les joueurs blessés et à se déplacer en toute sécurité sur les scènes actives.",
   "Category": "Services",
   "AccentColor": "0.3882,0.902,0.7451,1",
   "Salary": 60,
   "MaxPlayers": 3,
-  "Command": "/medic",
+  "Command": "/medecin",
   "Order": 70,
   "StartingItems": [
     "weapons/crowbar/crowbar.prefab",
@@ -18,6 +18,7 @@
     "models/citizen_clothes/shoes/boots/black_boots.clothing",
     "models/citizen_clothes/gloves/rubber_gloves/rubber_gloves.clothing"
   ],
+  "IsDefault": false,
   "__references": [],
   "__version": 0
 }
