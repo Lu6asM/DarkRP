@@ -22,6 +22,7 @@ code/Properties/*
 *launchSettings.json
 *.sln
 *.vmat.meta
+CLAUDE.md
 
 *idea
 
