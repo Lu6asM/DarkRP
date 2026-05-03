@@ -1,6 +1,6 @@
 {
-  "Title": "Gun Dealer",
-  "Description": "Black-market supplier who starts armed enough to protect stock and territory.",
+  "Title": "Vendeur d'armes",
+  "Description": "Fournisseur du marché noir qui commence assez armé pour protéger son stock et son territoire.",
   "Category": "Commerce",
   "AccentColor": "0.9882,0.6431,0.2863,1",
   "Salary": 70,

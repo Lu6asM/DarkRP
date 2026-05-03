@@ -1,7 +1,7 @@
 {
-  "Title": "Civil Protection",
-  "Description": "Frontline police role focused on patrols, arrests, and street control.",
-  "Category": "Government",
+  "Title": "Protection Civile",
+  "Description": "Rôle de police de première ligne axé sur les patrouilles, les arrestations et le contrôle des rues.",
+  "Category": "Gouvernement",
   "AccentColor": "0.3373,0.7176,0.9765,1",
   "Salary": 65,
   "MaxPlayers": 8,

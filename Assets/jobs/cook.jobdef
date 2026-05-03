@@ -1,6 +1,6 @@
 {
-  "Title": "Cook",
-  "Description": "Food service role focused on utility, survival, and civilian support.",
+  "Title": "Cuisinier",
+  "Description": "Rôle de service alimentaire axé sur l'utilité, la survie et le soutien aux civils.",
   "Category": "Services",
   "AccentColor": "0.9843,0.7451,0.3098,1",
   "Salary": 40,
