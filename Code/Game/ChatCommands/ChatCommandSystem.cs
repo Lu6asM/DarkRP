@@ -111,18 +111,18 @@ public static class ChatCommandSystem
 
 	static readonly ChatCommandDefinition[] StaticCommands =
 	[
-		new( "advert", "/advert <message>", "Broadcast an advert message.", AdvertCommand, aliases: ["ad"] ),
-		new( "ooc", "/ooc <message>", "Talk out of character.", OocCommand, aliases: ["//"] ),
-		new( "me", "/me <action>", "Describe a roleplay action.", MeCommand ),
-		new( "pm", "/pm <player> <message>", "Send a private message.", PrivateMessageCommand, aliases: ["msg", "tell", "w"] ),
-		new( "dropmoney", "/dropmoney <amount>", "Drop money in front of you.", DropMoneyCommand, aliases: ["dropcash"] ),
-		new( "name", "/name <rp name>", "Change your roleplay name.", NameCommand, aliases: ["rpname", "nick"] ),
-		new( "kick", "/kick <player> [reason]", "Kick a player.", KickCommand, ChatCommandAccess.Admin, accessText: "admin" ),
-		new( "ban", "/ban <player|steamid> [reason]", "Ban a player.", BanCommand, ChatCommandAccess.SuperAdmin, accessText: "superadmin" ),
-		new( "unban", "/unban <steamid>", "Remove a SteamID ban.", UnbanCommand, ChatCommandAccess.SuperAdmin, accessText: "superadmin" ),
-		new( "setadmin", "/setadmin <player> <none|admin|superadmin>", "Change a player's staff role.", SetAdminCommand, ChatCommandAccess.SuperAdmin, accessText: "superadmin" ),
-		new( "givemoney", "/givemoney <player> <amount>", "Give money to a player.", GiveMoneyCommand, ChatCommandAccess.Admin, accessText: "admin" ),
-		new( "setmoney", "/setmoney <player> <amount>", "Set a player's money.", SetMoneyCommand, ChatCommandAccess.Admin, accessText: "admin" )
+		new( "advert", "/advert <message>", "Diffuser un message d'annonce.", AdvertCommand, aliases: ["ad"] ),
+		new( "ooc", "/ooc <message>", "Parler hors personnage.", OocCommand, aliases: ["//"] ),
+		new( "me", "/me <action>", "Décrire une action de jeu de rôle.", MeCommand ),
+		new( "pm", "/pm <player> <message>", "Envoyer un message privé.", PrivateMessageCommand, aliases: ["msg", "tell", "w"] ),
+		new( "dropmoney", "/dropmoney <amount>", "Laisser tomber de l'argent devant vous.", DropMoneyCommand, aliases: ["dropcash"] ),
+		new( "name", "/name <rp name>", "Changer votre nom de jeu de rôle.", NameCommand, aliases: ["rpname", "nick"] ),
+		new( "kick", "/kick <player> [reason]", "Expulser un joueur.", KickCommand, ChatCommandAccess.Admin, accessText: "admin" ),
+		new( "ban", "/ban <player|steamid> [reason]", "Bannir un joueur.", BanCommand, ChatCommandAccess.SuperAdmin, accessText: "superadmin" ),
+		new( "unban", "/unban <steamid>", "Supprimer un bannissement SteamID.", UnbanCommand, ChatCommandAccess.SuperAdmin, accessText: "superadmin" ),
+		new( "setadmin", "/setadmin <player> <none|admin|superadmin>", "Changer le rôle d'un joueur.", SetAdminCommand, ChatCommandAccess.SuperAdmin, accessText: "superadmin" ),
+		new( "givemoney", "/givemoney <player> <amount>", "Donner de l'argent à un joueur.", GiveMoneyCommand, ChatCommandAccess.Admin, accessText: "admin" ),
+		new( "setmoney", "/setmoney <player> <amount>", "Définir l'argent d'un joueur.", SetMoneyCommand, ChatCommandAccess.Admin, accessText: "admin" )
 	];
 
 	public static IReadOnlyList<string> TokenizeArguments( string argumentsText )
@@ -158,7 +158,7 @@ public static class ChatCommandSystem
 
 		if ( string.IsNullOrWhiteSpace( commandName ) )
 		{
-			chat?.AddSystemTextTo( caller, "Start typing a command to see suggestions.", "/" );
+			chat?.AddSystemTextTo( caller, "Commencez à taper une commande pour voir les suggestions.", "/" );
 			return true;
 		}
 
@@ -172,7 +172,7 @@ public static class ChatCommandSystem
 		{
 			if ( !CanUseCommand( player, command ) )
 			{
-				context.Reply( "You do not have access to that command.", "!" );
+				context.Reply( "Vous n'avez pas accès à cette commande.", "!" );
 				return true;
 			}
 
@@ -180,7 +180,7 @@ public static class ChatCommandSystem
 			return true;
 		}
 
-		context.Reply( "Unknown command.", "!" );
+		context.Reply( "Commande inconnue.", "!" );
 		return true;
 	}
 
@@ -313,7 +313,7 @@ public static class ChatCommandSystem
 
 		if ( string.IsNullOrWhiteSpace( query ) )
 		{
-			error = "Enter a player name or SteamID.";
+			error = "Entrez un nom de joueur ou un SteamID.";
 			return false;
 		}
 
@@ -347,8 +347,8 @@ public static class ChatCommandSystem
 		}
 
 		error = matches.Length == 0
-			? "Player not found."
-			: $"Multiple players match: {string.Join( ", ", matches.Select( x => x.DisplayName ) )}.";
+			? "Joueur non trouvé."
+			: $"Plusieurs joueurs correspondent : {string.Join( ", ", matches.Select( x => x.DisplayName ) )}.";
 		return false;
 	}
 
@@ -365,11 +365,11 @@ public static class ChatCommandSystem
 	{
 		target = null;
 		rest = string.Empty;
-		error = "Player not found.";
+		error = "Joueur non trouvé.";
 
 		if ( arguments.Count == 0 )
 		{
-			error = "Enter a target player.";
+			error = "Entrez un joueur cible.";
 			return false;
 		}
 
@@ -419,29 +419,29 @@ public static class ChatCommandSystem
 	{
 		if ( string.IsNullOrWhiteSpace( context.ArgumentsText ) )
 		{
-			context.Reply( "Usage: /advert <message>", "!" );
+			context.Reply( "Utilisation : /advert <message>", "!" );
 			return;
 		}
 
-		context.Broadcast( $"[Advert] {context.Player.DisplayName}: {context.ArgumentsText}", "AD" );
+		context.Broadcast( $"[Annonce] {context.Player.DisplayName} : {context.ArgumentsText}", "AD" );
 	}
 
 	static void OocCommand( ChatCommandContext context )
 	{
 		if ( string.IsNullOrWhiteSpace( context.ArgumentsText ) )
 		{
-			context.Reply( "Usage: /ooc <message>", "!" );
+			context.Reply( "Utilisation : /ooc <message>", "!" );
 			return;
 		}
 
-		context.Broadcast( $"[OOC] {context.Player.DisplayName}: {context.ArgumentsText}", "OOC" );
+		context.Broadcast( $"[HC] {context.Player.DisplayName} : {context.ArgumentsText}", "OOC" );
 	}
 
 	static void MeCommand( ChatCommandContext context )
 	{
 		if ( string.IsNullOrWhiteSpace( context.ArgumentsText ) )
 		{
-			context.Reply( "Usage: /me <action>", "!" );
+			context.Reply( "Utilisation : /me <action>", "!" );
 			return;
 		}
 
@@ -455,14 +455,14 @@ public static class ChatCommandSystem
 
 		if ( string.IsNullOrWhiteSpace( message ) )
 		{
-			context.Reply( "Usage: /pm <player> <message>", "!" );
+			context.Reply( "Utilisation : /pm <joueur> <message>", "!" );
 			return;
 		}
 
-		context.Chat?.AddSystemTextTo( context.Connection, $"PM to {target.DisplayName}: {message}", "PM" );
+		context.Chat?.AddSystemTextTo( context.Connection, $"MP pour {target.DisplayName} : {message}", "PM" );
 		if ( target.Network.Owner != context.Connection )
 		{
-			context.Chat?.AddSystemTextTo( target.Network.Owner, $"PM from {context.Player.DisplayName}: {message}", "PM" );
+			context.Chat?.AddSystemTextTo( target.Network.Owner, $"MP de {context.Player.DisplayName} : {message}", "PM" );
 		}
 	}
 
@@ -470,7 +470,7 @@ public static class ChatCommandSystem
 	{
 		if ( context.Arguments.Count < 1 || !TryParsePositiveInt( context.Arguments[0], out var amount ) )
 		{
-			context.Reply( "Usage: /dropmoney <amount>", "!" );
+			context.Reply( "Utilisation : /dropmoney <montant>", "!" );
 			return;
 		}
 
@@ -481,7 +481,7 @@ public static class ChatCommandSystem
 	{
 		if ( string.IsNullOrWhiteSpace( context.ArgumentsText ) )
 		{
-			context.Reply( "Usage: /name <rp name>", "!" );
+			context.Reply( "Utilisation : /name <nom rp>", "!" );
 			return;
 		}
 
@@ -496,59 +496,59 @@ public static class ChatCommandSystem
 		var connection = target.Network.Owner;
 		if ( connection is null || connection.IsHost || connection == context.Connection )
 		{
-			context.Reply( "You cannot kick that player.", "!" );
+			context.Reply( "Vous ne pouvez pas expulser ce joueur.", "!" );
 			return;
 		}
 
-		GameManager.Current?.Kick( connection, string.IsNullOrWhiteSpace( reason ) ? "Kicked" : reason );
-		Notices.SendNotice( context.Connection, "person_remove", Color.Green, $"{target.DisplayName} was kicked.", 3 );
+		GameManager.Current?.Kick( connection, string.IsNullOrWhiteSpace( reason ) ? "Expulsé" : reason );
+		Notices.SendNotice( context.Connection, "person_remove", Color.Green, $"{target.DisplayName} a été expulsé.", 3 );
 	}
 
 	static void BanCommand( ChatCommandContext context )
 	{
 		if ( context.Arguments.Count == 0 )
 		{
-			context.Reply( "Usage: /ban <player|steamid> [reason]", "!" );
+			context.Reply( "Utilisation : /ban <joueur|steamid> [raison]", "!" );
 			return;
 		}
 
 		if ( TryFindPlayerAndRest( context.Arguments, out var target, out var reason, out _ ) )
 		{
-			var finalReason = string.IsNullOrWhiteSpace( reason ) ? "Banned" : reason;
+			var finalReason = string.IsNullOrWhiteSpace( reason ) ? "Banni" : reason;
 			var connection = target.Network.Owner;
 			if ( connection is null || connection.IsHost || connection == context.Connection )
 			{
-				context.Reply( "You cannot ban that player.", "!" );
+				context.Reply( "Vous ne pouvez pas bannir ce joueur.", "!" );
 				return;
 			}
 
 			BanSystem.Current?.Ban( connection, finalReason );
-			Notices.SendNotice( context.Connection, "gavel", Color.Green, $"{target.DisplayName} was banned.", 3 );
+			Notices.SendNotice( context.Connection, "gavel", Color.Green, $"{target.DisplayName} a été banni.", 3 );
 			return;
 		}
 
 		SplitFirst( context.ArgumentsText, out var targetQuery, out reason );
-		var finalOfflineReason = string.IsNullOrWhiteSpace( reason ) ? "Banned" : reason;
+		var finalOfflineReason = string.IsNullOrWhiteSpace( reason ) ? "Banni" : reason;
 		if ( !ulong.TryParse( targetQuery, out var steamIdValue ) )
 		{
-			context.Reply( "Player not found. Use a SteamID to ban offline players.", "!" );
+			context.Reply( "Joueur non trouvé. Utilisez un SteamID pour bannir un joueur hors ligne.", "!" );
 			return;
 		}
 
 		BanSystem.Current?.Ban( steamIdValue, finalOfflineReason );
-		Notices.SendNotice( context.Connection, "gavel", Color.Green, $"{steamIdValue} was banned.", 3 );
+		Notices.SendNotice( context.Connection, "gavel", Color.Green, $"{steamIdValue} a été banni.", 3 );
 	}
 
 	static void UnbanCommand( ChatCommandContext context )
 	{
 		if ( context.Arguments.Count < 1 || !ulong.TryParse( context.Arguments[0], out var steamIdValue ) )
 		{
-			context.Reply( "Usage: /unban <steamid>", "!" );
+			context.Reply( "Utilisation : /unban <steamid>", "!" );
 			return;
 		}
 
 		BanSystem.Current?.Unban( steamIdValue );
-		Notices.SendNotice( context.Connection, "gavel", Color.Green, $"{steamIdValue} was unbanned.", 3 );
+		Notices.SendNotice( context.Connection, "gavel", Color.Green, $"{steamIdValue} a été débanni.", 3 );
 	}
 
 	static void SetAdminCommand( ChatCommandContext context )
@@ -558,19 +558,19 @@ public static class ChatCommandSystem
 
 		if ( !SplitFirst( rest, out var roleText, out _ ) || !TryParseAdminRole( roleText, out var role ) )
 		{
-			context.Reply( "Usage: /setadmin <player> <none|admin|superadmin>", "!" );
+			context.Reply( "Utilisation : /setadmin <joueur> <aucun|admin|superadmin>", "!" );
 			return;
 		}
 
 		var connection = target.Network.Owner;
 		if ( connection?.IsHost == true )
 		{
-			context.Reply( "You cannot change the host role.", "!" );
+			context.Reply( "Vous ne pouvez pas changer le rôle de l'hôte.", "!" );
 			return;
 		}
 
 		AdminSystem.Current?.SetRole( connection.SteamId, role, connection.DisplayName );
-		Notices.SendNotice( context.Connection, "security", Color.Green, $"{target.DisplayName} role set to {role}.", 3 );
+		Notices.SendNotice( context.Connection, "security", Color.Green, $"Le rôle de {target.DisplayName} a été défini sur {role}.", 3 );
 	}
 
 	static bool TryParseAdminRole( string roleText, out AdminRole role )
@@ -603,12 +603,12 @@ public static class ChatCommandSystem
 
 		if ( !SplitFirst( rest, out var amountText, out _ ) || !TryParsePositiveInt( amountText, out var amount ) )
 		{
-			context.Reply( "Usage: /givemoney <player> <amount>", "!" );
+			context.Reply( "Utilisation : /givemoney <joueur> <montant>", "!" );
 			return;
 		}
 
 		target.GiveMoney( amount );
-		Notices.SendNotice( context.Connection, "$", Color.Green, $"Gave ${amount:n0} to {target.DisplayName}.", 3 );
+		Notices.SendNotice( context.Connection, "$", Color.Green, $"A donné ${amount:n0} à {target.DisplayName}.", 3 );
 	}
 
 	static void SetMoneyCommand( ChatCommandContext context )
@@ -618,11 +618,11 @@ public static class ChatCommandSystem
 
 		if ( !SplitFirst( rest, out var amountText, out _ ) || !int.TryParse( amountText, out var amount ) || amount < 0 )
 		{
-			context.Reply( "Usage: /setmoney <player> <amount>", "!" );
+			context.Reply( "Utilisation : /setmoney <joueur> <montant>", "!" );
 			return;
 		}
 
 		target.SetMoney( amount );
-		Notices.SendNotice( context.Connection, "$", Color.Green, $"{target.DisplayName} now has ${amount:n0}.", 3 );
+		Notices.SendNotice( context.Connection, "$", Color.Green, $"{target.DisplayName} a maintenant ${amount:n0}.", 3 );
 	}
 }

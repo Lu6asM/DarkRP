@@ -267,13 +267,13 @@ public sealed class LimitsSystem : GameObjectSystem<LimitsSystem>, Global.ISpawn
 		return spawner.Dupe.PreviewModels.Count( m => m.Model?.Data?.Explosive == true );
 	}
 
-	private static string GetToolName( ToolMode tool ) => tool?.TypeDescription?.Title ?? tool?.GetType().Name ?? "Unknown";
+	private static string GetToolName( ToolMode tool ) => tool?.TypeDescription?.Title ?? tool?.GetType().Name ?? "Inconnu";
 
 	private static void NotifyLimit( PlayerData player, string category, int limit )
 	{
 		var target = player?.Connection;
 		if ( target is null ) return;
 
-		Notices.SendNotice( target, "block", Color.Red, $"Limit reached: {category} ({limit})", 3 );
+		Notices.SendNotice( target, "block", Color.Red, $"Limite atteinte : {category} ({limit})", 3 );
 	}
 }

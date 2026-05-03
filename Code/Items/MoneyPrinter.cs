@@ -33,9 +33,9 @@ public sealed class MoneyPrinter : Component, Component.IPressable, IPhysgunEven
 
 		var description = StoredMoney > 0
 			? $"{definition.Title} - ${StoredMoney:n0} - {GetHealthPercent():0}%"
-			: $"{definition.Title} - Empty - {GetHealthPercent():0}%";
+			: $"{definition.Title} - Vide - {GetHealthPercent():0}%";
 
-		return new IPressable.Tooltip( "Collect", "$", description );
+		return new IPressable.Tooltip( "Collecter", "$", description );
 	}
 
 	bool IPressable.CanPress( IPressable.Event e ) => StoredMoney > 0;
@@ -109,7 +109,7 @@ public sealed class MoneyPrinter : Component, Component.IPressable, IPhysgunEven
 
 		if ( player.Network.Owner is { } owner )
 		{
-			Notices.SendNotice( owner, "$", Color.Green, $"Collected ${collected:n0} from the printer.", 3 );
+			Notices.SendNotice( owner, "$", Color.Green, $"{collected:n0}$ récupérés de l'imprimante.", 3 );
 		}
 
 		PlayCollectEffects();
@@ -141,13 +141,13 @@ public sealed class MoneyPrinter : Component, Component.IPressable, IPhysgunEven
 
 		if ( ownerConnection is not null )
 		{
-			var attackerName = attacker.IsValid() ? attacker.DisplayName : "Someone";
-			Notices.SendNotice( ownerConnection, "warning", Color.Orange, $"{attackerName} destroyed your printer.", 3 );
+			var attackerName = attacker.IsValid() ? attacker.DisplayName : "Quelqu'un";
+			Notices.SendNotice( ownerConnection, "warning", Color.Orange, $"{attackerName} a détruit votre imprimante.", 3 );
 		}
 
 		if ( attacker.IsValid() && attacker.Network.Owner != ownerConnection )
 		{
-			Notices.SendNotice( attacker.Network.Owner, "warning", Color.Green, "Printer destroyed.", 2 );
+			Notices.SendNotice( attacker.Network.Owner, "warning", Color.Green, "Imprimante détruite.", 2 );
 		}
 
 		PlayDestroyEffects( WorldPosition );

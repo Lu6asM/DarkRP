@@ -22,7 +22,7 @@ public sealed class BanSystem : GameObjectSystem<BanSystem>, Component.INetworkL
 		if ( !_bans.TryGetValue( connection.SteamId, out var entry ) )
 			return true;
 
-		reason = $"You're banned from this server: {entry.Reason}";
+		reason = $"Vous êtes banni de ce serveur : {entry.Reason}";
 		return false;
 	}
 
@@ -31,12 +31,12 @@ public sealed class BanSystem : GameObjectSystem<BanSystem>, Component.INetworkL
 	/// </summary>
 	public void Ban( Connection connection, string reason )
 	{
-		Assert.True( Networking.IsHost, "Only the host may ban players." );
+		Assert.True( Networking.IsHost, "Seul l'hôte peut bannir des joueurs." );
 
 		_bans[connection.SteamId] = new BanEntry( connection.DisplayName, reason );
 		Save();
 		SendBannedListToAdmins();
-		Scene.Get<Chat>()?.AddSystemText( $"{connection.DisplayName} was banned: {reason}", "🔨" );
+		Scene.Get<Chat>()?.AddSystemText( $"{connection.DisplayName} a été banni : {reason}", "🔨" );
 		connection.Kick( reason );
 	}
 
@@ -46,7 +46,7 @@ public sealed class BanSystem : GameObjectSystem<BanSystem>, Component.INetworkL
 	/// </summary>
 	public void Ban( SteamId steamId, string reason )
 	{
-		Assert.True( Networking.IsHost, "Only the host may ban players." );
+		Assert.True( Networking.IsHost, "Seul l'hôte peut bannir des joueurs." );
 
 		_bans[steamId] = new BanEntry( steamId.ToString(), reason );
 		Save();
@@ -58,7 +58,7 @@ public sealed class BanSystem : GameObjectSystem<BanSystem>, Component.INetworkL
 	/// </summary>
 	public void Unban( SteamId steamId )
 	{
-		Assert.True( Networking.IsHost, "Only the host may unban players." );
+		Assert.True( Networking.IsHost, "Seul l'hôte peut débannir des joueurs." );
 
 		if ( _bans.Remove( steamId ) )
 		{
@@ -150,9 +150,9 @@ public sealed class BanSystem : GameObjectSystem<BanSystem>, Component.INetworkL
 		if ( target is null || target.IsHost || target == Rpc.Caller )
 			return;
 
-		var finalReason = string.IsNullOrWhiteSpace( reason ) ? "Banned" : reason.Trim();
+		var finalReason = string.IsNullOrWhiteSpace( reason ) ? "Banni" : reason.Trim();
 		Current.Ban( target, finalReason );
-		Notices.SendNotice( Rpc.Caller, "gavel", Color.Green, $"{target.DisplayName} was banned.", 3 );
+		Notices.SendNotice( Rpc.Caller, "gavel", Color.Green, $"{target.DisplayName} a été banni.", 3 );
 	}
 
 	/// <summary>
@@ -175,7 +175,7 @@ public sealed class BanSystem : GameObjectSystem<BanSystem>, Component.INetworkL
 			else
 				Current.Ban( steamId, reason );
 
-			Log.Info( $"Banned {steamId}: {reason}" );
+			Log.Info( $"Banni {steamId} : {reason}" );
 			return;
 		}
 
@@ -184,11 +184,11 @@ public sealed class BanSystem : GameObjectSystem<BanSystem>, Component.INetworkL
 		if ( conn is not null )
 		{
 			Current.Ban( conn, reason );
-			Log.Info( $"Banned {conn.DisplayName}: {reason}" );
+			Log.Info( $"Banni {conn.DisplayName} : {reason}" );
 		}
 		else
 		{
-			Log.Warning( $"Could not find player '{target}'" );
+			Log.Warning( $"Impossible de trouver le joueur '{target}'" );
 		}
 	}
 }

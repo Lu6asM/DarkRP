@@ -26,7 +26,7 @@ public sealed partial class GameManager : GameObjectSystem<GameManager>, Compone
 		CheckConnectionAchievement( channel );
 		CheckFriendsOnlineStat();
 
-		Scene.Get<Chat>()?.AddSystemText( $"{channel.DisplayName} has joined the game", "👋" );
+		Scene.Get<Chat>()?.AddSystemText( $"{channel.DisplayName} a rejoint la partie", "👋" );
 	}
 
 	/// <summary>
@@ -48,7 +48,7 @@ public sealed partial class GameManager : GameObjectSystem<GameManager>, Compone
 		if ( _kickedPlayers.Remove( channel.Id ) ) return;
 		if ( BanSystem.Current?.IsBanned( channel.SteamId ) ?? false ) return;
 
-		Scene.Get<Chat>()?.AddSystemText( $"{channel.DisplayName} has left the game", "👋" );
+		Scene.Get<Chat>()?.AddSystemText( $"{channel.DisplayName} a quitté la partie", "👋" );
 	}
 
 	private PlayerData CreatePlayerInfo( Connection channel )
@@ -191,15 +191,15 @@ public sealed partial class GameManager : GameObjectSystem<GameManager>, Compone
 
 		if ( string.IsNullOrEmpty( attackerName ) )
 		{
-			SendMessage( $"{player.DisplayName} died (tags: {dmg.Tags})" );
+			SendMessage( $"{player.DisplayName} est mort (tags: {dmg.Tags})" );
 		}
 		else if ( weapon.IsValid() )
 		{
-			SendMessage( $"{attackerName} killed {(isSuicide ? "self" : player.DisplayName)} with {weapon.Name} (tags: {dmg.Tags})" );
+			SendMessage( $"{attackerName} a tué {(isSuicide ? "lui-même" : player.DisplayName)} avec {weapon.Name} (tags: {dmg.Tags})" );
 		}
 		else
 		{
-			SendMessage( $"{attackerName} killed {(isSuicide ? "self" : player.DisplayName)} (tags: {dmg.Tags})" );
+			SendMessage( $"{attackerName} a tué {(isSuicide ? "lui-même" : player.DisplayName)} (tags: {dmg.Tags})" );
 		}
 	}
 
@@ -370,6 +370,6 @@ public sealed partial class GameManager : GameObjectSystem<GameManager>, Compone
 
 	public void OnCleanup( int removedObjects, int restoredObjects )
 	{
-		Notices.AddNotice( "cleaning_services", Color.Green, $"Cleanup! Removed {removedObjects} objects, restored {restoredObjects} objects." );
+		Notices.AddNotice( "cleaning_services", Color.Green, $"Nettoyage ! {removedObjects} objets supprimés, {restoredObjects} objets restaurés." );
 	}
 }
