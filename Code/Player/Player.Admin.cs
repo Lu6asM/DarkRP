@@ -26,9 +26,9 @@ public sealed partial class Player
 		if ( connection is null || connection.IsHost || connection == Rpc.Caller )
 			return;
 
-		var finalReason = string.IsNullOrWhiteSpace( reason ) ? "Kicked" : reason.Trim();
+		var finalReason = string.IsNullOrWhiteSpace( reason ) ? "Expulsé(e)" : reason.Trim();
 		GameManager.Current?.Kick( connection, finalReason );
-		Notices.SendNotice( Rpc.Caller, "person_remove", Color.Green, $"{connection.DisplayName} was kicked.", 3 );
+		Notices.SendNotice( Rpc.Caller, "person_remove", Color.Green, $"{connection.DisplayName} a été expulsé(e).", 3 );
 	}
 
 	[Rpc.Host]
@@ -41,9 +41,9 @@ public sealed partial class Player
 		if ( connection is null || connection.IsHost || connection == Rpc.Caller )
 			return;
 
-		var finalReason = string.IsNullOrWhiteSpace( reason ) ? "Banned" : reason.Trim();
+		var finalReason = string.IsNullOrWhiteSpace( reason ) ? "Banni(e)" : reason.Trim();
 		BanSystem.Current?.Ban( connection, finalReason );
-		Notices.SendNotice( Rpc.Caller, "gavel", Color.Green, $"{connection.DisplayName} was banned.", 3 );
+		Notices.SendNotice( Rpc.Caller, "gavel", Color.Green, $"{connection.DisplayName} a été banni(e).", 3 );
 	}
 
 	[Rpc.Host]
@@ -62,9 +62,9 @@ public sealed partial class Player
 
 		var roleText = role switch
 		{
-			AdminRole.Admin => "set as admin",
-			AdminRole.SuperAdmin => "set as superadmin",
-			_ => "removed from staff"
+			AdminRole.Admin => "défini(e) comme admin",
+			AdminRole.SuperAdmin => "défini(e) comme superadmin",
+			_ => "retiré(e) du staff"
 		};
 
         Notices.SendNotice( Rpc.Caller, role == AdminRole.SuperAdmin ? "stars" : "security", Color.Green, $"{displayName} {roleText}.", 3 );

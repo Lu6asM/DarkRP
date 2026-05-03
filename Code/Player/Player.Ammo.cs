@@ -17,23 +17,23 @@ public sealed partial class Player
 
 		if ( !AmmoShopCatalog.TryGetPickupAmmo( definition.PrefabPath, out _, out _ ) )
 		{
-			Notices.SendNotice( Network.Owner, "block", Color.Red, "Ammo pickup unavailable.", 3 );
+			Notices.SendNotice( Network.Owner, "block", Color.Red, "Pack de munitions indisponible.", 3 );
 			return;
 		}
 
 		if ( !TryTakeMoney( definition.Price ) )
 		{
-			Notices.SendNotice( Network.Owner, "block", Color.Red, "You don't have enough money.", 3 );
+			Notices.SendNotice( Network.Owner, "block", Color.Red, "Vous n'avez pas assez d'argent.", 3 );
 			return;
 		}
 
 		if ( AmmoPickup.TrySpawn( this, definition.PrefabPath ) )
 		{
-			Notices.SendNotice( Network.Owner, "$", Color.Green, $"{definition.Title} purchased.", 3 );
+			Notices.SendNotice( Network.Owner, "$", Color.Green, $"{definition.Title} acheté(e).", 3 );
 			return;
 		}
 
 		GiveMoney( definition.Price );
-		Notices.SendNotice( Network.Owner, "block", Color.Red, "Unable to place that ammo right now.", 3 );
+		Notices.SendNotice( Network.Owner, "block", Color.Red, "Impossible de placer ces munitions maintenant.", 3 );
 	}
 }

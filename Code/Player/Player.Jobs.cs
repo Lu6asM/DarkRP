@@ -94,14 +94,14 @@ public sealed partial class Player
 
 		if ( string.Equals( JobDefinitionPath, definition.ResourcePath, StringComparison.OrdinalIgnoreCase ) )
 		{
-			Notices.SendNotice( Network.Owner, "person", Color.Yellow, $"You are already {definition.Title}.", 3 );
+			Notices.SendNotice( Network.Owner, "person", Color.Yellow, $"Vous êtes déjà {definition.Title}.", 3 );
 			return;
 		}
 
 		if ( _timeSinceJobChange < JobChangeCooldownSeconds )
 		{
 			var remaining = MathF.Ceiling( JobChangeCooldownSeconds - _timeSinceJobChange );
-			Notices.SendNotice( Network.Owner, "schedule", Color.Orange, $"Wait {FormatJobChangeCooldown( remaining )} before changing jobs again.", 3 );
+			Notices.SendNotice( Network.Owner, "schedule", Color.Orange, $"Attendez {FormatJobChangeCooldown( remaining )} avant de changer de métier.", 3 );
 			return;
 		}
 
@@ -111,12 +111,12 @@ public sealed partial class Player
 			string voteReason = null;
 			if ( manager is null || !manager.TryStartVote( this, definition, out voteReason ) )
 			{
-				Notices.SendNotice( Network.Owner, "block", Color.Red, voteReason ?? "Unable to start job vote.", 3 );
+				Notices.SendNotice( Network.Owner, "block", Color.Red, voteReason ?? "Impossible de démarrer le vote.", 3 );
 				return;
 			}
 
 			_timeSinceJobChange = 0;
-			Notices.SendNotice( Network.Owner, "how_to_vote", Color.Cyan, $"Vote started for {definition.Title}.", 3 );
+			Notices.SendNotice( Network.Owner, "how_to_vote", Color.Cyan, $"Vote lancé pour {definition.Title}.", 3 );
 			return;
 		}
 
@@ -172,7 +172,7 @@ public sealed partial class Player
 
 		if ( notifyPlayer )
 		{
-			Notices.SendNotice( Network.Owner, "badge", Color.Green, $"You are now {definition.Title}.", 3 );
+			Notices.SendNotice( Network.Owner, "badge", Color.Green, $"Vous êtes maintenant {definition.Title}.", 3 );
 		}
 	}
 

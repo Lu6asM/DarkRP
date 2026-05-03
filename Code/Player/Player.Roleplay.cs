@@ -9,7 +9,7 @@ public sealed partial class Player
 	public int Money { get; private set; } = 2500;
 
 	[Property, Sync( SyncFlags.FromHost )]
-	public string JobTitle { get; private set; } = "Citizen";
+	public string JobTitle { get; private set; } = "Citoyen";
 
 	public bool CanAfford( int amount )
 	{
@@ -49,7 +49,7 @@ public sealed partial class Player
 		if ( !Networking.IsHost )
 			return;
 
-		JobTitle = string.IsNullOrWhiteSpace( title ) ? "Citizen" : title.Trim();
+		JobTitle = string.IsNullOrWhiteSpace( title ) ? "Citoyen" : title.Trim();
 		if ( PlayerData.IsValid() )
 		{
 			PlayerData.JobTitle = JobTitle;
@@ -94,25 +94,25 @@ public sealed partial class Player
 
 		if ( string.Equals( PlayerData?.DisplayName, normalizedName, StringComparison.Ordinal ) )
 		{
-			Notices.SendNotice( Network.Owner, "person", Color.Yellow, "You're already using this RP name.", 3 );
+			Notices.SendNotice( Network.Owner, "person", Color.Yellow, "Vous utilisez déjà ce nom RP.", 3 );
 			return false;
 		}
 
 		if ( IsRoleplayNameTaken( normalizedName ) )
 		{
-			Notices.SendNotice( Network.Owner, "block", Color.Red, "This RP name is already taken.", 3 );
+			Notices.SendNotice( Network.Owner, "block", Color.Red, "Ce nom RP est déjà pris.", 3 );
 			return false;
 		}
 
 		SetRoleplayName( normalizedName );
-		Notices.SendNotice( Network.Owner, "person", Color.Green, $"RP name updated to {normalizedName}.", 3 );
+		Notices.SendNotice( Network.Owner, "person", Color.Green, $"Nom RP mis à jour : {normalizedName}.", 3 );
 		return true;
 	}
 
 	static bool TryNormalizeRoleplayName( string value, out string normalizedName, out string error )
 	{
 		normalizedName = null;
-		error = $"RP name must be {MinRoleplayNameLength}-{MaxRoleplayNameLength} characters.";
+		error = $"Le nom RP doit faire entre {MinRoleplayNameLength} et {MaxRoleplayNameLength} caractères.";
 
 		if ( string.IsNullOrWhiteSpace( value ) )
 			return false;
@@ -126,7 +126,7 @@ public sealed partial class Player
 			if ( char.IsLetterOrDigit( character ) || character is ' ' or '-' or '_' or '\'' )
 				continue;
 
-			error = "RP name can only contain letters, numbers, spaces, apostrophes, '-' or '_'.";
+			error = "Le nom RP ne peut contenir que des lettres, chiffres, espaces, apostrophes, '-' ou '_'.";
 			normalizedName = null;
 			return false;
 		}
@@ -174,13 +174,13 @@ public sealed partial class Player
 
 		if ( amount <= 0 )
 		{
-			Notices.SendNotice( Network.Owner, "block", Color.Red, "Enter a valid amount to drop.", 3 );
+			Notices.SendNotice( Network.Owner, "block", Color.Red, "Entrez un montant valide à déposer.", 3 );
 			return false;
 		}
 
 		if ( !TryTakeMoney( amount ) )
 		{
-			Notices.SendNotice( Network.Owner, "block", Color.Red, "You don't have enough money.", 3 );
+			Notices.SendNotice( Network.Owner, "block", Color.Red, "Vous n'avez pas assez d'argent.", 3 );
 			return false;
 		}
 
@@ -188,7 +188,7 @@ public sealed partial class Player
 			return true;
 
 		GiveMoney( amount );
-		Notices.SendNotice( Network.Owner, "block", Color.Red, "Unable to drop money right now.", 3 );
+		Notices.SendNotice( Network.Owner, "block", Color.Red, "Impossible de déposer de l'argent maintenant.", 3 );
 		return false;
 	}
 }

@@ -17,17 +17,17 @@ public sealed partial class Player
 
 		if ( !TryTakeMoney( definition.Price ) )
 		{
-			Notices.SendNotice( Network.Owner, "block", Color.Red, "You don't have enough money.", 3 );
+			Notices.SendNotice( Network.Owner, "block", Color.Red, "Vous n'avez pas assez d'argent.", 3 );
 			return;
 		}
 
 		if ( WeaponShipment.TrySpawn( this, definition ) )
 		{
-			Notices.SendNotice( Network.Owner, "$", Color.Green, $"{definition.Title} purchased.", 3 );
+			Notices.SendNotice( Network.Owner, "$", Color.Green, $"{definition.Title} achetée.", 3 );
 			return;
 		}
 
 		GiveMoney( definition.Price );
-		Notices.SendNotice( Network.Owner, "block", Color.Red, "Unable to place the shipment right now.", 3 );
+		Notices.SendNotice( Network.Owner, "block", Color.Red, "Impossible de placer la livraison maintenant.", 3 );
 	}
 }
