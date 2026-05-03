@@ -1,0 +1,184 @@
+@import "/UI/Theme.scss";
+
+// Slot size + gap constants
+$slot-size: 100px;
+$slot-gap: 6px;
+$grid-pad: 14px;
+// 9 slots × 100 + 8 gaps × 6 + 2 × 14 padding + 2px border = 978px
+$window-width: 978px;
+
+InventoryMenu {
+	position: absolute;
+	top: 0;
+	left: 0;
+	width: 100%;
+	height: 100%;
+	justify-content: center;
+	align-items: center;
+	pointer-events: none;
+	z-index: 2000;
+
+	.inv-window {
+		pointer-events: all;
+		background-color: rgba(12, 14, 18, 0.97);
+		border: 1px solid rgba(255, 255, 255, 0.12);
+		border-radius: 8px;
+		width: $window-width;
+		flex-direction: column;
+		overflow: hidden;
+	}
+
+	.inv-header {
+		flex-direction: row;
+		align-items: center;
+		justify-content: space-between;
+		padding: 12px 16px;
+		background-color: rgba(0, 0, 0, 0.5);
+		border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+	}
+
+	.inv-title {
+		font-size: 15px;
+		font-weight: bold;
+		color: rgba(255, 255, 255, 0.9);
+		letter-spacing: 0.5px;
+	}
+
+	.inv-close {
+		width: 28px;
+		height: 28px;
+		background-color: rgba(180, 50, 50, 0.8);
+		border-radius: 4px;
+		font-size: 14px;
+		color: white;
+		justify-content: center;
+		align-items: center;
+		cursor: pointer;
+
+		&:hover {
+			background-color: rgba(220, 60, 60, 1);
+		}
+	}
+
+	.inv-grid {
+		flex-direction: row;
+		flex-wrap: wrap;
+		gap: $slot-gap;
+		padding: $grid-pad;
+	}
+
+	.inv-divider {
+		padding: 6px $grid-pad;
+		border-top: 1px solid rgba(255, 255, 255, 0.06);
+		border-bottom: 1px solid rgba(255, 255, 255, 0.06);
+
+		label {
+			font-size: 11px;
+			color: rgba(255, 255, 255, 0.3);
+			letter-spacing: 1px;
+		}
+	}
+
+	.inv-hotbar {
+		flex-direction: row;
+		gap: $slot-gap;
+		padding: $grid-pad;
+		background-color: rgba(0, 0, 0, 0.3);
+	}
+
+	.inv-slot {
+		width: $slot-size;
+		height: $slot-size;
+		background-color: rgba(255, 255, 255, 0.04);
+		border: 1px solid rgba(255, 255, 255, 0.1);
+		border-radius: 6px;
+		flex-direction: column;
+		align-items: center;
+		padding: 6px;
+		position: relative;
+		overflow: hidden;
+		flex-shrink: 0;
+
+		&.empty {
+			opacity: 0.2;
+		}
+
+		&.filled, &.hotbar-slot:not(.empty) {
+			cursor: pointer;
+
+			&:hover {
+				background-color: rgba(255, 255, 255, 0.1);
+				border-color: rgba(255, 255, 255, 0.3);
+
+				.inv-drop-btn {
+					opacity: 1;
+				}
+			}
+		}
+
+		&.locked {
+			opacity: 0.4;
+			cursor: default;
+		}
+
+		&.active {
+			border-color: rgba(100, 200, 255, 0.6);
+			background-color: rgba(100, 200, 255, 0.08);
+		}
+	}
+
+	.inv-slot-icon {
+		width: 52px;
+		height: 52px;
+		background-size: contain;
+		background-repeat: no-repeat;
+		background-position: center;
+		flex-shrink: 0;
+	}
+
+	.inv-slot-name {
+		font-size: 11px;
+		color: rgba(255, 255, 255, 0.75);
+		text-align: center;
+		overflow: hidden;
+		text-overflow: ellipsis;
+		white-space: nowrap;
+		width: 100%;
+		margin-top: 3px;
+	}
+
+	.inv-slot-ammo {
+		font-size: 10px;
+		color: rgba(255, 200, 80, 0.9);
+		text-align: center;
+	}
+
+	.inv-slot-index {
+		position: absolute;
+		top: 3px;
+		left: 5px;
+		font-size: 10px;
+		color: rgba(255, 255, 255, 0.35);
+	}
+
+	.inv-drop-btn {
+		position: absolute;
+		bottom: 3px;
+		right: 3px;
+		width: 20px;
+		height: 20px;
+		background-color: rgba(180, 50, 50, 0.85);
+		border-radius: 3px;
+		font-size: 11px;
+		color: white;
+		justify-content: center;
+		align-items: center;
+		cursor: pointer;
+		opacity: 0;
+		transition: opacity 0.1s;
+
+		&:hover {
+			background-color: rgba(220, 60, 60, 1);
+		}
+	}
+}
