@@ -5,7 +5,8 @@
   "AccentColor": "0.9059,0.3569,0.3569,1",
   "Salary": 60,
   "MaxPlayers": 6,
-  "Command": "/voleur",
+  "RequiresVote": false,
+  "Command": "/thief",
   "Order": 45,
   "StartingItems": [
     "weapons/lockpick/lockpick.prefab",
