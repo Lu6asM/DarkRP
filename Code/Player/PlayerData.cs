@@ -16,6 +16,7 @@ public sealed partial class PlayerData : Component, Global.ISaveEvents
 	[Sync] public string JobTitle { get; set; } = "Citizen";
 
 	[Sync] public bool IsGodMode { get; set; }
+	[Sync] public bool IsInvisible { get; set; }
 
 	public Connection Connection => Connection.Find( PlayerId );
 

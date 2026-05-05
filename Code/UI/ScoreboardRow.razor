@@ -63,81 +63,177 @@
 	{
 		if ( Entry is null || Entry.Connection is null ) return;
 
-		var steamId = Entry.Connection.SteamId;
-		var localPlayer = Player.FindLocalPlayer();
-		var canKick = localPlayer?.HasAdminAccess == true;
-		var canSuperAdminModerate = localPlayer?.HasSuperAdminAccess == true;
-		var canManageRoles = localPlayer?.HasSuperAdminAccess == true;
-		var targetRole = GetEntryAdminRole();
-		var menu = Sandbox.MenuPanel.Open( this, Scoreboard.GetMenuOverlay() ?? GetMenuSourcePanel() );
+		var steamId      = Entry.Connection.SteamId;
+		var localPlayer  = Player.FindLocalPlayer();
+		var isAdmin      = localPlayer?.HasAdminAccess == true;
+		var isSuperAdmin = localPlayer?.HasSuperAdminAccess == true;
+		var targetRole   = GetEntryAdminRole();
+		var targetPlayer = GetEntryPlayer();
+		var menu         = Sandbox.MenuPanel.Open( this, Scoreboard.GetMenuOverlay() ?? GetMenuSourcePanel() );
 
+		// ── Copier SteamID (toujours visible, tout le monde) ──────────────
 		menu.AddOption( "content_copy", "Copy Steam ID", () =>
 		{
 			Clipboard.SetText( steamId.ToString() );
 			Notices.AddNotice( "copy_all", Color.Cyan, $"Copied {Entry.Connection.DisplayName}'s SteamID to your clipboard", 5 );
 		} );
 
+		// ── Mute — seulement sur les autres ───────────────────────────────
 		if ( !Entry.IsMe )
 		{
 			bool isMuted = SandboxVoice.IsMuted( steamId );
-			menu.AddOption( isMuted ? "volume_up" : "volume_off", isMuted ? "Unmute" : "Mute", () => SandboxVoice.Mute( steamId ) );
+			menu.AddOption( isMuted ? "volume_up" : "volume_off", isMuted ? "Unmute" : "Mute",
+				() => SandboxVoice.Mute( steamId ) );
+		}
 
-			if ( canKick && !Entry.Connection.IsHost )
+		// ── Actions admin — sur tout le monde Y COMPRIS soi-même ──────────
+		if ( isAdmin )
+		{
+			menu.AddSpacer();
+
+			// Set Health
+			menu.AddOption( "favorite", "Set Health…", () =>
+			{
+				var popup = new StringQueryPopup
+				{
+					Title        = "Set Health",
+					Prompt       = $"Nouvelle santé pour {Entry.DisplayName} (1-100) :",
+					ConfirmLabel = "Appliquer",
+					OnConfirm    = value =>
+					{
+						if ( int.TryParse( value, out var hp ) && hp >= 1 && hp <= 100 )
+							localPlayer?.RequestAdminSetHealth( Entry.PlayerId, hp );
+					}
+				};
+				popup.Parent = FindPopupPanel();
+			} );
+
+			// Set Armour
+			menu.AddOption( "shield", "Set Armor…", () =>
+			{
+				var popup = new StringQueryPopup
+				{
+					Title        = "Set Armor",
+					Prompt       = $"Nouvelle armure pour {Entry.DisplayName} (0-100) :",
+					ConfirmLabel = "Appliquer",
+					OnConfirm    = value =>
+					{
+						if ( int.TryParse( value, out var armour ) && armour >= 0 && armour <= 100 )
+							localPlayer?.RequestAdminSetArmour( Entry.PlayerId, armour );
+					}
+				};
+				popup.Parent = FindPopupPanel();
+			} );
+
+			// Give / Take Money
+			menu.AddOption( "attach_money", "Give Money…", () =>
+			{
+				var popup = new StringQueryPopup
+				{
+					Title        = "Give Money",
+					Prompt       = $"Montant pour {Entry.DisplayName} (négatif pour retirer) :",
+					ConfirmLabel = "Appliquer",
+					OnConfirm    = value =>
+					{
+						if ( int.TryParse( value, out var amount ) )
+							localPlayer?.RequestAdminGiveMoney( Entry.PlayerId, amount );
+					}
+				};
+				popup.Parent = FindPopupPanel();
+			} );
+
+			// God Mode
+			var godLabel = Entry.IsGodMode ? "Disable God Mode" : "Enable God Mode";
+			menu.AddOption( "auto_fix", godLabel,
+				() => localPlayer?.RequestAdminToggleGodMode( Entry.PlayerId ) );
+
+			// Invisible
+			var invisLabel = Entry.IsInvisible ? "Disable Invisible" : "Enable Invisible";
+			menu.AddOption( "visibility_off", invisLabel,
+				() => localPlayer?.RequestAdminToggleInvisible( Entry.PlayerId ) );
+
+			// TP + Slay — pas de sens sur soi-même
+			if ( !Entry.IsMe )
+			{
+				menu.AddSpacer();
+
+				menu.AddOption( "near_me", "TP → moi",
+					() => localPlayer?.RequestAdminTeleportToMe( Entry.PlayerId ) );
+
+				menu.AddOption( "location_on", "TP à lui",
+					() => localPlayer?.RequestAdminTeleportToTarget( Entry.PlayerId ) );
+
+				menu.AddSpacer();
+
+				menu.AddOption( "bolt", "Slay",
+					() => localPlayer?.RequestAdminSlay( Entry.PlayerId ) );
+			}
+		}
+
+		// ── Le reste — seulement sur les autres ───────────────────────────
+		if ( !Entry.IsMe )
+		{
+			// Kick
+			if ( isAdmin && !Entry.Connection.IsHost )
 			{
 				menu.AddSpacer();
 				menu.AddOption( "person_remove", "Kick", () => OpenKickConfirm( Entry ) );
 			}
 
-			if ( canSuperAdminModerate && !Entry.Connection.IsHost )
+			// Ban
+			if ( isSuperAdmin && !Entry.Connection.IsHost )
 			{
-				if ( !canKick )
+				if ( !isAdmin )
 					menu.AddSpacer();
-
 				menu.AddOption( "gavel", "Ban", () => OpenBanConfirm( Entry ) );
 			}
 
-			if ( canManageRoles && !Entry.Connection.IsHost )
+			// Gestion rôles admin
+			if ( isSuperAdmin && !Entry.Connection.IsHost )
 			{
 				menu.AddSpacer();
 
 				if ( targetRole != AdminRole.Admin )
-					menu.AddOption( "security", "Set Admin", () => SetAdminRole( AdminRole.Admin ) );
-
+					menu.AddOption( "security",   "Set Admin",      () => SetAdminRole( AdminRole.Admin ) );
 				if ( targetRole != AdminRole.SuperAdmin )
-					menu.AddOption( "stars", "Set SuperAdmin", () => SetAdminRole( AdminRole.SuperAdmin ) );
-
+					menu.AddOption( "stars",      "Set SuperAdmin", () => SetAdminRole( AdminRole.SuperAdmin ) );
 				if ( targetRole != AdminRole.None )
-					menu.AddOption( "person_off", "Remove Staff", () => SetAdminRole( AdminRole.None ) );
+					menu.AddOption( "person_off", "Remove Staff",   () => SetAdminRole( AdminRole.None ) );
 			}
 
+			// Wanted
 			if ( localPlayer?.CanIssueWantedStatus == true )
 			{
 				menu.AddSpacer();
 
-				if ( GetEntryPlayer()?.IsWanted == true )
-					menu.AddOption( "check_circle", "Clear Wanted", () => localPlayer.RequestSetWantedStatus( Entry.PlayerId, string.Empty, false ) );
+				if ( targetPlayer?.IsWanted == true )
+					menu.AddOption( "check_circle", "Clear Wanted",
+						() => localPlayer.RequestSetWantedStatus( Entry.PlayerId, string.Empty, false ) );
 				else
 					menu.AddOption( "warning", "Mark Wanted", () => OpenWantedConfirm( Entry ) );
 			}
 
-			if ( localPlayer?.CanArrestPlayers == true && GetEntryPlayer()?.IsArrested == true )
+			// Unarrest
+			if ( localPlayer?.CanArrestPlayers == true && targetPlayer?.IsArrested == true )
 			{
-				menu.AddOption( "check_circle", "Unarrest", () => localPlayer.RequestReleaseArrestPlayer( Entry.PlayerId ) );
+				menu.AddOption( "check_circle", "Unarrest",
+					() => localPlayer.RequestReleaseArrestPlayer( Entry.PlayerId ) );
 			}
-
 		}
 
 		e.StopPropagation();
 	}
 
+	// ── Popups ────────────────────────────────────────────────────────────
+
 	void OpenWantedConfirm( PlayerData entry )
 	{
 		var popup = new StringQueryPopup
 		{
-			Title = "Mark Wanted",
-			Prompt = $"Why is {entry.DisplayName} wanted?",
+			Title        = "Mark Wanted",
+			Prompt       = $"Why is {entry.DisplayName} wanted?",
 			ConfirmLabel = "Confirm",
-			OnConfirm = x => Player.FindLocalPlayer()?.RequestSetWantedStatus( entry.PlayerId, x, true )
+			OnConfirm    = x => Player.FindLocalPlayer()?.RequestSetWantedStatus( entry.PlayerId, x, true )
 		};
 		popup.Parent = FindPopupPanel();
 	}
@@ -146,10 +242,10 @@
 	{
 		var popup = new StringQueryPopup
 		{
-			Title = "Kick Player",
-			Prompt = $"Why do you want to kick {entry.DisplayName}?",
+			Title        = "Kick Player",
+			Prompt       = $"Why do you want to kick {entry.DisplayName}?",
 			ConfirmLabel = "Kick",
-			OnConfirm = x => Player.FindLocalPlayer()?.RequestKickPlayer( (long)entry.Connection.SteamId.Value, x )
+			OnConfirm    = x => Player.FindLocalPlayer()?.RequestKickPlayer( (long)entry.Connection.SteamId.Value, x )
 		};
 		popup.Parent = FindPopupPanel();
 	}
@@ -158,13 +254,15 @@
 	{
 		var popup = new StringQueryPopup
 		{
-			Title = "Ban Player",
-			Prompt = $"Why do you want to ban {entry.DisplayName}?",
+			Title        = "Ban Player",
+			Prompt       = $"Why do you want to ban {entry.DisplayName}?",
 			ConfirmLabel = "Ban",
-			OnConfirm = x => Player.FindLocalPlayer()?.RequestBanPlayer( (long)entry.Connection.SteamId.Value, x )
+			OnConfirm    = x => Player.FindLocalPlayer()?.RequestBanPlayer( (long)entry.Connection.SteamId.Value, x )
 		};
 		popup.Parent = FindPopupPanel();
 	}
+
+	// ── Helpers ───────────────────────────────────────────────────────────
 
 	AdminRole GetEntryAdminRole()
 	{
@@ -183,9 +281,9 @@
 	{
 		return role switch
 		{
-			AdminRole.Admin => "Admin",
+			AdminRole.Admin      => "Admin",
 			AdminRole.SuperAdmin => "SuperAdmin",
-			_ => string.Empty
+			_                    => string.Empty
 		};
 	}
 
@@ -193,9 +291,9 @@
 	{
 		return role switch
 		{
-			AdminRole.Admin => "admin",
+			AdminRole.Admin      => "admin",
 			AdminRole.SuperAdmin => "superadmin",
-			_ => "none"
+			_                    => "none"
 		};
 	}
 
@@ -235,6 +333,8 @@
 		hash.Add( Entry?.Ping );
 		hash.Add( Entry?.IsWanted );
 		hash.Add( Entry?.IsArrested );
+		hash.Add( Entry?.IsGodMode );
+		hash.Add( Entry?.IsInvisible );
 		hash.Add( (int)GetEntryAdminRole() );
 		return hash.ToHashCode();
 	}

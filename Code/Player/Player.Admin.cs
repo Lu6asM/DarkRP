@@ -62,15 +62,15 @@ public sealed partial class Player
 
 		var roleText = role switch
 		{
-			AdminRole.Admin => "défini(e) comme admin",
+			AdminRole.Admin      => "défini(e) comme admin",
 			AdminRole.SuperAdmin => "défini(e) comme superadmin",
-			_ => "retiré(e) du staff"
+			_                    => "retiré(e) du staff"
 		};
 
 		Notices.SendNotice( Rpc.Caller, role == AdminRole.SuperAdmin ? "stars" : "security", Color.Green, $"{displayName} {roleText}.", 3 );
 	}
 
-	// ── Nouvelles méthodes admin ──────────────────────────────────────────
+	// ── Set Health ───────────────────────────────────────────────────────
 
 	[Rpc.Host]
 	public void RequestAdminSetHealth( Guid targetId, int hp )
@@ -84,6 +84,8 @@ public sealed partial class Player
 		Notices.SendNotice( Rpc.Caller, "favorite", Color.Green, $"Santé de {target.DisplayName} → {hp}.", 3 );
 	}
 
+	// ── Set Armour ───────────────────────────────────────────────────────
+
 	[Rpc.Host]
 	public void RequestAdminSetArmour( Guid targetId, int armour )
 	{
@@ -95,6 +97,8 @@ public sealed partial class Player
 		target.Armour = Math.Clamp( armour, 0f, 100f );
 		Notices.SendNotice( Rpc.Caller, "shield", Color.Green, $"Armure de {target.DisplayName} → {armour}.", 3 );
 	}
+
+	// ── Give / Take Money ─────────────────────────────────────────────────
 
 	[Rpc.Host]
 	public void RequestAdminGiveMoney( Guid targetId, int amount )
@@ -108,6 +112,8 @@ public sealed partial class Player
 		var label = amount >= 0 ? $"+${amount:n0}" : $"-${Math.Abs( amount ):n0}";
 		Notices.SendNotice( Rpc.Caller, "attach_money", Color.Green, $"{label} pour {target.DisplayName}.", 3 );
 	}
+
+	// ── TP → moi ─────────────────────────────────────────────────────────
 
 	[Rpc.Host]
 	public void RequestAdminTeleportToMe( Guid targetId )
@@ -124,6 +130,8 @@ public sealed partial class Player
 		Notices.SendNotice( Rpc.Caller, "near_me", Color.Green, $"{target.DisplayName} téléporté vers vous.", 3 );
 	}
 
+	// ── TP → lui ─────────────────────────────────────────────────────────
+
 	[Rpc.Host]
 	public void RequestAdminTeleportToTarget( Guid targetId )
 	{
@@ -139,6 +147,8 @@ public sealed partial class Player
 		Notices.SendNotice( Rpc.Caller, "location_on", Color.Green, $"Téléporté vers {target.DisplayName}.", 3 );
 	}
 
+	// ── Slay ─────────────────────────────────────────────────────────────
+
 	[Rpc.Host]
 	public void RequestAdminSlay( Guid targetId )
 	{
@@ -151,6 +161,8 @@ public sealed partial class Player
 		Notices.SendNotice( Rpc.Caller, "bolt", Color.Green, $"{target.DisplayName} a été slayé(e).", 3 );
 	}
 
+	// ── God Mode ─────────────────────────────────────────────────────────
+
 	[Rpc.Host]
 	public void RequestAdminToggleGodMode( Guid targetId )
 	{
@@ -162,5 +174,46 @@ public sealed partial class Player
 		target.PlayerData.IsGodMode = !target.PlayerData.IsGodMode;
 		var state = target.PlayerData.IsGodMode ? "activé" : "désactivé";
 		Notices.SendNotice( Rpc.Caller, "auto_fix", Color.Green, $"God Mode {state} pour {target.DisplayName}.", 3 );
+	}
+
+	// ── Invisible ────────────────────────────────────────────────────────
+	// Cache le Body du joueur pour tous les autres clients.
+	// Le joueur lui-même voit toujours son propre body (géré dans ApplyInvisibility).
+
+	[Rpc.Host]
+	public void RequestAdminToggleInvisible( Guid targetId )
+	{
+		if ( !AdminSystem.Current.HasAdminAccess( Rpc.Caller ) ) return;
+
+		var target = Player.For( targetId );
+		if ( target is null || !target.PlayerData.IsValid() ) return;
+
+		target.PlayerData.IsInvisible = !target.PlayerData.IsInvisible;
+		target.ApplyInvisibility();
+
+		var state = target.PlayerData.IsInvisible ? "activé" : "désactivé";
+		Notices.SendNotice( Rpc.Caller, "visibility_off", Color.Green, $"Invisible {state} pour {target.DisplayName}.", 3 );
+	}
+
+	/// <summary>
+	/// Applique ou retire l'invisibilité sur le Body du joueur.
+	/// Appelé depuis le host via Rpc.Broadcast pour que tous les clients
+	/// cachent / affichent le modèle.
+	/// </summary>
+	[Rpc.Broadcast( NetFlags.HostOnly | NetFlags.Reliable )]
+	public void ApplyInvisibility()
+	{
+		if ( !Body.IsValid() ) return;
+
+		var invisible = PlayerData?.IsInvisible ?? false;
+
+		// Le joueur lui-même voit toujours son propre body
+		if ( IsLocalPlayer )
+		{
+			Body.Enabled = true;
+			return;
+		}
+
+		Body.Enabled = !invisible;
 	}
 }
