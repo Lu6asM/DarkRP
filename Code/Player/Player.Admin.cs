@@ -26,9 +26,9 @@ public sealed partial class Player
 		if ( connection is null || connection.IsHost || connection == Rpc.Caller )
 			return;
 
-		var finalReason = string.IsNullOrWhiteSpace( reason ) ? "Kicked" : reason.Trim();
+		var finalReason = string.IsNullOrWhiteSpace( reason ) ? "Expulsé(e)" : reason.Trim();
 		GameManager.Current?.Kick( connection, finalReason );
-		Notices.SendNotice( Rpc.Caller, "person_remove", Color.Green, $"{connection.DisplayName} was kicked.", 3 );
+		Notices.SendNotice( Rpc.Caller, "person_remove", Color.Green, $"{connection.DisplayName} a été expulsé(e).", 3 );
 	}
 
 	[Rpc.Host]
@@ -41,9 +41,9 @@ public sealed partial class Player
 		if ( connection is null || connection.IsHost || connection == Rpc.Caller )
 			return;
 
-		var finalReason = string.IsNullOrWhiteSpace( reason ) ? "Banned" : reason.Trim();
+		var finalReason = string.IsNullOrWhiteSpace( reason ) ? "Banni(e)" : reason.Trim();
 		BanSystem.Current?.Ban( connection, finalReason );
-		Notices.SendNotice( Rpc.Caller, "gavel", Color.Green, $"{connection.DisplayName} was banned.", 3 );
+		Notices.SendNotice( Rpc.Caller, "gavel", Color.Green, $"{connection.DisplayName} a été banni(e).", 3 );
 	}
 
 	[Rpc.Host]
@@ -62,11 +62,105 @@ public sealed partial class Player
 
 		var roleText = role switch
 		{
-			AdminRole.Admin => "set as admin",
-			AdminRole.SuperAdmin => "set as superadmin",
-			_ => "removed from staff"
+			AdminRole.Admin => "défini(e) comme admin",
+			AdminRole.SuperAdmin => "défini(e) comme superadmin",
+			_ => "retiré(e) du staff"
 		};
 
-        Notices.SendNotice( Rpc.Caller, role == AdminRole.SuperAdmin ? "stars" : "security", Color.Green, $"{displayName} {roleText}.", 3 );
+		Notices.SendNotice( Rpc.Caller, role == AdminRole.SuperAdmin ? "stars" : "security", Color.Green, $"{displayName} {roleText}.", 3 );
+	}
+
+	// ── Nouvelles méthodes admin ──────────────────────────────────────────
+
+	[Rpc.Host]
+	public void RequestAdminSetHealth( Guid targetId, int hp )
+	{
+		if ( !AdminSystem.Current.HasAdminAccess( Rpc.Caller ) ) return;
+
+		var target = Player.For( targetId );
+		if ( target is null ) return;
+
+		target.Health = Math.Clamp( hp, 1f, 100f );
+		Notices.SendNotice( Rpc.Caller, "favorite", Color.Green, $"Santé de {target.DisplayName} → {hp}.", 3 );
+	}
+
+	[Rpc.Host]
+	public void RequestAdminSetArmour( Guid targetId, int armour )
+	{
+		if ( !AdminSystem.Current.HasAdminAccess( Rpc.Caller ) ) return;
+
+		var target = Player.For( targetId );
+		if ( target is null ) return;
+
+		target.Armour = Math.Clamp( armour, 0f, 100f );
+		Notices.SendNotice( Rpc.Caller, "shield", Color.Green, $"Armure de {target.DisplayName} → {armour}.", 3 );
+	}
+
+	[Rpc.Host]
+	public void RequestAdminGiveMoney( Guid targetId, int amount )
+	{
+		if ( !AdminSystem.Current.HasAdminAccess( Rpc.Caller ) ) return;
+
+		var target = Player.For( targetId );
+		if ( target is null ) return;
+
+		target.Money = Math.Max( 0, target.Money + amount );
+		var label = amount >= 0 ? $"+${amount:n0}" : $"-${Math.Abs( amount ):n0}";
+		Notices.SendNotice( Rpc.Caller, "attach_money", Color.Green, $"{label} pour {target.DisplayName}.", 3 );
+	}
+
+	[Rpc.Host]
+	public void RequestAdminTeleportToMe( Guid targetId )
+	{
+		if ( !AdminSystem.Current.HasAdminAccess( Rpc.Caller ) ) return;
+
+		var target = Player.For( targetId );
+		if ( target is null ) return;
+
+		var caller = Scene.GetAll<Player>().FirstOrDefault( p => p.Network.OwnerId == Rpc.CallerId );
+		if ( caller is null ) return;
+
+		target.WorldPosition = caller.WorldPosition + Vector3.Up * 10f;
+		Notices.SendNotice( Rpc.Caller, "near_me", Color.Green, $"{target.DisplayName} téléporté vers vous.", 3 );
+	}
+
+	[Rpc.Host]
+	public void RequestAdminTeleportToTarget( Guid targetId )
+	{
+		if ( !AdminSystem.Current.HasAdminAccess( Rpc.Caller ) ) return;
+
+		var target = Player.For( targetId );
+		if ( target is null ) return;
+
+		var caller = Scene.GetAll<Player>().FirstOrDefault( p => p.Network.OwnerId == Rpc.CallerId );
+		if ( caller is null ) return;
+
+		caller.WorldPosition = target.WorldPosition + Vector3.Up * 10f;
+		Notices.SendNotice( Rpc.Caller, "location_on", Color.Green, $"Téléporté vers {target.DisplayName}.", 3 );
+	}
+
+	[Rpc.Host]
+	public void RequestAdminSlay( Guid targetId )
+	{
+		if ( !AdminSystem.Current.HasAdminAccess( Rpc.Caller ) ) return;
+
+		var target = Player.For( targetId );
+		if ( target is null ) return;
+
+		target.OnDamage( new DamageInfo { Damage = 9999f } );
+		Notices.SendNotice( Rpc.Caller, "bolt", Color.Green, $"{target.DisplayName} a été slayé(e).", 3 );
+	}
+
+	[Rpc.Host]
+	public void RequestAdminToggleGodMode( Guid targetId )
+	{
+		if ( !AdminSystem.Current.HasAdminAccess( Rpc.Caller ) ) return;
+
+		var target = Player.For( targetId );
+		if ( target is null || !target.PlayerData.IsValid() ) return;
+
+		target.PlayerData.IsGodMode = !target.PlayerData.IsGodMode;
+		var state = target.PlayerData.IsGodMode ? "activé" : "désactivé";
+		Notices.SendNotice( Rpc.Caller, "auto_fix", Color.Green, $"God Mode {state} pour {target.DisplayName}.", 3 );
 	}
 }
