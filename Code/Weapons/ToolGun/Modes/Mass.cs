@@ -1,7 +1,8 @@
 ﻿﻿
 [Icon( "🍔" )]
+[Title( "#tool.name.mass" )]
 [ClassName( "mass" )]
-[Group( "Tools" )]
+[Group( "#tool.group.tools" )]
 public class Mass : ToolMode
 {
 	[Sync, Property, Title( "Mass (kg)" ), Range( 1, 250 ), Step( 0.5f )]
@@ -58,6 +59,7 @@ public class Mass : ToolMode
 	private void SetMass( Rigidbody rb, float mass )
 	{
 		if ( !rb.IsValid() || rb.IsProxy ) return;
+		if ( !CanUseToolOn( rb.GameObject ) ) return;
 		if ( !TryUseToolActionCooldown() ) return;
 
 		if ( mass <= 0f )
@@ -76,6 +78,7 @@ public class Mass : ToolMode
 	private void CopyMass( Rigidbody rb )
 	{
 		if ( !rb.IsValid() || rb.IsProxy ) return;
+		if ( !CanUseToolOn( rb.GameObject ) ) return;
 		if ( !TryUseToolActionCooldown() ) return;
 
 		var mo = rb.GetComponent<PhysicalProperties>();

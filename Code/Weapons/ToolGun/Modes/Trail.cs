@@ -1,9 +1,9 @@
 using Sandbox.UI;
 
 [Icon( "✨" )]
-[Title( "Trail" )]
+[Title( "#tool.name.trail" )]
 [ClassName( "trail" )]
-[Group( "Render" )]
+[Group( "#tool.group.render" )]
 public class Trail : ToolMode
 {
 	const string TrailLimitMarkerName = "trail_limit_marker";
@@ -65,6 +65,7 @@ public class Trail : ToolMode
 	{
 		if ( !go.IsValid() ) return;
 		if ( go.IsProxy ) return;
+		if ( !CanUseToolOn( go ) ) return;
 		if ( !TryUseToolActionCooldown() ) return;
 
 		var root = go.Network?.RootGameObject ?? go;
@@ -109,6 +110,7 @@ public class Trail : ToolMode
 	{
 		if ( !go.IsValid() ) return;
 		if ( go.IsProxy ) return;
+		if ( !CanUseToolOn( go ) ) return;
 		if ( !TryUseToolActionCooldown() ) return;
 
 		var root = go.Network?.RootGameObject ?? go;

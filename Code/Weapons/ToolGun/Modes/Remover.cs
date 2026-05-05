@@ -1,6 +1,7 @@
 ﻿﻿[Icon( "🧨" )]
+[Title( "#tool.name.remover" )]
 [ClassName( "remover" )]
-[Group( "Tools" )]
+[Group( "#tool.group.tools" )]
 public class Remover : ToolMode
 {
 	public override bool TraceHitboxes => true;
@@ -40,6 +41,7 @@ public class Remover : ToolMode
 		go = go?.Network?.RootGameObject;
 
 		if ( !CanDestroy( go ) ) return;
+		if ( !CanUseToolOn( go ) ) return;
 		if ( go.IsProxy ) return;
 
 		go.Destroy();

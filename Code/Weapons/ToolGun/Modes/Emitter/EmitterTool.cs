@@ -1,10 +1,10 @@
 using Sandbox.UI;
 
 [Hide]
-[Title( "Emitter" )]
+[Title( "#tool.name.emitter" )]
 [Icon( "💨" )]
 [ClassName( "emittertool" )]
-[Group( "Building" )]
+[Group( "#tool.group.building" )]
 public class EmitterTool : ToolMode
 {
 	public override bool UseSnapGrid => true;
@@ -68,6 +68,9 @@ public class EmitterTool : ToolMode
 	[Rpc.Host]
 	public void Spawn( SelectionPoint point, PrefabFile emitterPrefab, ScriptedEmitter effect, Transform tx )
 	{
+		if ( !CanUseToolOn( point ) )
+			return;
+
 		if ( emitterPrefab == null )
 			return;
 		if ( !TryUseToolSpawnLimit() )

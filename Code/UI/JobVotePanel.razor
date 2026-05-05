@@ -9,7 +9,7 @@
 <root>
 	<div class="job-vote-card hud-panel">
 		<div class="vote-header">
-			<label class="vote-title">Vote de métier</label>
+			<label class="vote-title">Job Vote</label>
 			<label class="vote-timer">@SecondsRemainingText</label>
 		</div>
 
@@ -49,8 +49,8 @@
 	bool CanVote => IsContextMenuOpen && !HasVoted;
 	string YesButtonClass => _localVote == true ? "vote-button yes selected" : "vote-button yes";
 	string NoButtonClass => _localVote == false ? "vote-button no selected" : "vote-button no";
-	string YesButtonText => $"Oui {Manager?.YesVotes ?? 0}";
-	string NoButtonText => $"Non {Manager?.NoVotes ?? 0}";
+	string YesButtonText => $"Yes {Manager?.YesVotes ?? 0}";
+	string NoButtonText => $"No {Manager?.NoVotes ?? 0}";
 
 	string SecondsRemainingText
 	{
@@ -61,7 +61,7 @@
 		}
 	}
 
-	string VoteQuestion => $"Autoriser {Manager?.CandidateName ?? "Inconnu"} à devenir {Manager?.JobTitle ?? "ce métier"} ?";
+	string VoteQuestion => $"Allow {Manager?.CandidateName ?? "Unknown"} to become {Manager?.JobTitle ?? "this job"}?";
 
 	void SubmitVote( bool support )
 	{

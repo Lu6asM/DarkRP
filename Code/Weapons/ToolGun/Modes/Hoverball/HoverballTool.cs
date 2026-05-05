@@ -1,10 +1,10 @@
 ﻿using Sandbox.UI;
 
 [Hide]
-[Title( "Hoverball" )]
+[Title( "#tool.name.hoverball" )]
 [Icon( "🎱" )]
 [ClassName( "hoverballtool" )]
-[Group( "Building" )]
+[Group( "#tool.group.building" )]
 public class HoverballTool : ToolMode
 {
 	public override IEnumerable<string> TraceIgnoreTags => ["constraint", "collision"];
@@ -57,6 +57,9 @@ public class HoverballTool : ToolMode
 	[Rpc.Host]
 	public void Spawn( SelectionPoint point, PrefabFile hoverballPrefab, Transform tx )
 	{
+		if ( !CanUseToolOn( point ) )
+			return;
+
 		if ( hoverballPrefab == null )
 			return;
 		if ( !TryUseToolSpawnLimit() )

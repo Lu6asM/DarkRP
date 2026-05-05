@@ -29,8 +29,8 @@ public enum StackAlignMode
 
 [Icon( "📚" )]
 [ClassName( "stacker" )]
-[Group( "Building" )]
-[Title( "Stacker" )]
+[Group( "#tool.group.building" )]
+[Title( "#tool.name.stacker" )]
 public class StackerTool : ToolMode
 {
 	private const int MaxStackCount = 50;
@@ -335,6 +335,7 @@ public class StackerTool : ToolMode
 	private void SpawnStack( GameObject target )
 	{
 		if ( !target.IsValid() ) return;
+		if ( !CanUseToolOn( target ) ) return;
 
 		var root = ResolveRoot( target );
 		if ( root.Tags.Contains( "constraint" ) ) return;

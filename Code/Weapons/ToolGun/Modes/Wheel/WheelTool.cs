@@ -1,10 +1,10 @@
 ﻿using Sandbox.UI;
 
 [Hide]
-[Title( "Wheel" )]
+[Title( "#tool.name.wheel" )]
 [Icon( "🛞" )]
 [ClassName( "wheeltool" )]
-[Group( "Building" )]
+[Group( "#tool.group.building" )]
 public class WheelTool : ToolMode
 {
 	public override bool UseSnapGrid => true;
@@ -89,6 +89,7 @@ public class WheelTool : ToolMode
 	[Rpc.Host]
 	public void SpawnWheel( SelectionPoint point, WheelDefinition def, Transform tx, bool reversed )
 	{
+		if ( !CanUseToolOn( point ) ) return;
 		if ( def == null || def.Prefab?.GetScene() is not Scene scene ) return;
 		if ( !TryUseToolSpawnLimit() ) return;
 		if ( !TryUseToolActionCooldown() ) return;

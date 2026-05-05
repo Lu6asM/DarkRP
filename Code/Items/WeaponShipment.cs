@@ -42,9 +42,9 @@ public sealed class WeaponShipment : Component, Component.IPressable, IPhysgunEv
 
 	IPressable.Tooltip? IPressable.GetTooltip( IPressable.Event e )
 	{
-		var title = RemainingWeapons > 0 ? "Distribuer l'arme" : "Lot vide";
+		var title = RemainingWeapons > 0 ? "Dispense Weapon" : "Shipment Empty";
 		var icon = RemainingWeapons > 0 ? "inventory_2" : "block";
-		var description = $"{ShipmentTitle} - {RemainingWeapons} restants";
+		var description = $"{ShipmentTitle} - {RemainingWeapons} left";
 		return new IPressable.Tooltip( title, icon, description );
 	}
 
@@ -126,7 +126,7 @@ public sealed class WeaponShipment : Component, Component.IPressable, IPhysgunEv
 			var player = presserObject.Root.GetComponent<Player>();
 			if ( player?.Network.Owner is { } connection )
 			{
-				Notices.SendNotice( connection, "inventory_2", Color.Green, $"Distribution depuis {ShipmentTitle} ({RemainingWeapons} restants).", 2 );
+				Notices.SendNotice( connection, "inventory_2", Color.Green, $"Dispensed from {ShipmentTitle} ({RemainingWeapons} left).", 2 );
 			}
 		}
 	}
@@ -221,7 +221,7 @@ public sealed class WeaponShipment : Component, Component.IPressable, IPhysgunEv
 			CacheLabels();
 		}
 
-		var labelText = $"{ShipmentTitle} | {RemainingWeapons} RESTANTS";
+		var labelText = $"{ShipmentTitle} | {RemainingWeapons} LEFT";
 		foreach ( var label in Labels )
 		{
 			if ( !label.IsValid() )

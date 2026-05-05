@@ -64,13 +64,13 @@ public sealed class JobVoteManager : Component
 
 		if ( candidate is null || definition is null )
 		{
-			reason = "Demande de vote invalide.";
+			reason = "Invalid vote request.";
 			return false;
 		}
 
 		if ( IsVoteActive && SecondsRemaining > 0.0f )
 		{
-			reason = "Un vote de métier est déjà en cours.";
+			reason = "A job vote is already in progress.";
 			return false;
 		}
 
@@ -80,7 +80,7 @@ public sealed class JobVoteManager : Component
 		var candidateId = candidate.PlayerData?.PlayerId ?? candidate.Network.Owner?.Id ?? Guid.Empty;
 		if ( candidateId == Guid.Empty )
 		{
-			reason = "Impossible d'identifier le candidat.";
+			reason = "Unable to identify the candidate.";
 			return false;
 		}
 
@@ -95,7 +95,7 @@ public sealed class JobVoteManager : Component
 		NoVotes = 0;
 		Revision++;
 
-		Scene.Get<Chat>()?.AddSystemText( $"{CandidateName} veut devenir {JobTitle}. Ouvrez le menu contextuel avec C pour libérer la souris et voter.", "how_to_vote" );
+		Scene.Get<Chat>()?.AddSystemText( $"{CandidateName} wants to become {JobTitle}. Open the context menu with C to unlock your mouse and vote.", "how_to_vote" );
 		return true;
 	}
 
@@ -118,7 +118,7 @@ public sealed class JobVoteManager : Component
 
 		if ( Votes.ContainsKey( voterId ) )
 		{
-			Notices.SendNotice( Rpc.Caller, "how_to_vote", Color.Yellow, "Vous avez déjà voté.", 2 );
+			Notices.SendNotice( Rpc.Caller, "how_to_vote", Color.Yellow, "You already voted.", 2 );
 			return;
 		}
 
@@ -126,7 +126,7 @@ public sealed class JobVoteManager : Component
 		UpdateVoteCounts();
 		Revision++;
 
-		Notices.SendNotice( Rpc.Caller, "how_to_vote", support ? Color.Green : Color.Orange, "Vote enregistré.", 2 );
+		Notices.SendNotice( Rpc.Caller, "how_to_vote", support ? Color.Green : Color.Orange, "Vote recorded.", 2 );
 
 		if ( Votes.Count >= GetEligibleVoterCount() )
 		{
@@ -164,7 +164,7 @@ public sealed class JobVoteManager : Component
 		var passed = yesVotes > noVotes;
 		if ( !passed )
 		{
-			Scene.Get<Chat>()?.AddSystemText( $"Le vote de {candidateName} pour {jobTitle} a échoué ({yesVotes} oui / {noVotes} non).", "how_to_vote" );
+			Scene.Get<Chat>()?.AddSystemText( $"{candidateName}'s job vote for {jobTitle} failed ({yesVotes} yes / {noVotes} no).", "how_to_vote" );
 			return;
 		}
 
@@ -172,19 +172,19 @@ public sealed class JobVoteManager : Component
 		var definition = JobDefinition.Get( jobPath );
 		if ( !candidate.IsValid() || definition is null )
 		{
-			Scene.Get<Chat>()?.AddSystemText( $"Le vote de {candidateName} est passé, mais le candidat n'est plus disponible.", "how_to_vote" );
+			Scene.Get<Chat>()?.AddSystemText( $"{candidateName}'s vote passed, but the candidate is no longer available.", "how_to_vote" );
 			return;
 		}
 
 		if ( !JobManager.CanJoin( candidate, definition, out var reason ) )
 		{
 			Notices.SendNotice( candidate.Network.Owner, "block", Color.Red, reason, 3 );
-			Scene.Get<Chat>()?.AddSystemText( $"Le vote de {candidateName} est passé, mais {jobTitle} n'est plus disponible.", "how_to_vote" );
+			Scene.Get<Chat>()?.AddSystemText( $"{candidateName}'s vote passed, but {jobTitle} is no longer available.", "how_to_vote" );
 			return;
 		}
 
 		candidate.ApplyVotedJobDefinition( definition );
-		Scene.Get<Chat>()?.AddSystemText( $"Le vote de {candidateName} pour {jobTitle} est passé ({yesVotes} oui / {noVotes} non).", "how_to_vote" );
+		Scene.Get<Chat>()?.AddSystemText( $"{candidateName}'s job vote for {jobTitle} passed ({yesVotes} yes / {noVotes} no).", "how_to_vote" );
 	}
 
 	void ClearVote()

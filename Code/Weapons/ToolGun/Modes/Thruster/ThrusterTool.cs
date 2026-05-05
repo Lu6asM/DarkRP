@@ -1,10 +1,10 @@
 ﻿﻿using Sandbox.UI;
 
 [Hide]
-[Title( "Thruster" )]
+[Title( "#tool.name.thruster" )]
 [Icon( "🚀" )]
 [ClassName( "thrustertool" )]
-[Group( "Building" )]
+[Group( "#tool.group.building" )]
 public class ThrusterTool : ToolMode
 {
 	public override bool UseSnapGrid => true;
@@ -85,6 +85,9 @@ public class ThrusterTool : ToolMode
 	[Rpc.Host]
 	public void Spawn( SelectionPoint point, PrefabFile thrusterPrefab, Transform tx, bool noWeld )
 	{
+		if ( !CanUseToolOn( point ) )
+			return;
+
 		if ( thrusterPrefab == null )
 			return;
 		if ( !TryUseToolSpawnLimit() )

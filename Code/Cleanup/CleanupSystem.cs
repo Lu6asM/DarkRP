@@ -271,7 +271,7 @@ public sealed class CleanupSystem : GameObjectSystem<CleanupSystem>, ISceneLoadi
 			}
 			else
 			{
-				Notices.AddNotice( "cleaning_services", Color.Red, $"Impossible de trouver {targetName} à nettoyer" );
+				Notices.AddNotice( "cleaning_services", Color.Red, $"Can't find {targetName} to clean up" );
 			}
 
 			return;
@@ -332,7 +332,7 @@ public sealed class CleanupSystem : GameObjectSystem<CleanupSystem>, ISceneLoadi
 			count++;
 		}
 
-		Notices.SendNotice( caller, "cleaning_services", Color.Green, $"{count} objets nettoyés" );
+		Notices.SendNotice( caller, "cleaning_services", Color.Green, $"Cleaned up {count} objects" );
 	}
 
 }

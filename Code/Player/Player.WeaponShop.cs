@@ -12,7 +12,7 @@ public sealed partial class Player
 		var inventory = GetComponent<PlayerInventory>();
 		if ( !inventory.IsValid() )
 		{
-			Notices.SendNotice( Network.Owner, "block", Color.Red, "Inventaire indisponible.", 3 );
+			Notices.SendNotice( Network.Owner, "block", Color.Red, "Inventory unavailable.", 3 );
 			return;
 		}
 
@@ -24,17 +24,17 @@ public sealed partial class Player
 
 		if ( !TryTakeMoney( definition.Price ) )
 		{
-			Notices.SendNotice( Network.Owner, "block", Color.Red, "Vous n'avez pas assez d'argent.", 3 );
+			Notices.SendNotice( Network.Owner, "block", Color.Red, "You don't have enough money.", 3 );
 			return;
 		}
 
 		if ( inventory.Pickup( definition.PrefabPath ) )
 		{
-			Notices.SendNotice( Network.Owner, "$", Color.Green, $"{definition.Title} achetée.", 3 );
+			Notices.SendNotice( Network.Owner, "$", Color.Green, $"{definition.Title} purchased.", 3 );
 			return;
 		}
 
 		GiveMoney( definition.Price );
-		Notices.SendNotice( Network.Owner, "block", Color.Red, "Impossible d'ajouter cette arme maintenant.", 3 );
+		Notices.SendNotice( Network.Owner, "block", Color.Red, "Unable to add that weapon right now.", 3 );
 	}
 }

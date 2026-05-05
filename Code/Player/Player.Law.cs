@@ -42,7 +42,7 @@ public sealed partial class Player
 			reason = reason?.Trim();
 			if ( string.IsNullOrWhiteSpace( reason ) )
 			{
-				Notices.SendNotice( Network.Owner, "block", Color.Red, "Indiquez un motif de recherche.", 3 );
+				Notices.SendNotice( Network.Owner, "block", Color.Red, "Provide a wanted reason.", 3 );
 				return;
 			}
 
@@ -65,13 +65,13 @@ public sealed partial class Player
 
 		if ( target.IsArrested )
 		{
-			Notices.SendNotice( Network.Owner, "block", Color.Red, "La cible est déjà arrêtée.", 3 );
+			Notices.SendNotice( Network.Owner, "block", Color.Red, "Target is already arrested.", 3 );
 			return;
 		}
 
 		if ( WorldPosition.Distance( target.WorldPosition ) > ArrestDistance )
 		{
-			Notices.SendNotice( Network.Owner, "block", Color.Red, "Rapprochez-vous pour arrêter ce joueur.", 3 );
+			Notices.SendNotice( Network.Owner, "block", Color.Red, "Get closer to arrest that player.", 3 );
 			return;
 		}
 
@@ -90,13 +90,13 @@ public sealed partial class Player
 
 		if ( !target.IsArrested )
 		{
-			Notices.SendNotice( Network.Owner, "block", Color.Red, "La cible n'est pas arrêtée.", 3 );
+			Notices.SendNotice( Network.Owner, "block", Color.Red, "Target is not arrested.", 3 );
 			return;
 		}
 
 		if ( WorldPosition.Distance( target.WorldPosition ) > ArrestDistance )
 		{
-			Notices.SendNotice( Network.Owner, "block", Color.Red, "Rapprochez-vous pour libérer ce joueur.", 3 );
+			Notices.SendNotice( Network.Owner, "block", Color.Red, "Get closer to release that player.", 3 );
 			return;
 		}
 
@@ -104,7 +104,7 @@ public sealed partial class Player
 
 		if ( Network.Owner is { } actorConnection )
 		{
-			Notices.SendNotice( actorConnection, "check_circle", Color.Green, $"{target.DisplayName} libéré(e).", 3 );
+			Notices.SendNotice( actorConnection, "check_circle", Color.Green, $"Released {target.DisplayName} from arrest.", 3 );
 		}
 	}
 
@@ -147,15 +147,15 @@ public sealed partial class Player
 
 		if ( Network.Owner is { } targetConnection )
 		{
-			Notices.SendNotice( targetConnection, "warning", Color.Orange, $"Vous êtes recherché(e) : {PlayerData.WantedReason}", 4 );
+			Notices.SendNotice( targetConnection, "warning", Color.Orange, $"You are wanted: {PlayerData.WantedReason}", 4 );
 		}
 
 		if ( actor?.Network.Owner is { } actorConnection )
 		{
-			Notices.SendNotice( actorConnection, "gavel", Color.Green, $"{DisplayName} est désormais recherché(e).", 3 );
+			Notices.SendNotice( actorConnection, "gavel", Color.Green, $"{DisplayName} is now wanted.", 3 );
 		}
 
-		Scene.Get<Chat>()?.AddSystemText( $"{DisplayName} est désormais recherché(e) : {PlayerData.WantedReason}", "🚨" );
+		Scene.Get<Chat>()?.AddSystemText( $"{DisplayName} is now wanted: {PlayerData.WantedReason}", "🚨" );
 	}
 
 	public void ClearWanted( Player actor )
@@ -169,12 +169,12 @@ public sealed partial class Player
 
 		if ( Network.Owner is { } targetConnection )
 		{
-			Notices.SendNotice( targetConnection, "check_circle", Color.Green, "Vous n'êtes plus recherché(e).", 3 );
+			Notices.SendNotice( targetConnection, "check_circle", Color.Green, "You are no longer wanted.", 3 );
 		}
 
 		if ( actor?.Network.Owner is { } actorConnection )
 		{
-			Notices.SendNotice( actorConnection, "check_circle", Color.Green, $"{DisplayName} n'est plus recherché(e).", 3 );
+			Notices.SendNotice( actorConnection, "check_circle", Color.Green, $"Cleared wanted status for {DisplayName}.", 3 );
 		}
 	}
 
@@ -211,25 +211,25 @@ public sealed partial class Player
 
 			if ( officer?.Network.Owner is { } officerSuccessConnection )
 			{
-				Notices.SendNotice( officerSuccessConnection, "check_circle", Color.Green, $"{DisplayName} déplacé(e) en cellule.", 3 );
+				Notices.SendNotice( officerSuccessConnection, "check_circle", Color.Green, $"Moved {DisplayName} to a jail cell marker.", 3 );
 			}
 		}
 		else if ( officer?.Network.Owner is { } officerNoticeConnection )
 		{
-			Notices.SendNotice( officerNoticeConnection, "block", Color.Orange, "Aucune cellule trouvée. Joueur arrêté sur place.", 4 );
+			Notices.SendNotice( officerNoticeConnection, "block", Color.Orange, "No JailCellMarker found. Player was arrested in place.", 4 );
 		}
 
 		if ( Network.Owner is { } targetConnection )
 		{
-			Notices.SendNotice( targetConnection, "gavel", Color.Orange, $"Vous avez été arrêté(e) pour {ArrestDuration:0} secondes.", 4 );
+			Notices.SendNotice( targetConnection, "gavel", Color.Orange, $"You were arrested for {ArrestDuration:0} seconds.", 4 );
 		}
 
 		if ( officer?.Network.Owner is { } officerConnection )
 		{
-			Notices.SendNotice( officerConnection, "gavel", Color.Green, $"{DisplayName} arrêté(e).", 3 );
+			Notices.SendNotice( officerConnection, "gavel", Color.Green, $"Arrested {DisplayName}.", 3 );
 		}
 
-		Scene.Get<Chat>()?.AddSystemText( $"{DisplayName} a été arrêté(e) par {officer?.DisplayName ?? "la loi"}.", "⛓" );
+		Scene.Get<Chat>()?.AddSystemText( $"{DisplayName} was arrested by {officer?.DisplayName ?? "the law"}.", "⛓" );
 	}
 
 	async void ApplyPrisonerClothingForCurrentArrest()
@@ -264,7 +264,7 @@ public sealed partial class Player
 
 		if ( Network.Owner is { } targetConnection )
 		{
-			Notices.SendNotice( targetConnection, "check_circle", Color.Green, "Vous avez été libéré(e).", 3 );
+			Notices.SendNotice( targetConnection, "check_circle", Color.Green, "You have been released from arrest.", 3 );
 		}
 	}
 

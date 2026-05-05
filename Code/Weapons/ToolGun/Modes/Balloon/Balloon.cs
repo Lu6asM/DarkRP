@@ -1,8 +1,9 @@
 ﻿using Sandbox.UI;
 
 [Icon( "🎈" )]
+[Title( "#tool.name.balloon" )]
 [ClassName( "balloon" )]
-[Group( "Building" )]
+[Group( "#tool.group.building" )]
 public class Balloon : ToolMode
 {
 	public override bool UseSnapGrid => true;
@@ -93,6 +94,9 @@ public class Balloon : ToolMode
 	[Rpc.Host]
 	public void Spawn( SelectionPoint point, PrefabFile thrusterPrefab, Transform tx, bool withRope, Color spawnTint )
 	{
+		if ( !CanUseToolOn( point ) )
+			return;
+
 		if ( !TryUseToolSpawnLimit() )
 			return;
 

@@ -26,7 +26,7 @@ public sealed partial class GameManager : GameObjectSystem<GameManager>, Compone
 		CheckConnectionAchievement( channel );
 		CheckFriendsOnlineStat();
 
-		Scene.Get<Chat>()?.AddSystemText( $"{channel.DisplayName} a rejoint la partie", "👋" );
+		Scene.Get<Chat>()?.AddSystemText( $"{channel.DisplayName} has joined the game", "👋" );
 	}
 
 	/// <summary>
@@ -48,7 +48,7 @@ public sealed partial class GameManager : GameObjectSystem<GameManager>, Compone
 		if ( _kickedPlayers.Remove( channel.Id ) ) return;
 		if ( BanSystem.Current?.IsBanned( channel.SteamId ) ?? false ) return;
 
-		Scene.Get<Chat>()?.AddSystemText( $"{channel.DisplayName} a quitté la partie", "👋" );
+		Scene.Get<Chat>()?.AddSystemText( $"{channel.DisplayName} has left the game", "👋" );
 	}
 
 	private PlayerData CreatePlayerInfo( Connection channel )
@@ -191,15 +191,15 @@ public sealed partial class GameManager : GameObjectSystem<GameManager>, Compone
 
 		if ( string.IsNullOrEmpty( attackerName ) )
 		{
-			SendMessage( $"{player.DisplayName} est mort (tags: {dmg.Tags})" );
+			SendMessage( $"{player.DisplayName} died (tags: {dmg.Tags})" );
 		}
 		else if ( weapon.IsValid() )
 		{
-			SendMessage( $"{attackerName} a tué {(isSuicide ? "lui-même" : player.DisplayName)} avec {weapon.Name} (tags: {dmg.Tags})" );
+			SendMessage( $"{attackerName} killed {(isSuicide ? "self" : player.DisplayName)} with {weapon.Name} (tags: {dmg.Tags})" );
 		}
 		else
 		{
-			SendMessage( $"{attackerName} a tué {(isSuicide ? "lui-même" : player.DisplayName)} (tags: {dmg.Tags})" );
+			SendMessage( $"{attackerName} killed {(isSuicide ? "self" : player.DisplayName)} (tags: {dmg.Tags})" );
 		}
 	}
 
@@ -228,6 +228,11 @@ public sealed partial class GameManager : GameObjectSystem<GameManager>, Compone
 	public static void ChangeProperty( Component c, string propertyName, object value )
 	{
 		if ( !c.IsValid() ) return;
+		if ( !CanModifyInspectedObject( c.GameObject, Rpc.Caller, out var reason ) )
+		{
+			SendInspectorDeniedNotice( Rpc.Caller, reason );
+			return;
+		}
 
 		var tl = TypeLibrary.GetType( c.GetType() );
 		if ( tl is null ) return;
@@ -253,6 +258,12 @@ public sealed partial class GameManager : GameObjectSystem<GameManager>, Compone
 	public static void ApplyMorphBatch( SkinnedModelRenderer smr, string morphsJson )
 	{
 		if ( !smr.IsValid() ) return;
+		if ( !CanModifyInspectedObject( smr.GameObject, Rpc.Caller, out var reason ) )
+		{
+			SendInspectorDeniedNotice( Rpc.Caller, reason );
+			return;
+		}
+
 		smr.GameObject.GetOrAddComponent<MorphState>().ApplyBatch( morphsJson );
 	}
 
@@ -263,13 +274,25 @@ public sealed partial class GameManager : GameObjectSystem<GameManager>, Compone
 	public static void ApplyFacePosePreset( SkinnedModelRenderer smr, string morphsJson )
 	{
 		if ( !smr.IsValid() ) return;
+		if ( !CanModifyInspectedObject( smr.GameObject, Rpc.Caller, out var reason ) )
+		{
+			SendInspectorDeniedNotice( Rpc.Caller, reason );
+			return;
+		}
+
 		smr.GameObject.GetOrAddComponent<MorphState>().ApplyPreset( morphsJson );
 	}
 
 	[Rpc.Host]
 	public static async void ChangeMaterialOverride( ModelRenderer renderer, int materialIndex, string materialPath )
 	{
+		var caller = Rpc.Caller;
 		if ( !renderer.IsValid() ) return;
+		if ( !CanModifyInspectedObject( renderer.GameObject, caller, out var reason ) )
+		{
+			SendInspectorDeniedNotice( caller, reason );
+			return;
+		}
 
 		Material material = null;
 
@@ -280,6 +303,11 @@ public sealed partial class GameManager : GameObjectSystem<GameManager>, Compone
 		}
 
 		if ( !renderer.IsValid() ) return;
+		if ( !CanModifyInspectedObject( renderer.GameObject, caller, out reason ) )
+		{
+			SendInspectorDeniedNotice( caller, reason );
+			return;
+		}
 
 		renderer.Materials.SetOverride( materialIndex, material );
 
@@ -295,8 +323,11 @@ public sealed partial class GameManager : GameObjectSystem<GameManager>, Compone
 		if ( !go.IsValid() || go.IsProxy ) return;
 		if ( go.Tags.Has( "player" ) ) return;
 
-		// Check ownership if the object has an Ownable component
-		if ( !go.HasAccess( Rpc.Caller ) ) return;
+		if ( !CanModifyInspectedObject( go, Rpc.Caller, out var reason ) )
+		{
+			SendInspectorDeniedNotice( Rpc.Caller, reason );
+			return;
+		}
 
 		go.Destroy();
 	}
@@ -308,8 +339,11 @@ public sealed partial class GameManager : GameObjectSystem<GameManager>, Compone
 	public static void BreakInspectedProp( Prop prop )
 	{
 		if ( !prop.IsValid() || prop.IsProxy ) return;
-		// Check ownership if the object has an Ownable component
-		if ( !prop.GameObject.HasAccess( Rpc.Caller ) ) return;
+		if ( !CanModifyInspectedObject( prop.GameObject, Rpc.Caller, out var reason ) )
+		{
+			SendInspectorDeniedNotice( Rpc.Caller, reason );
+			return;
+		}
 
 		var damageable = prop.GetComponent<Component.IDamageable>();
 		if ( damageable is null ) return;
@@ -317,6 +351,42 @@ public sealed partial class GameManager : GameObjectSystem<GameManager>, Compone
 		var dmg = new DamageInfo( 999999, null, null );
 		dmg.Tags.Add( DamageTags.GibAlways );
 		damageable.OnDamage( in dmg );
+	}
+
+	static bool CanModifyInspectedObject( GameObject go, Connection caller, out string reason )
+	{
+		reason = null;
+
+		if ( !go.IsValid() || go.IsProxy )
+			return false;
+
+		if ( caller is null )
+			return false;
+
+		if ( caller.IsHost || AdminSystem.Current?.HasAdminAccess( caller ) == true )
+			return true;
+
+		if ( !ObjectAccess.TryGetOwnable( go, out var ownable ) || ownable.Owner is null )
+		{
+			reason = "Only admins can interact with server-owned objects.";
+			return false;
+		}
+
+		if ( ownable.Owner != caller )
+		{
+			reason = "You can only interact with objects you own.";
+			return false;
+		}
+
+		return true;
+	}
+
+	static void SendInspectorDeniedNotice( Connection caller, string reason )
+	{
+		if ( caller is null || string.IsNullOrWhiteSpace( reason ) )
+			return;
+
+		Notices.SendNotice( caller, "block", Color.Red, reason, 3 );
 	}
 
 	[Rpc.Host]
@@ -370,6 +440,6 @@ public sealed partial class GameManager : GameObjectSystem<GameManager>, Compone
 
 	public void OnCleanup( int removedObjects, int restoredObjects )
 	{
-		Notices.AddNotice( "cleaning_services", Color.Green, $"Nettoyage ! {removedObjects} objets supprimés, {restoredObjects} objets restaurés." );
+		Notices.AddNotice( "cleaning_services", Color.Green, $"Cleanup! Removed {removedObjects} objects, restored {restoredObjects} objects." );
 	}
 }

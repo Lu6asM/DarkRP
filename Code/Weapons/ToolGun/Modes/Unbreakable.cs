@@ -1,7 +1,8 @@
 
 [Icon( "🛡️" )]
+[Title( "#tool.name.unbreakable" )]
 [ClassName( "unbreakable" )]
-[Group( "Tools" )]
+[Group( "#tool.group.tools" )]
 public class Unbreakable : ToolMode
 {
 	public override string Description => "#tool.hint.unbreakable.description";
@@ -42,6 +43,7 @@ public class Unbreakable : ToolMode
 	private void SetUnbreakable( Prop prop, bool unbreakable )
 	{
 		if ( !prop.IsValid() || prop.IsProxy ) return;
+		if ( !CanUseToolOn( prop.GameObject ) ) return;
 		if ( !TryUseToolActionCooldown() ) return;
 
 		prop.Health = unbreakable ? 0 : ( prop?.Model?.Data?.Health ?? 100 );
