@@ -353,6 +353,7 @@ public sealed partial class GameManager : GameObjectSystem<GameManager>, Compone
 		damageable.OnDamage( in dmg );
 	}
 
+
 	static bool CanModifyInspectedObject( GameObject go, Connection caller, out string reason )
 	{
 		reason = null;

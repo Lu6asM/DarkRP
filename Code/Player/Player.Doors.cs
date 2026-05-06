@@ -317,7 +317,7 @@ public sealed partial class Player
 
 		if ( !TryGetLookedRoleplayDoor( out var roleplayDoor ) )
 		{
-			Notices.SendNotice( Network.Owner, "block", Color.Red, "Look at a roleplay door first.", 3 );
+			Notices.SendNotice( Network.Owner, "block", Color.Red, "Regardez d'abord une porte.", 3 );
 			return;
 		}
 
@@ -325,7 +325,7 @@ public sealed partial class Player
 		{
 			var price = Math.Max( 0, roleplayDoor.PurchasePrice );
 			PlayDoorActionSound( "sounds/ui/ui.spawn.sound" );
-			Notices.SendNotice( Network.Owner, "$", Color.Green, $"Door purchased for ${price:n0}.", 3 );
+			Notices.SendNotice( Network.Owner, "$", Color.Green, $"Porte achetée pour {price:n0}$.", 3 );
 			return;
 		}
 
@@ -339,19 +339,19 @@ public sealed partial class Player
 
 		if ( !IsHoldingDoorKeys() )
 		{
-			Notices.SendNotice( Network.Owner, "key", Color.Red, "Equip your keys first.", 3 );
+			Notices.SendNotice( Network.Owner, "key", Color.Red, "Équipez vos clés d'abord.", 3 );
 			return;
 		}
 
 		if ( !TryGetLookedRoleplayDoor( out var roleplayDoor ) )
 		{
-			Notices.SendNotice( Network.Owner, "block", Color.Red, "Look at a roleplay door first.", 3 );
+			Notices.SendNotice( Network.Owner, "block", Color.Red, "Regardez d'abord une porte.", 3 );
 			return;
 		}
 
 		if ( roleplayDoor.TrySetLocked( this, locked, out var error ) )
 		{
-			var message = locked ? "Door locked." : "Door unlocked.";
+			var message = locked ? "Porte verrouillée." : "Porte déverrouillée.";
 			var icon = locked ? "lock" : "lock_open";
 			Notices.SendNotice( Network.Owner, icon, Color.Green, message, 3 );
 			return;
@@ -378,14 +378,14 @@ public sealed partial class Player
 
 		if ( !TryGetLookedRoleplayDoor( out var roleplayDoor ) )
 		{
-			Notices.SendNotice( Network.Owner, "block", Color.Red, "Look at a roleplay door first.", 3 );
+			Notices.SendNotice( Network.Owner, "block", Color.Red, "Regardez d'abord une porte.", 3 );
 			return;
 		}
 
 		if ( roleplayDoor.TrySell( this, out var refund, out var error ) )
 		{
 			PlayDoorActionSound( "sounds/ui/ui.undo.sound" );
-			Notices.SendNotice( Network.Owner, "$", Color.Green, $"Door sold for ${refund:n0}.", 3 );
+			Notices.SendNotice( Network.Owner, "$", Color.Green, $"Porte vendue pour {refund:n0}$.", 3 );
 			return;
 		}
 
@@ -399,14 +399,14 @@ public sealed partial class Player
 
 		if ( !TryGetLookedRoleplayDoor( out var roleplayDoor ) )
 		{
-			Notices.SendNotice( Network.Owner, "block", Color.Red, "Look at a roleplay door first.", 3 );
+			Notices.SendNotice( Network.Owner, "block", Color.Red, "Regardez d'abord une porte.", 3 );
 			return;
 		}
 
 		if ( roleplayDoor.TryLockpick( this, out var error ) )
 		{
 			ResetDoorLockpickHold();
-			Notices.SendNotice( Network.Owner, "key", Color.Green, "Lockpick succeeded.", 3 );
+			Notices.SendNotice( Network.Owner, "key", Color.Green, "Crochetage réussi.", 3 );
 			return;
 		}
 

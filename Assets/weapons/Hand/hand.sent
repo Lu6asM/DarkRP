@@ -1,7 +1,7 @@
 {
   "Prefab": "weapons/hand/hand.prefab",
-  "Title": "Hands",
-  "Description": "Let's fight !",
+  "Title": "Poings",
+  "Description": "Au combat !",
   "Category": "Weapon",
   "IncludeCode": false,
   "Developer": false,

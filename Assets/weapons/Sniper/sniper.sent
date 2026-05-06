@@ -1,7 +1,7 @@
 {
   "Prefab": "weapons/sniper/sniper.prefab",
   "Title": "M700 Sniper",
-  "Description": "High-powered bolt-action sniper rifle with scope",
+  "Description": "Fusil de précision à verrou haute puissance avec lunette de visée.",
   "Category": "Weapon",
   "IncludeCode": false,
   "__references": [],

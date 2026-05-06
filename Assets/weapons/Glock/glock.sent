@@ -1,7 +1,7 @@
 {
   "Prefab": "weapons/glock/glock.prefab",
   "Title": "USP",
-  "Description": null,
+  "Description": "Pistolet semi-automatique fiable et précis à courte portée.",
   "Category": "Weapon",
   "IncludeCode": false,
   "__references": [],

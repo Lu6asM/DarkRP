@@ -1,7 +1,7 @@
 {
   "Prefab": "weapons/grenade/grenade.prefab",
   "Title": "Grenade",
-  "Description": null,
+  "Description": "Explosif à fragmentation lancé à la main.",
   "Category": "Weapon",
   "IncludeCode": false,
   "__references": [],

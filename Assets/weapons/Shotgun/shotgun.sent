@@ -1,7 +1,7 @@
 {
   "Prefab": "weapons/shotgun/shotgun.prefab",
-  "Title": "Shotgun",
-  "Description": "It goes boom",
+  "Title": "Fusil à Pompe",
+  "Description": "Arme dévastatrice à courte portée infligeant d'énormes dégâts.",
   "Category": "Weapon",
   "IncludeCode": false,
   "__references": [],

@@ -1,7 +1,7 @@
 {
   "Prefab": "weapons/rpg/rpg.prefab",
-  "Title": "Rocket Launcher",
-  "Description": null,
+  "Title": "Lance-Roquettes",
+  "Description": "Lance une roquette explosive dévastatrice.",
   "Category": "Weapon",
   "IncludeCode": false,
   "Developer": false,

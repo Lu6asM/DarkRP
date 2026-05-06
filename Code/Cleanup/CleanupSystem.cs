@@ -332,7 +332,7 @@ public sealed class CleanupSystem : GameObjectSystem<CleanupSystem>, ISceneLoadi
 			count++;
 		}
 
-		Notices.SendNotice( caller, "cleaning_services", Color.Green, $"Cleaned up {count} objects" );
+		Notices.SendNotice( caller, "cleaning_services", Color.Green, $"{count} objet(s) nettoyé(s)" );
 	}
 
 }

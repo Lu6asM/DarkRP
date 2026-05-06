@@ -1,7 +1,7 @@
 {
   "Prefab": "weapons/ragebait/ragebait.prefab",
-  "Title": "Ragebait",
-  "Description": "A hobo weapon that throws dirty bait.",
+  "Title": "Appât",
+  "Description": "Arme de clochard qui projette un appât repoussant.",
   "Category": "Weapon",
   "IncludeCode": false,
   "__references": [],

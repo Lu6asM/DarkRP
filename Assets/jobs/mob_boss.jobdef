@@ -1,7 +1,7 @@
 {
   "Title": "Parrain",
   "Description": "Chef criminel de haut rang disposant d'un meilleur équipement et contrôlant les opérations du gang.",
-  "Category": "Criminel",
+  "Category": "Criminal",
   "AccentColor": "0.55612,0.19782,0.5907,1",
   "Salary": 85,
   "MaxPlayers": 1,

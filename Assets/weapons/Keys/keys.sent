@@ -1,7 +1,7 @@
 {
   "Prefab": "weapons/keys/keys.prefab",
-  "Title": "Keys",
-  "Description": "Lock owned doors with primary fire and unlock them with secondary fire.",
+  "Title": "Clés",
+  "Description": "Verrouillez vos portes avec le clic gauche et déverrouillez-les avec le clic droit.",
   "Category": "Weapon",
   "IncludeCode": false,
   "__references": [],

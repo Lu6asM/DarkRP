@@ -1,7 +1,7 @@
 {
   "Title": "Voleur",
   "Description": "S'introduit dans les maisons verrouillées et s'échappe avant l'arrivée des forces de l'ordre.",
-  "Category": "Criminel",
+  "Category": "Criminal",
   "AccentColor": "0.9059,0.3569,0.3569,1",
   "Salary": 60,
   "MaxPlayers": 6,

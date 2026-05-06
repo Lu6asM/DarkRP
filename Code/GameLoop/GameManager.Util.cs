@@ -42,7 +42,7 @@ public sealed partial class GameManager
 
 		var finalReason = string.IsNullOrWhiteSpace( reason ) ? "Kicked" : reason.Trim();
 		Current.Kick( target, finalReason );
-		Notices.SendNotice( Rpc.Caller, "person_remove", Color.Green, $"{target.DisplayName} was kicked.", 3 );
+		Notices.SendNotice( Rpc.Caller, "person_remove", Color.Green, $"{target.DisplayName} a été expulsé(e).", 3 );
 	}
 
 	/// <summary>

@@ -1,7 +1,7 @@
 {
   "Title": "SDF",
   "Description": "Rôle de survie dans la rue avec un équipement minimal et une tenue civile négligée.",
-  "Category": "Civil",
+  "Category": "Civilian",
   "AccentColor": "0.7294,0.7569,0.8275,1",
   "Salary": 0,
   "MaxPlayers": 3,

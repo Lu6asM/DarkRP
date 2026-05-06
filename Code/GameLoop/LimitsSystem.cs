@@ -274,6 +274,6 @@ public sealed class LimitsSystem : GameObjectSystem<LimitsSystem>, Global.ISpawn
 		var target = player?.Connection;
 		if ( target is null ) return;
 
-		Notices.SendNotice( target, "block", Color.Red, $"Limit reached: {category} ({limit})", 3 );
+		Notices.SendNotice( target, "block", Color.Red, $"Limite atteinte : {category} ({limit})", 3 );
 	}
 }

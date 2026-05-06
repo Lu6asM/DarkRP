@@ -1,6 +1,6 @@
 {
   "Prefab": "weapons/physgun/physgun.prefab",
-  "Title": "Physics Gun",
+  "Title": "Pistolet Physique",
   "Description": "bzzzzt...",
   "Category": "Weapon",
   "IncludeCode": false,

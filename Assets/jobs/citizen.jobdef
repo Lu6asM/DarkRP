@@ -1,7 +1,7 @@
 {
   "Title": "Citoyen",
   "Description": "Rôle civil standard sans autorité spéciale ni équipement de combat intégré.",
-  "Category": "Civil",
+  "Category": "Civilian",
   "AccentColor": "0.8471,0.9098,1,1",
   "Salary": 45,
   "MaxPlayers": 0,

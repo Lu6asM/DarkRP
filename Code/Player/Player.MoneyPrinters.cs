@@ -11,23 +11,23 @@ public sealed partial class Player
 
 		if ( MoneyPrinter.CountOwned( Network.Owner ) >= MoneyPrinterDefinition.MaxOwnedPerPlayer )
 		{
-			Notices.SendNotice( Network.Owner, "block", Color.Red, $"You already own {MoneyPrinterDefinition.MaxOwnedPerPlayer} printers.", 3 );
+			Notices.SendNotice( Network.Owner, "block", Color.Red, $"Vous possédez déjà {MoneyPrinterDefinition.MaxOwnedPerPlayer} imprimante(s).", 3 );
 			return;
 		}
 
 		if ( !TryTakeMoney( definition.Price ) )
 		{
-			Notices.SendNotice( Network.Owner, "block", Color.Red, "You don't have enough money.", 3 );
+			Notices.SendNotice( Network.Owner, "block", Color.Red, "Vous n'avez pas assez d'argent.", 3 );
 			return;
 		}
 
 		if ( MoneyPrinter.TrySpawn( this, definition ) )
 		{
-			Notices.SendNotice( Network.Owner, "$", Color.Green, $"{definition.Title} purchased.", 3 );
+			Notices.SendNotice( Network.Owner, "$", Color.Green, $"{definition.Title} acheté.", 3 );
 			return;
 		}
 
 		GiveMoney( definition.Price );
-		Notices.SendNotice( Network.Owner, "block", Color.Red, "Unable to place the printer right now.", 3 );
+		Notices.SendNotice( Network.Owner, "block", Color.Red, "Impossible de placer l'imprimante pour le moment.", 3 );
 	}
 }

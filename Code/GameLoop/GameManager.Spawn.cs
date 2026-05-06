@@ -36,7 +36,7 @@ public sealed partial class GameManager
 
 		if ( SpawnBlocklist.IsBlockedForPlayer( player, type, path ) )
 		{
-			Notices.SendNotice( Rpc.Caller, "block", Color.Red, "This prop is restricted to admins.", 3 );
+			Notices.SendNotice( Rpc.Caller, "block", Color.Red, "Cet objet est réservé aux administrateurs.", 3 );
 			return;
 		}
 

@@ -1,7 +1,7 @@
 {
   "Prefab": "weapons/mp5/mp5.prefab",
   "Title": "MP5",
-  "Description": "Semi-automatic sub machine gun",
+  "Description": "Pistolet-mitrailleur compact à cadence élevée.",
   "Category": "Weapon",
   "IncludeCode": false,
   "__references": [],

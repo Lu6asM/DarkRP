@@ -1,7 +1,7 @@
 {
   "Prefab": "weapons/crowbar/crowbar.prefab",
-  "Title": "Crowbar",
-  "Description": null,
+  "Title": "Pied-de-biche",
+  "Description": "Arme de mêlée solide et polyvalente.",
   "Category": "Weapon",
   "IncludeCode": false,
   "__references": [],

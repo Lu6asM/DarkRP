@@ -1,7 +1,7 @@
 {
   "Title": "Commissaire",
   "Description": "Dirige la Protection Civile et intervient dans les situations à haut risque avec un équipement lourd.",
-  "Category": "Gouvernement",
+  "Category": "Government",
   "AccentColor": "0.251,0.651,0.9412,1",
   "Salary": 90,
   "MaxPlayers": 1,

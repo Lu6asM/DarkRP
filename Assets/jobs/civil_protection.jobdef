@@ -1,7 +1,7 @@
 {
-  "Title": "Protection Civile",
+  "Title": "Police",
   "Description": "Rôle de police de première ligne axé sur les patrouilles, les arrestations et le contrôle des rues.",
-  "Category": "Gouvernement",
+  "Category": "Government",
   "AccentColor": "0.3373,0.7176,0.9765,1",
   "Salary": 65,
   "MaxPlayers": 8,
