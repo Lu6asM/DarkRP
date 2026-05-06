@@ -1,16 +1,19 @@
 {
   "Title": "Protection Civile",
   "Description": "Rôle de police de première ligne axé sur les patrouilles, les arrestations et le contrôle des rues.",
-  "Category": "Gouvernement",
+  "Category": "Government",
   "AccentColor": "0.3373,0.7176,0.9765,1",
   "Salary": 65,
   "MaxPlayers": 8,
+  "RequiresVote": false,
   "Command": "/cp",
   "Order": 10,
   "StartingItems": [
     "weapons/glock/glock.prefab",
     "weapons/arreststick/arrest_stick.prefab"
   ],
+  "UseOwnerAvatarAppearance": false,
+  "PreserveOwnerAvatarAppearance": true,
   "Clothing": [
     "models/citizen_clothes/hat/police_hat/police_hat.clothing",
     "models/citizen_clothes/shirt/jumpsuit/blue_jumpsuit.clothing",
