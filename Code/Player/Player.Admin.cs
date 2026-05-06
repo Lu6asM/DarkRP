@@ -189,23 +189,16 @@ public sealed partial class Player
 		if ( target is null || !target.PlayerData.IsValid() ) return;
 
 		target.PlayerData.IsInvisible = !target.PlayerData.IsInvisible;
-		target.ApplyInvisibility();
+		target.ApplyInvisibility( target.PlayerData.IsInvisible );
 
 		var state = target.PlayerData.IsInvisible ? "activé" : "désactivé";
 		Notices.SendNotice( Rpc.Caller, "visibility_off", Color.Green, $"Invisible {state} pour {target.DisplayName}.", 3 );
 	}
 
-	/// <summary>
-	/// Applique ou retire l'invisibilité sur le Body du joueur.
-	/// Appelé depuis le host via Rpc.Broadcast pour que tous les clients
-	/// cachent / affichent le modèle.
-	/// </summary>
 	[Rpc.Broadcast( NetFlags.HostOnly | NetFlags.Reliable )]
-	public void ApplyInvisibility()
+	public void ApplyInvisibility( bool invisible )
 	{
 		if ( !Body.IsValid() ) return;
-
-		var invisible = PlayerData?.IsInvisible ?? false;
 
 		// Le joueur lui-même voit toujours son propre body
 		if ( IsLocalPlayer )
