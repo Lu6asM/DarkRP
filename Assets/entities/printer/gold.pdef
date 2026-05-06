@@ -1,7 +1,7 @@
 {
   "Prefab": "entities/printer/money_printer.prefab",
-  "Title": "Gold Printer",
-  "Description": "High-tier printer that generates $25 every 10 seconds.",
+  "Title": "Imprimante Or",
+  "Description": "Imprimante haut de gamme qui génère 25$ toutes les 10 secondes.",
   "Price": 2600,
   "MoneyPerTick": 25,
   "Interval": 10,

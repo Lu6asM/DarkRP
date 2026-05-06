@@ -1,7 +1,7 @@
 {
   "Prefab": "entities/printer/money_printer.prefab",
-  "Title": "Silver Printer",
-  "Description": "Balanced printer that generates $25 every 15 seconds.",
+  "Title": "Imprimante Argent",
+  "Description": "Imprimante équilibrée qui génère $25 toutes les 15 secondes.",
   "Price": 1200,
   "MoneyPerTick": 25,
   "Interval": 15,

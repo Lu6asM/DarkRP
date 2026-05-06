@@ -22,15 +22,15 @@ public static class WeaponShopCatalog
 
 	static readonly WeaponShopItemDefinition[] Items =
 	[
-		new( "weapons/crowbar/crowbar.prefab", "Crowbar", 250, "A cheap melee option that hits hard at point-blank range." ),
-		new( "weapons/glock/glock.prefab", "USP", 600, "A dependable sidearm for cheap, accurate close-range fights." ),
-		new( "weapons/colt1911/colt1911.prefab", "1911", 750, "A heavier pistol with stronger shots and a smaller magazine." ),
-		new( "weapons/grenade/grenade.prefab", "Grenade", 900, "A thrown explosive for flushing players out of tight positions.", true ),
-		new( "weapons/mp5/mp5.prefab", "SMG", 1600, "A fast-firing SMG built for aggressive short-range pressure.", true ),
-		new( "weapons/shotgun/shotgun.prefab", "Shotgun", 2100, "A close-quarters weapon that deals massive damage up close.", true ),
-		new( "weapons/m4a1/m4a1.prefab", "M4A1", 2600, "A balanced assault rifle that stays effective in most fights.", true ),
-		new( "weapons/sniper/sniper.prefab", "Sniper", 3200, "A high-damage rifle made for long-range picks and hold angles.", true ),
-		new( "weapons/rpg/rpg.prefab", "Rocket Launcher", 10000, "A heavy launcher for expensive, high-impact explosive pressure.", true )
+		new( "weapons/crowbar/crowbar.prefab", "Pied-de-biche", 250, "Une arme de mêlée bon marché qui fait mal à bout portant." ),
+		new( "weapons/glock/glock.prefab", "USP", 600, "Une arme de poing fiable, précise et efficace à courte portée." ),
+		new( "weapons/colt1911/colt1911.prefab", "1911", 750, "Un pistolet plus lourd avec des tirs plus puissants et un chargeur réduit." ),
+		new( "weapons/grenade/grenade.prefab", "Grenade", 900, "Un explosif lancé à la main pour déloger les ennemis en zone fermée.", true ),
+		new( "weapons/mp5/mp5.prefab", "SMG", 1600, "Un pistolet-mitrailleur à cadence élevée, idéal pour le combat rapproché agressif.", true ),
+		new( "weapons/shotgun/shotgun.prefab", "Fusil à Pompe", 2100, "Une arme dévastatrice à courte portée infligeant d'énormes dégâts.", true ),
+		new( "weapons/m4a1/m4a1.prefab", "M4A1", 2600, "Un fusil d'assaut polyvalent, efficace dans la plupart des situations.", true ),
+		new( "weapons/sniper/sniper.prefab", "Sniper", 3200, "Un fusil haute précision conçu pour les éliminations à longue distance.", true ),
+		new( "weapons/rpg/rpg.prefab", "Lance-Roquettes", 10000, "Un lanceur lourd pour une pression explosive massive et dévastatrice.", true )
 	];
 
 	public static IReadOnlyList<WeaponShopItemDefinition> GetAll()
@@ -61,7 +61,7 @@ public static class WeaponShopCatalog
 		var item = Get( prefabPath );
 		if ( item is null )
 		{
-			reason = "Unknown weapon.";
+			reason = "Arme inconnue.";
 			return false;
 		}
 
@@ -70,13 +70,13 @@ public static class WeaponShopCatalog
 
 		if ( player is null )
 		{
-			reason = "Player unavailable.";
+			reason = "Joueur indisponible.";
 			return false;
 		}
 
 		if ( !IsGunDealer( player ) )
 		{
-			reason = "Gun Dealer only.";
+			reason = "Réservé aux Marchands d'Armes.";
 			return false;
 		}
 

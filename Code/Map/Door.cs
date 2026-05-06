@@ -142,10 +142,10 @@ public sealed class Door : Component, Component.IPressable
 
 		if ( IsLocked )
 		{
-			return new IPressable.Tooltip( "Locked", "lock", "" );
+			return new IPressable.Tooltip( "Verrouillée", "lock", "" );
 		}
 
-		var title = State == DoorState.Open ? "Close" : "Open";
+		var title = State == DoorState.Open ? "Fermer" : "Ouvrir";
 		return new IPressable.Tooltip( title, "door_front", "" );
 	}
 

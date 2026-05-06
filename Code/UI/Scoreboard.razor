@@ -9,7 +9,7 @@
 
             @if ( !string.IsNullOrEmpty( _mapTitle ) )
             {
-                <label class="small">Playing on @(_mapTitle)</label>
+                <label class="small">Sur la carte @(_mapTitle)</label>
             }
         </div>
 
@@ -36,41 +36,41 @@
                                         <h1>Session</h1>
 
                                         <div class="info-row">
-                                            <label class="key">Name</label>
+                                            <label class="key">Nom</label>
                                             <label class="value">@LocalPlayerName</label>
                                         </div>
 
                                         <div class="info-row">
-                                            <label class="key">Current Job</label>
+                                            <label class="key">Métier actuel</label>
                                             <label class="value">@LocalPlayerJob</label>
                                         </div>
 
                                         <div class="info-row">
-                                            <label class="key">Wallet</label>
+                                            <label class="key">Portefeuille</label>
                                             <label class="value">@FormatCurrency( LocalPlayerMoney )</label>
                                         </div>
 
                                         <div class="info-row">
-                                            <label class="key">Salary</label>
+                                            <label class="key">Salaire</label>
                                             <label class="value">@FormatCurrency( LocalPlayerSalary )</label>
                                         </div>
 
                                         <div class="info-row">
-                                            <label class="key">Server</label>
+                                            <label class="key">Serveur</label>
                                             <label class="value">@SessionType</label>
                                         </div>
 
                                         <div class="money-drop-wrap">
                                             <div class="money-drop-panel">
-                                                <label class="money-drop-label">Drop Money</label>
+                                                <label class="money-drop-label">Jeter de l'argent</label>
                                                 <div class="money-drop-controls">
                                                     <MoneyDropEntry @ref="DropMoneyEntry"
                                                                     class="menu-input money-drop-input"
-                                                                    Placeholder="Amount"
+                                                                    Placeholder="Montant"
                                                                     Value:bind=@_dropMoneyValue
                                                                     OnTabPressed="@CloseFromDropEntry"
                                                                     @onsubmit="@DropMoney" />
-                                                    <Button Text="Drop"
+                                                    <Button Text="Jeter"
                                                             Icon="$"
                                                             class="menu-action primary"
                                                             Disabled="@(!CanDropMoney)"
@@ -79,15 +79,15 @@
                                             </div>
 
                                             <div class="roleplay-name-panel">
-                                                <label class="money-drop-label">Set RP Name</label>
+                                                <label class="money-drop-label">Nom RP</label>
                                                 <div class="money-drop-controls">
                                                     <TabTextEntry @ref="RoleplayNameEntry"
                                                                   class="menu-input money-drop-input"
-                                                                  Placeholder="Roleplay name"
+                                                                  Placeholder="Nom roleplay"
                                                                   Value:bind=@_roleplayNameValue
                                                                   OnTabPressed="@CloseFromRoleplayNameEntry"
                                                                   @onsubmit="@SubmitRoleplayName" />
-                                                    <Button Text="Set"
+                                                    <Button Text="Définir"
                                                             Icon="person"
                                                             class="menu-action primary"
                                                             Disabled="@(!CanSubmitRoleplayName)"
@@ -98,14 +98,14 @@
                                     </div>
 
                                     <div class="dashboard-right menuinner city-laws-panel">
-                                        <h1>City Laws</h1>
-                                        <label class="laws-description">Public laws posted by the mayor and mirrored on every lawboard.</label>
+                                        <h1>Lois de la Ville</h1>
+                                        <label class="laws-description">Lois publiques affichées par le Maire et visibles sur tous les tableaux.</label>
 
                                         <div class="laws-list">
                                         @if ( CityLaws.Count == 0 )
                                         {
                                             <div class="law-empty">
-                                                <label>No city laws posted.</label>
+                                                <label>Aucune loi affichée.</label>
                                             </div>
                                         }
                                         else
@@ -121,7 +121,7 @@
 
                                                     @if ( CanManageCityLaws )
                                                     {
-                                                        <Button Text="Remove"
+                                                        <Button Text="Supprimer"
                                                                 Icon="delete"
                                                                 class="menu-action law-remove"
                                                                 @onclick="@(() => RemoveCityLaw( lawIndex ))" />
@@ -134,15 +134,15 @@
                                         @if ( CanManageCityLaws )
                                         {
                                             <div class="law-editor">
-                                                <label class="law-editor-label">Add City Law</label>
+                                                <label class="law-editor-label">Ajouter une Loi</label>
                                                 <div class="law-editor-controls">
                                                     <TabTextEntry @ref="LawEntry"
                                                                   class="menu-input law-input"
-                                                                  Placeholder="New city law"
+                                                                  Placeholder="Nouvelle loi"
                                                                   Value:bind=@_cityLawValue
                                                                   OnTabPressed="@CloseFromLawEntry"
                                                                   @onsubmit="@SubmitCityLaw" />
-                                                    <Button Text="Add"
+                                                    <Button Text="Ajouter"
                                                             Icon="gavel"
                                                             class="menu-action primary"
                                                             Disabled="@(!CanSubmitCityLaw)"
@@ -153,7 +153,7 @@
                                         }
                                         else
                                         {
-                                            <label class="law-hint">Only the Mayor can change city laws.</label>
+                                            <label class="law-hint">Seul le Maire peut modifier les lois.</label>
                                         }
                                     </div>
                                 </div>
@@ -170,9 +170,9 @@
                                     <div class="col">
                                         <div class="header row">
                                             <div class="avatar-spacer"></div>
-                                            <div class="name">Player</div>
+                                            <div class="name">Joueur</div>
                                             <div class="stat">Kills</div>
-                                            <div class="stat">Deaths</div>
+                                            <div class="stat">Morts</div>
                                             <div class="stat">Ping</div>
                                             <div class="mute-spacer"></div>
                                         </div>
@@ -212,20 +212,20 @@
                                                 </div>
 
                                                 <div class="job-meta">
-                                                    <label class="job-meta-item">Salary: @FormatCurrency( job.Salary )</label>
-                                                    <label class="job-meta-item">Slots: @GetJobSlotsText( job )</label>
+                                                    <label class="job-meta-item">Salaire : @FormatCurrency( job.Salary )</label>
+                                                    <label class="job-meta-item">Places : @GetJobSlotsText( job )</label>
                                                     @if ( job.RequiresVote )
                                                     {
-                                                        <label class="job-meta-item">Vote required</label>
+                                                        <label class="job-meta-item">Vote requis</label>
                                                     }
 
                                                     @if ( isCurrentJob )
                                                     {
-                                                        <label class="job-status current">Current</label>
+                                                        <label class="job-status current">Actuel</label>
                                                     }
                                                     else if ( !canSelectJob )
                                                     {
-                                                        <label class="job-status full">Full</label>
+                                                        <label class="job-status full">Complet</label>
                                                     }
                                                     else
                                                     {
@@ -248,7 +248,7 @@
                     <SpawnMenuPage>
                         <Left>
                             <div class="shop-categories menuinner">
-                                <h1>Categories</h1>
+                                <h1>Catégories</h1>
 
                                 <div class="shop-category-list">
                                     @foreach ( var shopSection in ShopSections )
@@ -281,23 +281,23 @@
                                                 @if ( !string.IsNullOrWhiteSpace( item.PrinterDefinitionPath ) )
                                                 {
                                                     <label class="shop-meta-item">@GetPrinterRateText( item )</label>
-                                                    <label class="shop-meta-item">Owned: @LocalOwnedPrinterCount / @MoneyPrinterDefinition.MaxOwnedPerPlayer</label>
-                                                    <Button Text="Buy"
+                                                    <label class="shop-meta-item">Possédé : @LocalOwnedPrinterCount / @MoneyPrinterDefinition.MaxOwnedPerPlayer</label>
+                                                    <Button Text="Acheter"
                                                             class="menu-action primary shop-buy"
                                                             Disabled="@(!CanBuyPrinter( item ))"
                                                             @onclick="@(() => BuyPrinter( item ))" />
                                                 }
                                                 else if ( !string.IsNullOrWhiteSpace( item.WeaponPrefabPath ) )
                                                 {
-                                                    <Button Text="Buy"
+                                                    <Button Text="Acheter"
                                                             class="menu-action primary shop-buy"
                                                             Disabled="@(!CanBuyWeapon( item ))"
                                                             @onclick="@(() => BuyWeapon( item ))" />
                                                 }
                                                 else if ( !string.IsNullOrWhiteSpace( item.ShipmentWeaponPrefabPath ) )
                                                 {
-                                                    <label class="shop-meta-item">@item.ShipmentCount x weapons</label>
-                                                    <Button Text="Buy"
+                                                    <label class="shop-meta-item">@item.ShipmentCount x armes</label>
+                                                    <Button Text="Acheter"
                                                             class="menu-action primary shop-buy"
                                                             Disabled="@(!CanBuyShipment( item ))"
                                                             @onclick="@(() => BuyShipment( item ))" />
@@ -305,7 +305,7 @@
                                                 else if ( !string.IsNullOrWhiteSpace( item.AmmoPrefabPath ) )
                                                 {
                                                     <label class="shop-meta-item">@GetAmmoReserveText( item )</label>
-                                                    <Button Text="Buy"
+                                                    <Button Text="Acheter"
                                                             class="menu-action primary shop-buy"
                                                             Disabled="@(!CanBuyAmmo( item ))"
                                                             @onclick="@(() => BuyAmmo( item ))" />
@@ -314,14 +314,14 @@
                                                 {
                                                     @if ( string.Equals( item.MiscPrefabPath, TipJar.PrefabPath, StringComparison.OrdinalIgnoreCase ) )
                                                     {
-                                                        <label class="shop-meta-item">Owned: @TipJar.CountOwned( Connection.Local ) / @TipJar.MaxOwnedPerPlayer</label>
+                                                        <label class="shop-meta-item">Possédé : @TipJar.CountOwned( Connection.Local ) / @TipJar.MaxOwnedPerPlayer</label>
                                                     }
                                                     else if ( string.Equals( item.MiscPrefabPath, Lawboard.PrefabPath, StringComparison.OrdinalIgnoreCase ) )
                                                     {
-                                                        <label class="shop-meta-item">Owned: @Lawboard.CountOwned( Connection.Local ) / @Lawboard.MaxOwnedPerPlayer</label>
+                                                        <label class="shop-meta-item">Possédé : @Lawboard.CountOwned( Connection.Local ) / @Lawboard.MaxOwnedPerPlayer</label>
                                                     }
 
-                                                    <Button Text="Buy"
+                                                    <Button Text="Acheter"
                                                             class="menu-action primary shop-buy"
                                                             Disabled="@(!CanBuyMiscItem( item ))"
                                                             @onclick="@(() => BuyMiscItem( item ))" />
@@ -350,41 +350,41 @@
                                             <h1>Administration</h1>
 
                                             <div class="info-row admin-info-row">
-                                                <label class="key">Your Role</label>
+                                                <label class="key">Votre Rôle</label>
                                                 <label class="value">@GetRoleLabel( LocalPlayerAdminRole )</label>
                                             </div>
 
                                             <div class="info-row admin-info-row">
-                                                <label class="key">Server</label>
+                                                <label class="key">Serveur</label>
                                                 <label class="value">@SessionType</label>
                                             </div>
 
                                             <div class="info-row admin-info-row">
-                                                <label class="key">Moderation</label>
-                                                <label class="value">Right click a player to kick, ban or manage roles.</label>
+                                                <label class="key">Modération</label>
+                                                <label class="value">Clic droit sur un joueur pour l'expulser, le bannir ou gérer ses rôles.</label>
                                             </div>
 
                                             @if ( CanManageAdminRoles )
                                             {
                                                 <div class="admin-panel">
-                                                    <label class="admin-panel-label">Manage By SteamID</label>
+                                                    <label class="admin-panel-label">Gérer par SteamID</label>
                                                     <TabTextEntry @ref="AdminSteamIdEntry"
                                                                   class="menu-input admin-steam-input"
                                                                   Placeholder="Steam ID64"
                                                                   Value:bind=@_adminSteamIdValue
                                                                   OnTabPressed="@CloseFromAdminEntry" />
                                                     <div class="admin-actions">
-                                                        <Button Text="Set Admin"
+                                                        <Button Text="Définir Admin"
                                                                 Icon="security"
                                                                 class="menu-action primary"
                                                                 Disabled="@(!CanSubmitAdminSteamId)"
                                                                 @onclick="@(() => SubmitAdminRole( AdminRole.Admin ))" />
-                                                        <Button Text="Set SuperAdmin"
+                                                        <Button Text="Définir SuperAdmin"
                                                                 Icon="stars"
                                                                 class="menu-action primary"
                                                                 Disabled="@(!CanSubmitAdminSteamId)"
                                                                 @onclick="@(() => SubmitAdminRole( AdminRole.SuperAdmin ))" />
-                                                        <Button Text="Remove"
+                                                        <Button Text="Retirer"
                                                                 Icon="person_off"
                                                                 class="menu-action primary"
                                                                 Disabled="@(!CanSubmitAdminSteamId)"
@@ -395,7 +395,7 @@
                                         </div>
 
                                         <div class="dashboard-right menuinner">
-                                            <h1>Online Staff</h1>
+                                            <h1>Staff en ligne</h1>
 
                                             @{
                                                 var onlineStaff = GetOnlineStaff().ToArray();
@@ -405,8 +405,8 @@
                                             {
                                                 <div class="action-row admin-staff-row">
                                                     <div class="action-copy admin-action-copy">
-                                                        <label class="action-title">No staff online</label>
-                                                        <label class="action-description">Admins and superadmins currently connected will appear here.</label>
+                                                        <label class="action-title">Aucun staff en ligne</label>
+                                                        <label class="action-description">Les admins et superadmins actuellement connectés apparaîtront ici.</label>
                                                     </div>
                                                 </div>
                                             }
@@ -431,14 +431,14 @@
 
                                             @if ( Networking.IsHost && CanManageAdminRoles )
                                             {
-                                                <h1>Offline Staff</h1>
+                                                <h1>Staff hors ligne</h1>
 
                                                 @if ( savedStaff.Length == 0 )
                                                 {
                                                     <div class="action-row admin-staff-row">
                                                         <div class="action-copy admin-action-copy">
-                                                            <label class="action-title">No offline staff</label>
-                                                            <label class="action-description">Add a SteamID here or use the player list context menu.</label>
+                                                            <label class="action-title">Aucun staff hors ligne</label>
+                                                            <label class="action-description">Ajoutez un SteamID ici ou utilisez le menu contextuel de la liste des joueurs.</label>
                                                         </div>
                                                     </div>
                                                 }
@@ -546,7 +546,7 @@
     ScoreboardPage _currentPage = ScoreboardPage.Dashboard;
     ScoreboardPage? _hoveredPage;
     string _mapTitle = null;
-    string _selectedShopSection = "Printers";
+    string _selectedShopSection = "Imprimantes";
     string _dropMoneyValue = "";
     string _roleplayNameValue = "";
     string _cityLawValue = "";
@@ -563,7 +563,7 @@
     int LocalPlayerMoney => LocalPlayer?.Money ?? 0;
     int LocalPlayerSalary => LocalPlayer?.CurrentJobDefinition?.Salary ?? 0;
     int LocalOwnedPrinterCount => MoneyPrinter.CountOwned( Connection.Local );
-    string LocalPlayerJob => string.IsNullOrWhiteSpace( LocalPlayer?.JobTitle ) ? "Citizen" : LocalPlayer.JobTitle;
+    string LocalPlayerJob => string.IsNullOrWhiteSpace( LocalPlayer?.JobTitle ) ? "Citoyen" : LocalPlayer.JobTitle;
     bool CanDropMoney => TryGetDropMoneyAmount( out var amount ) && LocalPlayer?.CanAfford( amount ) == true;
     bool CanSubmitRoleplayName => TryGetRoleplayName( out var roleplayName ) && !string.Equals( LocalPlayerName, roleplayName, StringComparison.Ordinal );
     IReadOnlyList<string> CityLaws => CityLawManager.Current?.Laws ?? Array.Empty<string>();
@@ -580,16 +580,16 @@
     NavigationItem[] NavigationItems => BuildNavigationItems();
 
     string LocalPlayerName
-        => Scene.GetAll<PlayerData>().FirstOrDefault( x => x.IsMe )?.DisplayName ?? "Current Player";
+        => Scene.GetAll<PlayerData>().FirstOrDefault( x => x.IsMe )?.DisplayName ?? "Joueur actuel";
 
-    string SessionType => Networking.IsHost ? "Host" : "Client";
+    string SessionType => Networking.IsHost ? "Hôte" : "Client";
 
     ShopSection CurrentShopSection
         => ShopSections.FirstOrDefault( x => x.Title == _selectedShopSection ) ?? ShopSections.First();
 
     IEnumerable<ShopItem> GetVisibleShopItems()
     {
-        if ( CurrentShopSection.Title == "Weapons" )
+        if ( CurrentShopSection.Title == "Armes" )
         {
             return CurrentShopSection.Items.Where( item =>
             {
@@ -601,7 +601,7 @@
             } );
         }
 
-        if ( CurrentShopSection.Title == "Shipments" )
+        if ( CurrentShopSection.Title == "Cargaisons" )
         {
             return CurrentShopSection.Items.Where( item =>
             {
@@ -613,7 +613,7 @@
             } );
         }
 
-        if ( CurrentShopSection.Title == "Ammo" )
+        if ( CurrentShopSection.Title == "Munitions" )
         {
             return CurrentShopSection.Items.Where( item =>
             {
@@ -625,7 +625,7 @@
             } );
         }
 
-        if ( CurrentShopSection.Title == "Miscellaneous" )
+        if ( CurrentShopSection.Title == "Divers" )
         {
             return CurrentShopSection.Items.Where( item =>
             {
@@ -655,10 +655,10 @@
     {
         var items = new List<NavigationItem>
         {
-            new( ScoreboardPage.Dashboard, "Dashboard" ),
-            new( ScoreboardPage.Players, "Players" ),
-            new( ScoreboardPage.Jobs, "Jobs" ),
-            new( ScoreboardPage.Shop, "Shop" )
+            new( ScoreboardPage.Dashboard, "Info" ),
+            new( ScoreboardPage.Players, "Joueurs" ),
+            new( ScoreboardPage.Jobs, "Métiers" ),
+            new( ScoreboardPage.Shop, "Boutique" )
         };
 
         if ( CanAccessAdministration )
@@ -707,12 +707,12 @@
     }
 
     string GetJobSlotsText( JobDefinition job ) => JobManager.FormatSlots( job );
-    string GetJobSelectText( JobDefinition job ) => job?.RequiresVote == true ? "Start Vote" : "Choose";
+    string GetJobSelectText( JobDefinition job ) => job?.RequiresVote == true ? "Lancer le vote" : "Choisir";
 
     string GetJobStartingGearText( JobDefinition job )
     {
         if ( job?.StartingItems is null || job.StartingItems.Length == 0 )
-            return "Starting Gear: None";
+            return "Équipement de départ : Aucun";
 
         var names = job.StartingItems
             .Select( GetStartingItemName )
@@ -720,8 +720,8 @@
             .ToArray();
 
         return names.Length == 0
-            ? "Starting Gear: None"
-            : $"Starting Gear: {string.Join( ", ", names )}";
+            ? "Équipement de départ : Aucun"
+            : $"Équipement de départ : {string.Join( ", ", names )}";
     }
 
     string GetStartingItemName( string prefabPath )
@@ -806,7 +806,7 @@
         if ( !AmmoShopCatalog.TryGetPickupAmmo( item.AmmoPrefabPath, out _, out var ammoAmount ) )
             return string.Empty;
 
-        return $"+{ammoAmount} ammo";
+        return $"+{ammoAmount} munitions";
     }
 
     void BuyPrinter( ShopItem item )
@@ -854,22 +854,22 @@
         return
         [
             new ShopSection(
-                "Printers",
-                "Buy money printers to generate cash over time.",
+                "Imprimantes",
+                "Achetez des imprimantes à billets pour générer de l'argent au fil du temps.",
                 PrinterDefinitions
                     .Select( x => new ShopItem( x.Title, x.Price, x.Description, x.ResourcePath ) )
                     .ToArray()
             ),
             new ShopSection(
-                "Weapons",
-                "Sandbox weapons available for individual purchase.",
+                "Armes",
+                "Armes disponibles à l'achat individuel.",
                 WeaponShopCatalog.GetAll()
                     .Select( x => new ShopItem( x.Title, x.Price, x.Description, weaponPrefabPath: x.PrefabPath ) )
                     .ToArray()
             ),
             new ShopSection(
-                "Shipments",
-                "Buy crate shipments that dispense 10 pickup-ready weapons.",
+                "Cargaisons",
+                "Achetez des cargaisons distribuant 10 armes prêtes à récupérer.",
                 WeaponShipmentCatalog.GetAll()
                     .Select( x => new ShopItem(
                         x.Title,
@@ -880,15 +880,15 @@
                     .ToArray()
             ),
             new ShopSection(
-                "Ammo",
-                "Buy ammo packs for shared weapon reserves.",
+                "Munitions",
+                "Achetez des packs de munitions pour vos réserves d'armes.",
                 AmmoShopCatalog.GetAll()
                     .Select( x => new ShopItem( x.Title, x.Price, x.Description, ammoPrefabPath: x.PrefabPath ) )
                     .ToArray()
             ),
             new ShopSection(
-                "Miscellaneous",
-                "Job utility items and roleplay equipment.",
+                "Divers",
+                "Objets utilitaires et équipements de roleplay.",
                 MiscShopCatalog.GetAll()
                     .Select( x => new ShopItem( x.Title, x.Price, x.Description, miscPrefabPath: x.PrefabPath ) )
                     .ToArray()
@@ -951,7 +951,7 @@
         {
             AdminRole.Admin => "Admin",
             AdminRole.SuperAdmin => "SuperAdmin",
-            _ => "Player"
+            _ => "Joueur"
         };
     }
 

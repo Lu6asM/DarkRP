@@ -11,7 +11,7 @@ public sealed class MoneyStack : Component, Component.IPressable, IPhysgunEvent
 		if ( Amount <= 0 )
 			return null;
 
-		return new IPressable.Tooltip( "Pick up", "$", $"${Amount:n0}" );
+		return new IPressable.Tooltip( "Ramasser", "$", $"${Amount:n0}" );
 	}
 
 	bool IPressable.CanPress( IPressable.Event e ) => Amount > 0;

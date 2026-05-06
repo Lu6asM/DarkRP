@@ -20,10 +20,10 @@ public static class AmmoShopCatalog
 {
 	static readonly AmmoShopItemDefinition[] Items =
 	[
-		new( "entities/pickup/ammo_9mm.prefab", "Pistol Ammo", 250, "A 30-round pistol ammo pack." ),
-		new( "entities/pickup/ammo_rifle.prefab", "Rifle Ammo", 450, "A 60-round rifle ammo pack." ),
-		new( "entities/pickup/ammo_shotgun.prefab", "Shotgun Ammo", 400, "An 18-shell shotgun ammo pack." ),
-		new( "entities/pickup/ammo_rocket.prefab", "Rockets", 1800, "Two rockets for the rocket launcher.", true )
+		new( "entities/pickup/ammo_9mm.prefab", "Munitions Pistolet", 250, "Un pack de 30 munitions pour pistolet." ),
+		new( "entities/pickup/ammo_rifle.prefab", "Munitions Fusil", 450, "Un pack de 60 munitions pour fusil." ),
+		new( "entities/pickup/ammo_shotgun.prefab", "Munitions Fusil à Pompe", 400, "Un pack de 18 cartouches pour fusil à pompe." ),
+		new( "entities/pickup/ammo_rocket.prefab", "Roquettes", 1800, "Deux roquettes pour le lance-roquettes.", true )
 	];
 
 	public static IReadOnlyList<AmmoShopItemDefinition> GetAll()
@@ -54,7 +54,7 @@ public static class AmmoShopCatalog
 		var item = Get( prefabPath );
 		if ( item is null )
 		{
-			reason = "Unknown ammo.";
+			reason = "Munition inconnue.";
 			return false;
 		}
 
@@ -63,13 +63,13 @@ public static class AmmoShopCatalog
 
 		if ( player is null )
 		{
-			reason = "Player unavailable.";
+			reason = "Joueur indisponible.";
 			return false;
 		}
 
 		if ( !WeaponShopCatalog.IsGunDealer( player ) )
 		{
-			reason = "Gun Dealer only.";
+			reason = "Réservé aux Marchands d'Armes.";
 			return false;
 		}
 

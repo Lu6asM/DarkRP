@@ -20,7 +20,7 @@ public static class JobManager
 
 		if ( player is null || definition is null )
 		{
-			reason = "Invalid job selection.";
+			reason = "Sélection de métier invalide.";
 			return false;
 		}
 
@@ -29,7 +29,7 @@ public static class JobManager
 
 		if ( definition.MaxPlayers > 0 && CountPlayers( definition ) >= definition.MaxPlayers )
 		{
-			reason = "This job is full.";
+			reason = "Ce métier est complet.";
 			return false;
 		}
 
@@ -39,6 +39,6 @@ public static class JobManager
 	public static string FormatSlots( JobDefinition definition )
 	{
 		var count = CountPlayers( definition );
-		return definition?.MaxPlayers > 0 ? $"{count} / {definition.MaxPlayers}" : $"{count} / Unlimited";
+		return definition?.MaxPlayers > 0 ? $"{count} / {definition.MaxPlayers}" : $"{count} / Illimité";
 	}
 }

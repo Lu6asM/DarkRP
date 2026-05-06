@@ -21,14 +21,14 @@ public sealed class TipJar : Component, Component.IPressable
 		if ( IsOwner( player ) )
 		{
 			var description = StoredMoney > 0
-				? $"Tip Jar - ${StoredMoney:n0}"
-				: "Tip Jar - Empty";
+				? $"Boîte à pourboires - {StoredMoney:n0}$"
+				: "Boîte à pourboires - Vide";
 
-			return new IPressable.Tooltip( "Collect Tips", "$", description );
+			return new IPressable.Tooltip( "Récupérer les pourboires", "$", description );
 		}
 
 		var ownerName = GetOwnerName();
-		return new IPressable.Tooltip( "Donate", "$", $"Donate to {ownerName}'s tip jar." );
+		return new IPressable.Tooltip( "Faire un don", "$", $"Faire un don à la boîte à pourboires de {ownerName}." );
 	}
 
 	bool IPressable.CanPress( IPressable.Event e )
@@ -110,21 +110,21 @@ public sealed class TipJar : Component, Component.IPressable
 		var owner = Player.FindForConnection( ownerConnection );
 		if ( ownerConnection is null || !owner.IsValid() )
 		{
-			Notices.SendNotice( donor.Network.Owner, "block", Color.Red, "The owner is not available.", 3 );
+			Notices.SendNotice( donor.Network.Owner, "block", Color.Red, "Le propriétaire n'est pas disponible.", 3 );
 			return;
 		}
 
 		if ( !donor.TryTakeMoney( amount ) )
 		{
-			Notices.SendNotice( donor.Network.Owner, "block", Color.Red, "You don't have enough money.", 3 );
+			Notices.SendNotice( donor.Network.Owner, "block", Color.Red, "Vous n'avez pas assez d'argent.", 3 );
 			return;
 		}
 
 		StoredMoney += amount;
 		RefreshLabels();
 
-		Notices.SendNotice( donor.Network.Owner, "$", Color.Green, $"Donated ${amount:n0} to {owner.DisplayName}.", 3 );
-		Notices.SendNotice( ownerConnection, "$", Color.Green, $"{donor.DisplayName} donated ${amount:n0} to your tip jar.", 3 );
+		Notices.SendNotice( donor.Network.Owner, "$", Color.Green, $"Vous avez donné {amount:n0}$ à {owner.DisplayName}.", 3 );
+		Notices.SendNotice( ownerConnection, "$", Color.Green, $"{donor.DisplayName} a donné {amount:n0}$ à votre boîte à pourboires.", 3 );
 		PlayDonationEffects();
 	}
 
@@ -143,7 +143,7 @@ public sealed class TipJar : Component, Component.IPressable
 		RefreshLabels();
 
 		collector.GiveMoney( collected );
-		Notices.SendNotice( collector.Network.Owner, "$", Color.Green, $"Collected ${collected:n0} from your tip jar.", 3 );
+		Notices.SendNotice( collector.Network.Owner, "$", Color.Green, $"Vous avez récupéré {collected:n0}$ de votre boîte à pourboires.", 3 );
 		PlayDonationEffects();
 	}
 
@@ -171,7 +171,7 @@ public sealed class TipJar : Component, Component.IPressable
 
 	void RefreshLabels()
 	{
-		var labelText = StoredMoney > 0 ? $"${MoneyFormatter.FormatCompact( StoredMoney )}" : "Tips";
+		var labelText = StoredMoney > 0 ? $"{MoneyFormatter.FormatCompact( StoredMoney )}$" : "Pourboires";
 
 		foreach ( var label in Labels )
 		{
@@ -202,7 +202,7 @@ public sealed class TipJar : Component, Component.IPressable
 		var ownerConnection = GetOwnerConnection();
 		return Player.FindForConnection( ownerConnection )?.DisplayName
 			?? ownerConnection?.DisplayName
-			?? "Unknown";
+			?? "Inconnu";
 	}
 
 	static Player GetPlayer( GameObject source )

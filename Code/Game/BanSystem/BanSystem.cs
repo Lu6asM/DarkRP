@@ -22,7 +22,7 @@ public sealed class BanSystem : GameObjectSystem<BanSystem>, Component.INetworkL
 		if ( !_bans.TryGetValue( connection.SteamId, out var entry ) )
 			return true;
 
-		reason = $"You're banned from this server: {entry.Reason}";
+		reason = $"Vous êtes banni de ce serveur : {entry.Reason}";
 		return false;
 	}
 
@@ -36,7 +36,7 @@ public sealed class BanSystem : GameObjectSystem<BanSystem>, Component.INetworkL
 		_bans[connection.SteamId] = new BanEntry( connection.DisplayName, reason );
 		Save();
 		SendBannedListToAdmins();
-		Scene.Get<Chat>()?.AddSystemText( $"{connection.DisplayName} was banned: {reason}", "🔨" );
+		Scene.Get<Chat>()?.AddSystemText( $"{connection.DisplayName} a été banni : {reason}", "🔨" );
 		connection.Kick( reason );
 	}
 
@@ -139,7 +139,7 @@ public sealed class BanSystem : GameObjectSystem<BanSystem>, Component.INetworkL
 	/// RPC to ban a connected player. Caller must have DarkRP superadmin access.
 	/// </summary>
 	[Rpc.Host]
-	public static void RpcBanPlayer( Connection target, string reason = "Banned" )
+	public static void RpcBanPlayer( Connection target, string reason = "Banni" )
 	{
 		if ( Current is null )
 			return;
@@ -152,7 +152,7 @@ public sealed class BanSystem : GameObjectSystem<BanSystem>, Component.INetworkL
 
 		var finalReason = string.IsNullOrWhiteSpace( reason ) ? "Banned" : reason.Trim();
 		Current.Ban( target, finalReason );
-		Notices.SendNotice( Rpc.Caller, "gavel", Color.Green, $"{target.DisplayName} was banned.", 3 );
+		Notices.SendNotice( Rpc.Caller, "gavel", Color.Green, $"{target.DisplayName} a été banni.", 3 );
 	}
 
 	/// <summary>
@@ -160,7 +160,7 @@ public sealed class BanSystem : GameObjectSystem<BanSystem>, Component.INetworkL
 	/// Usage: ban [name|steamid] [reason]
 	/// </summary>
 	[ConCmd( "ban" )]
-	public static void BanCommand( string target, string reason = "Banned" )
+	public static void BanCommand( string target, string reason = "Banni" )
 	{
 		if ( !Networking.IsHost ) return;
 

@@ -22,13 +22,13 @@ public static class WeaponShipmentCatalog
 {
 	static readonly WeaponShipmentItemDefinition[] Items =
 	[
-		new( "weapons/glock/glock.prefab", "USP Shipment", 4800, "A crate with 10 USP pistols for resale.", 10, true ),
-		new( "weapons/colt1911/colt1911.prefab", "1911 Shipment", 6000, "A crate with 10 Colt 1911 pistols for resale.", 10, true ),
-		new( "weapons/mp5/mp5.prefab", "SMG Shipment", 12800, "A crate with 10 SMGs ready to distribute.", 10, true ),
-		new( "weapons/shotgun/shotgun.prefab", "Shotgun Shipment", 16800, "A crate with 10 shotguns for close-range muscle.", 10, true ),
-		new( "weapons/m4a1/m4a1.prefab", "M4A1 Shipment", 20800, "A crate with 10 M4A1 rifles for heavier loadouts.", 10, true ),
-		new( "weapons/sniper/sniper.prefab", "Sniper Shipment", 25600, "A crate with 10 sniper rifles for long sightlines.", 10, true ),
-		new( "weapons/rpg/rpg.prefab", "Rocket Launcher Shipment", 80000, "A crate with 10 rocket launchers for high-end weapon dealing.", 10, true )
+		new( "weapons/glock/glock.prefab", "Cargaison USP", 4800, "Une caisse de 10 pistolets USP à revendre.", 10, true ),
+		new( "weapons/colt1911/colt1911.prefab", "Cargaison 1911", 6000, "Une caisse de 10 pistolets Colt 1911 à revendre.", 10, true ),
+		new( "weapons/mp5/mp5.prefab", "Cargaison SMG", 12800, "Une caisse de 10 pistolets-mitrailleurs prêts à distribuer.", 10, true ),
+		new( "weapons/shotgun/shotgun.prefab", "Cargaison Fusil à Pompe", 16800, "Une caisse de 10 fusils à pompe pour le combat rapproché.", 10, true ),
+		new( "weapons/m4a1/m4a1.prefab", "Cargaison M4A1", 20800, "Une caisse de 10 fusils M4A1 pour des équipements lourds.", 10, true ),
+		new( "weapons/sniper/sniper.prefab", "Cargaison Sniper", 25600, "Une caisse de 10 fusils de précision pour les longues distances.", 10, true ),
+		new( "weapons/rpg/rpg.prefab", "Cargaison Lance-Roquettes", 80000, "Une caisse de 10 lance-roquettes pour le trafic d'armes haut de gamme.", 10, true )
 	];
 
 	public static IReadOnlyList<WeaponShipmentItemDefinition> GetAll()
@@ -59,7 +59,7 @@ public static class WeaponShipmentCatalog
 		var item = Get( weaponPrefabPath );
 		if ( item is null )
 		{
-			reason = "Unknown shipment.";
+			reason = "Cargaison inconnue.";
 			return false;
 		}
 
@@ -68,13 +68,13 @@ public static class WeaponShipmentCatalog
 
 		if ( player is null )
 		{
-			reason = "Player unavailable.";
+			reason = "Joueur indisponible.";
 			return false;
 		}
 
 		if ( !WeaponShopCatalog.IsGunDealer( player ) )
 		{
-			reason = "Gun Dealer only.";
+			reason = "Réservé aux Marchands d'Armes.";
 			return false;
 		}
 

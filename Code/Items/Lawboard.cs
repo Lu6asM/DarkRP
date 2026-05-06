@@ -15,10 +15,10 @@ public sealed class Lawboard : Component, Component.IPressable
 	{
 		var laws = CityLawManager.Current?.Laws;
 		var description = laws is { Count: > 0 }
-			? $"{laws.Count} city law{(laws.Count == 1 ? "" : "s")} posted."
-			: "No city laws posted.";
+			? $"{laws.Count} loi{(laws.Count == 1 ? "" : "s")} affichée{(laws.Count == 1 ? "" : "s")}."
+			: "Aucune loi affichée.";
 
-		return new IPressable.Tooltip( "City Laws", "gavel", description );
+		return new IPressable.Tooltip( "Lois de la Ville", "gavel", description );
 	}
 
 	bool IPressable.CanPress( IPressable.Event e ) => false;
@@ -65,9 +65,9 @@ public sealed class Lawboard : Component, Component.IPressable
 	static string BuildBoardText( IReadOnlyList<string> laws )
 	{
 		if ( laws is null || laws.Count == 0 )
-			return "CITY LAWS\n\nNo laws posted.";
+			return "LOIS DE LA VILLE\n\nAucune loi affichée.";
 
-		var lines = new List<string> { "CITY LAWS", "" };
+		var lines = new List<string> { "LOIS DE LA VILLE", "" };
 		for ( var i = 0; i < laws.Count; i++ )
 		{
 			var wrapped = WrapLaw( $"{i + 1}. {laws[i]}", 34 );

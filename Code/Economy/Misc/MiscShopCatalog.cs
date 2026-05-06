@@ -25,8 +25,8 @@ public static class MiscShopCatalog
 
 	static readonly MiscShopItemDefinition[] Items =
 	[
-		new( TipJar.PrefabPath, "Tip Jar", 150, "Place a jar so other players can donate money to you.", HoboJobDefinitionPath, "Hobo" ),
-		new( Lawboard.PrefabPath, "Lawboard", 250, "Place a public board that mirrors the mayor's city laws.", MayorJobDefinitionPath, "Mayor" )
+		new( TipJar.PrefabPath, "Pot à Pourboires", 150, "Posez un pot pour que les autres joueurs puissent vous donner de l'argent.", HoboJobDefinitionPath, "Hobo" ),
+		new( Lawboard.PrefabPath, "Tableau des Lois", 250, "Posez un panneau public affichant les lois de la ville décrétées par le maire.", MayorJobDefinitionPath, "Mayor" )
 	];
 
 	public static IReadOnlyList<MiscShopItemDefinition> GetAll()
@@ -57,7 +57,7 @@ public static class MiscShopCatalog
 		var item = Get( prefabPath );
 		if ( item is null )
 		{
-			reason = "Unknown item.";
+			reason = "Objet inconnu.";
 			return false;
 		}
 
@@ -66,11 +66,11 @@ public static class MiscShopCatalog
 
 		if ( string.IsNullOrWhiteSpace( item.RequiredJobTitle ) )
 		{
-			reason = "Player unavailable.";
+			reason = "Joueur indisponible.";
 			return false;
 		}
 
-		reason = $"{item.RequiredJobTitle} only.";
+		reason = $"Réservé aux {item.RequiredJobTitle}.";
 		return false;
 	}
 

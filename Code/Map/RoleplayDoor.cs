@@ -122,38 +122,38 @@ public sealed class RoleplayDoor : Component
 
 		if ( !Networking.IsHost || !buyer.IsValid() )
 		{
-			error = "Invalid door purchase request.";
+			error = "Requête d'achat invalide.";
 			return false;
 		}
 
 		if ( IsGovernment )
 		{
-			error = "Government doors can't be bought.";
+			error = "Les portes gouvernementales ne peuvent pas être achetées.";
 			return false;
 		}
 
 		if ( IsPublic )
 		{
-			error = "Public doors can't be bought.";
+			error = "Les portes publiques ne peuvent pas être achetées.";
 			return false;
 		}
 
 		if ( IsOwned )
 		{
-			error = "This door is already owned.";
+			error = "Cette porte appartient déjà à quelqu'un.";
 			return false;
 		}
 
 		if ( CountOwnedBy( buyer.Network.Owner ) >= MaxOwnedPerPlayer )
 		{
-			error = $"You already own {MaxOwnedPerPlayer} doors.";
+			error = $"Vous possédez déjà {MaxOwnedPerPlayer} portes.";
 			return false;
 		}
 
 		var price = Math.Max( 0, PurchasePrice );
 		if ( !buyer.TryTakeMoney( price ) )
 		{
-			error = "You don't have enough money.";
+			error = "Vous n'avez pas assez d'argent.";
 			return false;
 		}
 
@@ -169,25 +169,25 @@ public sealed class RoleplayDoor : Component
 
 		if ( !Networking.IsHost || !seller.IsValid() )
 		{
-			error = "Invalid door sale request.";
+			error = "Requête de vente invalide.";
 			return false;
 		}
 
 		if ( IsGovernment )
 		{
-			error = "Government doors can't be sold.";
+			error = "Les portes gouvernementales ne peuvent pas être vendues.";
 			return false;
 		}
 
 		if ( IsPublic )
 		{
-			error = "Public doors can't be sold.";
+			error = "Les portes publiques ne peuvent pas être vendues.";
 			return false;
 		}
 
 		if ( !IsOwnedBy( seller.Network.Owner ) )
 		{
-			error = IsOwned ? "Only the door owner can sell it." : "Buy this door first.";
+			error = IsOwned ? "Seul le propriétaire peut vendre cette porte." : "Achetez cette porte d'abord.";
 			return false;
 		}
 
@@ -215,13 +215,13 @@ public sealed class RoleplayDoor : Component
 
 		if ( !Networking.IsHost || !actor.IsValid() )
 		{
-			error = "Invalid door lock request.";
+			error = "Requête de verrouillage invalide.";
 			return false;
 		}
 
 		if ( IsPublic )
 		{
-			error = "Public doors can't be locked.";
+			error = "Les portes publiques ne peuvent pas être verrouillées.";
 			return false;
 		}
 
@@ -229,19 +229,19 @@ public sealed class RoleplayDoor : Component
 		{
 			if ( !CanAccessGovernmentDoor( actor ) )
 			{
-				error = "Only government jobs can do that.";
+				error = "Seuls les métiers gouvernementaux peuvent faire ça.";
 				return false;
 			}
 		}
 		else if ( !IsOwnedBy( actor.Network.Owner ) )
 		{
-			error = IsOwned ? "Only the door owner can do that." : "Buy this door first.";
+			error = IsOwned ? "Seul le propriétaire peut faire ça." : "Achetez cette porte d'abord.";
 			return false;
 		}
 
 		if ( Door.IsLocked == locked )
 		{
-			error = locked ? "Door is already locked." : "Door is already unlocked.";
+			error = locked ? "La porte est déjà verrouillée." : "La porte est déjà déverrouillée.";
 			return false;
 		}
 
@@ -270,7 +270,7 @@ public sealed class RoleplayDoor : Component
 
 		if ( _lockpickCooldown > 0.0f )
 		{
-			error = "Lockpick is cooling down.";
+			error = "Le crochetage est en recharge.";
 			return false;
 		}
 
@@ -299,7 +299,7 @@ public sealed class RoleplayDoor : Component
 
 		if ( Owner is { } ownerConnection && ownerConnection != actor.Network.Owner )
 		{
-			Notices.SendNotice( ownerConnection, "warning", Color.Orange, $"{actor.DisplayName} lockpicked your door.", 3 );
+			Notices.SendNotice( ownerConnection, "warning", Color.Orange, $"{actor.DisplayName} a crocheté votre porte.", 3 );
 		}
 
 		return true;
@@ -316,19 +316,19 @@ public sealed class RoleplayDoor : Component
 
 		if ( !actor.IsValid() )
 		{
-			error = "Invalid lockpick request.";
+			error = "Requête de crochetage invalide.";
 			return false;
 		}
 
 		if ( !actor.IsThief )
 		{
-			error = "Only the thief can use lockpick.";
+			error = "Seul le voleur peut utiliser le crochet.";
 			return false;
 		}
 
 		if ( IsPublic )
 		{
-			error = "Public doors can't be lockpicked.";
+			error = "Les portes publiques ne peuvent pas être crochetées.";
 			return false;
 		}
 
@@ -336,7 +336,7 @@ public sealed class RoleplayDoor : Component
 		{
 			if ( !CanLockpickGovernmentDoor )
 			{
-				error = "Government doors can't be lockpicked.";
+				error = "Les portes gouvernementales ne peuvent pas être crochetées.";
 				return false;
 			}
 
@@ -345,13 +345,13 @@ public sealed class RoleplayDoor : Component
 
 		if ( !IsOwned )
 		{
-			error = "Only owned doors can be lockpicked.";
+			error = "Seules les portes possédées peuvent être crochetées.";
 			return false;
 		}
 
 		if ( IsOwnedBy( actor.Network.Owner ) )
 		{
-			error = "This is your own door.";
+			error = "C'est votre propre porte.";
 			return false;
 		}
 
@@ -361,35 +361,35 @@ public sealed class RoleplayDoor : Component
 	public IPressable.Tooltip BuildTooltip( Player player, Door.DoorState state )
 	{
 		var isOwner = player.IsValid() && IsOwnedBy( player.Network.Owner );
-		var title = Door.IsLocked ? "Locked" : state == Door.DoorState.Open ? "Close" : "Open";
+		var title = Door.IsLocked ? "Verrouillée" : state == Door.DoorState.Open ? "Fermer" : "Ouvrir";
 		var icon = Door.IsLocked ? "lock" : "door_front";
 
 		if ( IsPublic )
 		{
-			title = state == Door.DoorState.Open ? "Close" : "Open";
-			return new IPressable.Tooltip( title, "door_front", "Public door" );
+			title = state == Door.DoorState.Open ? "Fermer" : "Ouvrir";
+			return new IPressable.Tooltip( title, "door_front", "Porte publique" );
 		}
 
 		if ( IsGovernment )
 		{
 			if ( player.IsValid() && player.IsThief && CanLockpickGovernmentDoor && Door.IsLocked )
 			{
-				return new IPressable.Tooltip( "Lockpick", "key", "Hold attack" );
+				return new IPressable.Tooltip( "Crocheter", "key", "Maintenir attaque" );
 			}
 
 			if ( CanAccessGovernmentDoor( player ) )
 			{
-				return new IPressable.Tooltip( title, icon, "Use keys" );
+				return new IPressable.Tooltip( title, icon, "Utiliser les clés" );
 			}
 
-			return new IPressable.Tooltip( "Government Door", "lock", "Government only" );
+			return new IPressable.Tooltip( "Porte Gouvernementale", "lock", "Gouvernement uniquement" );
 		}
 
 		if ( !IsOwned )
 		{
 			var price = Math.Max( 0, PurchasePrice );
 			var progress = player.IsValid() ? player.GetDoorPurchaseProgress( this ) : 0.0f;
-			var description = $"E to open, Hold E to buy {price:n0}$";
+			var description = $"E pour ouvrir, Maintenir E pour acheter {price:n0}$";
 
 			if ( progress > 0.0f )
 			{
@@ -397,25 +397,25 @@ public sealed class RoleplayDoor : Component
 				description = $"{BuildProgressBar( progress )} {percent}%";
 			}
 
-			return new IPressable.Tooltip( "Buy Door", "$", description );
+			return new IPressable.Tooltip( "Acheter la Porte", "$", description );
 		}
 
 		if ( player.IsValid() && player.IsThief && !IsOwnedBy( player.Network.Owner ) )
 		{
 			if ( Door.IsLocked || player.IsDoorLockpickHolding && player.DoorLockpickTarget == this )
 			{
-				return new IPressable.Tooltip( "Lockpick", "key", "Hold attack" );
+				return new IPressable.Tooltip( "Crocheter", "key", "Maintenir attaque" );
 			}
 		}
 
 		if ( isOwner )
 		{
 			var sellPrice = Math.Max( 0, PurchasePrice );
-			return new IPressable.Tooltip( title, icon, $"Use keys. R sell ${sellPrice:n0}" );
+			return new IPressable.Tooltip( title, icon, $"Utiliser les clés. R vendre {sellPrice:n0}$" );
 		}
 
-		var ownerName = Owner?.DisplayName ?? "Unknown";
-		var lockState = Door.IsLocked ? "locked" : "unlocked";
+		var ownerName = Owner?.DisplayName ?? "Inconnu";
+		var lockState = Door.IsLocked ? "verrouillée" : "déverrouillée";
 		return new IPressable.Tooltip( title, icon, $"{ownerName} - {lockState}" );
 	}
 
