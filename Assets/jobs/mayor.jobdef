@@ -9,6 +9,8 @@
   "Command": "/maire",
   "Order": 30,
   "StartingItems": [],
+  "UseOwnerAvatarAppearance": false,
+  "PreserveOwnerAvatarAppearance": true,
   "Clothing": [
     "models/citizen_clothes/hat/fedora/fedora_brown.clothing",
     "models/citizen_clothes/shirt/waistcoat_and_shirt/waistcoat_and_shirt.clothing",

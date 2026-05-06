@@ -110,7 +110,7 @@
                   "IdValue": "5c0b2848-2f1a-4821-8b67-7e108b715ca7"
                 },
                 "Property": "Position",
-                "Value": "1.82483304,-94.4720764,-0.343090206"
+                "Value": "1.82501221,-94.3603821,-0.343082488"
               },
               {
                 "Target": {
@@ -119,6 +119,14 @@
                 },
                 "Property": "Rotation",
                 "Value": "0,0,-1,3.27825489E-07"
+              },
+              {
+                "Target": {
+                  "Type": "GameObject",
+                  "IdValue": "5c0b2848-2f1a-4821-8b67-7e108b715ca7"
+                },
+                "Property": "Scale",
+                "Value": "1,1.008165,1"
               },
               {
                 "Target": {
@@ -10672,6 +10680,39 @@
           }
         }
       ]
+    },
+    {
+      "__guid": "1d5d3419-39dd-47e5-b16c-b44107738c3f",
+      "__version": 2,
+      "__Prefab": "entities/sents/shatter_glass.prefab",
+      "__PrefabInstancePatch": {
+        "AddedObjects": [],
+        "RemovedObjects": [],
+        "PropertyOverrides": [
+          {
+            "Target": {
+              "Type": "GameObject",
+              "IdValue": "eb13d793-e834-4af4-bcf7-0cc871c4d1ee"
+            },
+            "Property": "Position",
+            "Value": "-2294.11035,965.200806,25.2388592"
+          },
+          {
+            "Target": {
+              "Type": "GameObject",
+              "IdValue": "eb13d793-e834-4af4-bcf7-0cc871c4d1ee"
+            },
+            "Property": "Rotation",
+            "Value": "-1.1920929E-07,0,1,0"
+          }
+        ],
+        "MovedObjects": []
+      },
+      "__PrefabIdToInstanceId": {
+        "eb13d793-e834-4af4-bcf7-0cc871c4d1ee": "1d5d3419-39dd-47e5-b16c-b44107738c3f",
+        "fa7ba4d0-359e-4b5c-9228-4611906acb8f": "312b8ec7-7e0d-46f1-b9fd-ff2bc7ea696b",
+        "84882231-301c-4afb-9d2f-de8bd7281aba": "d40927a8-147b-4baf-935e-1c8b678cb785"
+      }
     }
   ],
   "SceneProperties": {

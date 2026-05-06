@@ -13,6 +13,8 @@
     "weapons/arreststick/arrest_stick.prefab",
     "weapons/shotgun/shotgun.prefab"
   ],
+  "UseOwnerAvatarAppearance": false,
+  "PreserveOwnerAvatarAppearance": true,
   "Clothing": [
     "models/citizen_clothes/hat/police_hat/police_hat.clothing",
     "models/citizen_clothes/shirt/army_shirt/army_shirt.clothing",
