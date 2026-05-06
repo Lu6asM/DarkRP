@@ -57,7 +57,7 @@
           },
           "compiled": null
         },
-        "DisplayName": "Tool Gun",
+        "DisplayName": "Pistolet Outil",
         "HoldType": "Pistol",
         "ItemPrefab": {
           "_type": "gameobject",

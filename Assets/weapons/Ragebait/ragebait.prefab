@@ -27,7 +27,7 @@
         "Damage": 8,
         "DeployTime": 0.35,
         "DisplayIcon": null,
-        "DisplayName": "Ragebait",
+        "DisplayName": "Appât",
         "DroppedGameObject": {
           "_type": "gameobject",
           "go": "9c6ea4bc-7a05-404e-977a-bbe00d828c99"

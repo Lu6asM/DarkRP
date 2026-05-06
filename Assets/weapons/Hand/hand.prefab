@@ -37,7 +37,7 @@
           },
           "compiled": null
         },
-        "DisplayName": "Hands",
+        "DisplayName": "Mains",
         "DroppedGameObject": {
           "_type": "gameobject",
           "go": "38a5f87a-9045-4208-9d24-8f1362c74851"
@@ -49,6 +49,7 @@
           "prefab": "weapons/hand/hand.prefab"
         },
         "MissSwingDelay": 0.45,
+        "MuzzleGameObject": null,
         "OnComponentDestroy": null,
         "OnComponentDisabled": null,
         "OnComponentEnabled": null,
@@ -204,6 +205,7 @@
         "AgentMaxSlope": 40,
         "ExcludedBodies": "",
         "IncludedBodies": "",
+        "DeferGeneration": false,
         "CustomBounds": false
       }
     },
