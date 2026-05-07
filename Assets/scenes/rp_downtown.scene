@@ -6727,6 +6727,278 @@
             "c136a90f-132f-4103-9062-9058b99812ca": "525bb65d-0197-43af-a150-2e8470f4bc1b",
             "aabc02e6-1395-4ea6-9c20-7126f3b4b807": "f6d186f7-37a2-4149-9c68-8c2568d76925"
           }
+        },
+        {
+          "__guid": "6c622614-2a9b-413b-a738-0ac504cde20c",
+          "__version": 2,
+          "__Prefab": "entities/door/roleplay_door.prefab",
+          "__PrefabInstancePatch": {
+            "AddedObjects": [],
+            "RemovedObjects": [],
+            "PropertyOverrides": [
+              {
+                "Target": {
+                  "Type": "GameObject",
+                  "IdValue": "5c0b2848-2f1a-4821-8b67-7e108b715ca7"
+                },
+                "Property": "Name",
+                "Value": "roleplay_door (4)"
+              },
+              {
+                "Target": {
+                  "Type": "GameObject",
+                  "IdValue": "5c0b2848-2f1a-4821-8b67-7e108b715ca7"
+                },
+                "Property": "Position",
+                "Value": "-1278.21948,185.014648,-192.463074"
+              },
+              {
+                "Target": {
+                  "Type": "GameObject",
+                  "IdValue": "5c0b2848-2f1a-4821-8b67-7e108b715ca7"
+                },
+                "Property": "Rotation",
+                "Value": "0,0,-1.00000012,2.38418579E-07"
+              },
+              {
+                "Target": {
+                  "Type": "Component",
+                  "IdValue": "0c2c81fc-beb6-4df7-a04e-de6e3dbff7ae"
+                },
+                "Property": "IsGovernment",
+                "Value": true
+              }
+            ],
+            "MovedObjects": []
+          },
+          "__PrefabIdToInstanceId": {
+            "5c0b2848-2f1a-4821-8b67-7e108b715ca7": "6c622614-2a9b-413b-a738-0ac504cde20c",
+            "37ddcf29-6df0-46c6-ac21-9e4c05d34e87": "6f495138-8399-4647-bb9c-2f129cab0cc4",
+            "0c2c81fc-beb6-4df7-a04e-de6e3dbff7ae": "4b59d371-077b-4e3d-bb68-1535438bccd2",
+            "012ba01a-c345-4855-be53-6a942c1d21e9": "7f61e328-4bf0-4ea4-ad7a-3a44fbac4173",
+            "4c7bf97a-1c50-40b0-8bde-8477712a7fdf": "511fe180-cd70-48bd-b8c5-044a3ce19cd0",
+            "aa7b02ca-2781-4188-af14-7bff30b20362": "0001aff3-281b-40c4-af53-cafcc9ea36cd",
+            "363d322d-e56d-422a-aa43-de0ec59d498b": "92218d48-c0c4-40c1-8b33-d6d90a1f50eb",
+            "07f73016-9b45-4a07-861d-1f64c99a547b": "94796093-1339-49f4-8d32-16e4c5f4d141",
+            "c136a90f-132f-4103-9062-9058b99812ca": "5056eaf9-1c15-487a-bb9a-9b7af22f78ac",
+            "aabc02e6-1395-4ea6-9c20-7126f3b4b807": "54286534-2b15-4a4f-94ee-1c835a7c85c0"
+          }
+        },
+        {
+          "__guid": "53fbba39-3505-4f24-9cab-3d2225bbae6e",
+          "__version": 2,
+          "__Prefab": "entities/door/roleplay_door.prefab",
+          "__PrefabInstancePatch": {
+            "AddedObjects": [],
+            "RemovedObjects": [],
+            "PropertyOverrides": [
+              {
+                "Target": {
+                  "Type": "GameObject",
+                  "IdValue": "5c0b2848-2f1a-4821-8b67-7e108b715ca7"
+                },
+                "Property": "Name",
+                "Value": "roleplay_door (3)"
+              },
+              {
+                "Target": {
+                  "Type": "GameObject",
+                  "IdValue": "5c0b2848-2f1a-4821-8b67-7e108b715ca7"
+                },
+                "Property": "Position",
+                "Value": "-1277.15698,328.948029,-192.462128"
+              },
+              {
+                "Target": {
+                  "Type": "GameObject",
+                  "IdValue": "5c0b2848-2f1a-4821-8b67-7e108b715ca7"
+                },
+                "Property": "Rotation",
+                "Value": "0,0,-1.00000012,2.38418579E-07"
+              },
+              {
+                "Target": {
+                  "Type": "Component",
+                  "IdValue": "0c2c81fc-beb6-4df7-a04e-de6e3dbff7ae"
+                },
+                "Property": "IsGovernment",
+                "Value": true
+              }
+            ],
+            "MovedObjects": []
+          },
+          "__PrefabIdToInstanceId": {
+            "5c0b2848-2f1a-4821-8b67-7e108b715ca7": "53fbba39-3505-4f24-9cab-3d2225bbae6e",
+            "37ddcf29-6df0-46c6-ac21-9e4c05d34e87": "ea2e876c-6a81-45a5-a700-01875241ca81",
+            "0c2c81fc-beb6-4df7-a04e-de6e3dbff7ae": "9bf16d2a-4a5b-4a62-a23d-569b9e5687ec",
+            "012ba01a-c345-4855-be53-6a942c1d21e9": "1e2fcc5d-a91c-4e20-9159-f67eedbcb13e",
+            "4c7bf97a-1c50-40b0-8bde-8477712a7fdf": "b783f88f-6a07-421d-a22a-138f0178ca4c",
+            "aa7b02ca-2781-4188-af14-7bff30b20362": "08544e44-83ba-4e3f-8fbe-523136be2589",
+            "363d322d-e56d-422a-aa43-de0ec59d498b": "76fc5c23-b319-44b0-8baf-4268c746e04f",
+            "07f73016-9b45-4a07-861d-1f64c99a547b": "4b7fb833-677f-455d-aa40-9512e07ceb54",
+            "c136a90f-132f-4103-9062-9058b99812ca": "9da7ed35-52a1-4eb1-92f3-65070e5e2df6",
+            "aabc02e6-1395-4ea6-9c20-7126f3b4b807": "3de8eb73-52bc-4eeb-b783-cac16b259478"
+          }
+        },
+        {
+          "__guid": "9fb3098b-039f-4b19-b29a-9f872072b33d",
+          "__version": 2,
+          "__Prefab": "entities/door/roleplay_door.prefab",
+          "__PrefabInstancePatch": {
+            "AddedObjects": [],
+            "RemovedObjects": [],
+            "PropertyOverrides": [
+              {
+                "Target": {
+                  "Type": "GameObject",
+                  "IdValue": "5c0b2848-2f1a-4821-8b67-7e108b715ca7"
+                },
+                "Property": "Name",
+                "Value": "roleplay_door (2)"
+              },
+              {
+                "Target": {
+                  "Type": "GameObject",
+                  "IdValue": "5c0b2848-2f1a-4821-8b67-7e108b715ca7"
+                },
+                "Property": "Position",
+                "Value": "-1275.47852,473.025452,-191.838226"
+              },
+              {
+                "Target": {
+                  "Type": "GameObject",
+                  "IdValue": "5c0b2848-2f1a-4821-8b67-7e108b715ca7"
+                },
+                "Property": "Rotation",
+                "Value": "0,0,-1.00000012,2.38418579E-07"
+              },
+              {
+                "Target": {
+                  "Type": "Component",
+                  "IdValue": "0c2c81fc-beb6-4df7-a04e-de6e3dbff7ae"
+                },
+                "Property": "IsGovernment",
+                "Value": true
+              }
+            ],
+            "MovedObjects": []
+          },
+          "__PrefabIdToInstanceId": {
+            "5c0b2848-2f1a-4821-8b67-7e108b715ca7": "9fb3098b-039f-4b19-b29a-9f872072b33d",
+            "37ddcf29-6df0-46c6-ac21-9e4c05d34e87": "ae03ce48-4940-4efe-8f83-acea43e49e74",
+            "0c2c81fc-beb6-4df7-a04e-de6e3dbff7ae": "e5fc41c8-e6c4-4be3-a464-50f8a528333d",
+            "012ba01a-c345-4855-be53-6a942c1d21e9": "48afa75a-8745-46ff-abab-de17d699523a",
+            "4c7bf97a-1c50-40b0-8bde-8477712a7fdf": "a1cbb5e7-0aa6-4ab7-bcff-fb44943f4a87",
+            "aa7b02ca-2781-4188-af14-7bff30b20362": "f724a78f-a295-4143-aeff-1164eb6245ff",
+            "363d322d-e56d-422a-aa43-de0ec59d498b": "4b9b1b0a-ec62-4a32-aa8a-a215bde861c9",
+            "07f73016-9b45-4a07-861d-1f64c99a547b": "ab009131-4c84-4015-86e7-d370032c9513",
+            "c136a90f-132f-4103-9062-9058b99812ca": "00419571-9e72-4c7d-984c-d3abbb9a52aa",
+            "aabc02e6-1395-4ea6-9c20-7126f3b4b807": "0afee310-9849-421b-9366-ea01178371e4"
+          }
+        },
+        {
+          "__guid": "6cee1647-68bf-40be-84b3-a2314e0f5209",
+          "__version": 2,
+          "__Prefab": "entities/door/roleplay_door.prefab",
+          "__PrefabInstancePatch": {
+            "AddedObjects": [],
+            "RemovedObjects": [],
+            "PropertyOverrides": [
+              {
+                "Target": {
+                  "Type": "GameObject",
+                  "IdValue": "5c0b2848-2f1a-4821-8b67-7e108b715ca7"
+                },
+                "Property": "Name",
+                "Value": "roleplay_door (1)"
+              },
+              {
+                "Target": {
+                  "Type": "GameObject",
+                  "IdValue": "5c0b2848-2f1a-4821-8b67-7e108b715ca7"
+                },
+                "Property": "Position",
+                "Value": "-1144.87012,166.871246,-191.838226"
+              },
+              {
+                "Target": {
+                  "Type": "GameObject",
+                  "IdValue": "5c0b2848-2f1a-4821-8b67-7e108b715ca7"
+                },
+                "Property": "Rotation",
+                "Value": "0,0,8.94069672E-08,1.00000012"
+              },
+              {
+                "Target": {
+                  "Type": "Component",
+                  "IdValue": "0c2c81fc-beb6-4df7-a04e-de6e3dbff7ae"
+                },
+                "Property": "IsGovernment",
+                "Value": true
+              }
+            ],
+            "MovedObjects": []
+          },
+          "__PrefabIdToInstanceId": {
+            "5c0b2848-2f1a-4821-8b67-7e108b715ca7": "6cee1647-68bf-40be-84b3-a2314e0f5209",
+            "37ddcf29-6df0-46c6-ac21-9e4c05d34e87": "442dcfd9-224c-484b-9f1f-c2c3d37cbd06",
+            "0c2c81fc-beb6-4df7-a04e-de6e3dbff7ae": "87a85c5b-53b3-401d-ab35-cdc9a3cb7fda",
+            "012ba01a-c345-4855-be53-6a942c1d21e9": "a6bcabd9-1653-413d-87fd-a668da0a7054",
+            "4c7bf97a-1c50-40b0-8bde-8477712a7fdf": "6f1efd87-3410-4b82-9837-7eb92374a83c",
+            "aa7b02ca-2781-4188-af14-7bff30b20362": "2afa3ea4-c24d-440a-b68e-cc8f234c08bf",
+            "363d322d-e56d-422a-aa43-de0ec59d498b": "3f98edb4-f8c5-4aa2-8e62-497056315b3a",
+            "07f73016-9b45-4a07-861d-1f64c99a547b": "de7530e9-b9a8-40fd-8320-ae16b6d8854b",
+            "c136a90f-132f-4103-9062-9058b99812ca": "c07cf2a7-9dd9-43f2-8dad-2a933613ddbb",
+            "aabc02e6-1395-4ea6-9c20-7126f3b4b807": "0097163d-da64-41ce-81af-e534280ce915"
+          }
+        },
+        {
+          "__guid": "5d817e62-cfe8-4458-a8ba-ab55c793609b",
+          "__version": 2,
+          "__Prefab": "entities/door/roleplay_door.prefab",
+          "__PrefabInstancePatch": {
+            "AddedObjects": [],
+            "RemovedObjects": [],
+            "PropertyOverrides": [
+              {
+                "Target": {
+                  "Type": "GameObject",
+                  "IdValue": "5c0b2848-2f1a-4821-8b67-7e108b715ca7"
+                },
+                "Property": "Position",
+                "Value": "-1140.54773,374.995422,-191.838226"
+              },
+              {
+                "Target": {
+                  "Type": "GameObject",
+                  "IdValue": "5c0b2848-2f1a-4821-8b67-7e108b715ca7"
+                },
+                "Property": "Rotation",
+                "Value": "0,0,8.94069672E-08,1.00000012"
+              },
+              {
+                "Target": {
+                  "Type": "Component",
+                  "IdValue": "0c2c81fc-beb6-4df7-a04e-de6e3dbff7ae"
+                },
+                "Property": "IsGovernment",
+                "Value": true
+              }
+            ],
+            "MovedObjects": []
+          },
+          "__PrefabIdToInstanceId": {
+            "5c0b2848-2f1a-4821-8b67-7e108b715ca7": "5d817e62-cfe8-4458-a8ba-ab55c793609b",
+            "37ddcf29-6df0-46c6-ac21-9e4c05d34e87": "c378b543-d89f-4515-b984-6b12c08f3008",
+            "0c2c81fc-beb6-4df7-a04e-de6e3dbff7ae": "0233d344-bc7b-40e9-afec-507ef0874de4",
+            "012ba01a-c345-4855-be53-6a942c1d21e9": "27cf02b4-2c98-476e-9d69-f698b6220d1d",
+            "4c7bf97a-1c50-40b0-8bde-8477712a7fdf": "a017e30a-6aa1-47cf-811c-1ce5edcd8ced",
+            "aa7b02ca-2781-4188-af14-7bff30b20362": "01a26969-aace-4250-b538-2940009191ee",
+            "363d322d-e56d-422a-aa43-de0ec59d498b": "3aa6c9f3-98b0-4c4c-8771-99dd79f21a73",
+            "07f73016-9b45-4a07-861d-1f64c99a547b": "d5a9c6e5-8cc6-45cf-9060-8400a0e64268",
+            "c136a90f-132f-4103-9062-9058b99812ca": "036f4cb3-01a7-43c2-965e-3e1a3326f106",
+            "aabc02e6-1395-4ea6-9c20-7126f3b4b807": "a8f5538d-e3eb-412d-8686-fbf89393efea"
+          }
         }
       ]
     },
@@ -10713,278 +10985,6 @@
         "fa7ba4d0-359e-4b5c-9228-4611906acb8f": "312b8ec7-7e0d-46f1-b9fd-ff2bc7ea696b",
         "84882231-301c-4afb-9d2f-de8bd7281aba": "d40927a8-147b-4baf-935e-1c8b678cb785"
       }
-    },
-    {
-      "__guid": "5d817e62-cfe8-4458-a8ba-ab55c793609b",
-      "__version": 2,
-      "__Prefab": "entities/door/roleplay_door.prefab",
-      "__PrefabInstancePatch": {
-        "AddedObjects": [],
-        "RemovedObjects": [],
-        "PropertyOverrides": [
-          {
-            "Target": {
-              "Type": "GameObject",
-              "IdValue": "5c0b2848-2f1a-4821-8b67-7e108b715ca7"
-            },
-            "Property": "Position",
-            "Value": "-1894.96973,-753.994507,-159.375"
-          },
-          {
-            "Target": {
-              "Type": "GameObject",
-              "IdValue": "5c0b2848-2f1a-4821-8b67-7e108b715ca7"
-            },
-            "Property": "Rotation",
-            "Value": "0,0,0.70710665,0.707106769"
-          },
-          {
-            "Target": {
-              "Type": "Component",
-              "IdValue": "0c2c81fc-beb6-4df7-a04e-de6e3dbff7ae"
-            },
-            "Property": "IsGovernment",
-            "Value": true
-          }
-        ],
-        "MovedObjects": []
-      },
-      "__PrefabIdToInstanceId": {
-        "5c0b2848-2f1a-4821-8b67-7e108b715ca7": "5d817e62-cfe8-4458-a8ba-ab55c793609b",
-        "37ddcf29-6df0-46c6-ac21-9e4c05d34e87": "c378b543-d89f-4515-b984-6b12c08f3008",
-        "0c2c81fc-beb6-4df7-a04e-de6e3dbff7ae": "0233d344-bc7b-40e9-afec-507ef0874de4",
-        "012ba01a-c345-4855-be53-6a942c1d21e9": "27cf02b4-2c98-476e-9d69-f698b6220d1d",
-        "4c7bf97a-1c50-40b0-8bde-8477712a7fdf": "a017e30a-6aa1-47cf-811c-1ce5edcd8ced",
-        "aa7b02ca-2781-4188-af14-7bff30b20362": "01a26969-aace-4250-b538-2940009191ee",
-        "363d322d-e56d-422a-aa43-de0ec59d498b": "3aa6c9f3-98b0-4c4c-8771-99dd79f21a73",
-        "07f73016-9b45-4a07-861d-1f64c99a547b": "d5a9c6e5-8cc6-45cf-9060-8400a0e64268",
-        "c136a90f-132f-4103-9062-9058b99812ca": "036f4cb3-01a7-43c2-965e-3e1a3326f106",
-        "aabc02e6-1395-4ea6-9c20-7126f3b4b807": "a8f5538d-e3eb-412d-8686-fbf89393efea"
-      }
-    },
-    {
-      "__guid": "6cee1647-68bf-40be-84b3-a2314e0f5209",
-      "__version": 2,
-      "__Prefab": "entities/door/roleplay_door.prefab",
-      "__PrefabInstancePatch": {
-        "AddedObjects": [],
-        "RemovedObjects": [],
-        "PropertyOverrides": [
-          {
-            "Target": {
-              "Type": "GameObject",
-              "IdValue": "5c0b2848-2f1a-4821-8b67-7e108b715ca7"
-            },
-            "Property": "Name",
-            "Value": "roleplay_door (1)"
-          },
-          {
-            "Target": {
-              "Type": "GameObject",
-              "IdValue": "5c0b2848-2f1a-4821-8b67-7e108b715ca7"
-            },
-            "Property": "Position",
-            "Value": "-1686.84558,-758.316956,-159.375"
-          },
-          {
-            "Target": {
-              "Type": "GameObject",
-              "IdValue": "5c0b2848-2f1a-4821-8b67-7e108b715ca7"
-            },
-            "Property": "Rotation",
-            "Value": "0,0,0.70710665,0.707106769"
-          },
-          {
-            "Target": {
-              "Type": "Component",
-              "IdValue": "0c2c81fc-beb6-4df7-a04e-de6e3dbff7ae"
-            },
-            "Property": "IsGovernment",
-            "Value": true
-          }
-        ],
-        "MovedObjects": []
-      },
-      "__PrefabIdToInstanceId": {
-        "5c0b2848-2f1a-4821-8b67-7e108b715ca7": "6cee1647-68bf-40be-84b3-a2314e0f5209",
-        "37ddcf29-6df0-46c6-ac21-9e4c05d34e87": "442dcfd9-224c-484b-9f1f-c2c3d37cbd06",
-        "0c2c81fc-beb6-4df7-a04e-de6e3dbff7ae": "87a85c5b-53b3-401d-ab35-cdc9a3cb7fda",
-        "012ba01a-c345-4855-be53-6a942c1d21e9": "a6bcabd9-1653-413d-87fd-a668da0a7054",
-        "4c7bf97a-1c50-40b0-8bde-8477712a7fdf": "6f1efd87-3410-4b82-9837-7eb92374a83c",
-        "aa7b02ca-2781-4188-af14-7bff30b20362": "2afa3ea4-c24d-440a-b68e-cc8f234c08bf",
-        "363d322d-e56d-422a-aa43-de0ec59d498b": "3f98edb4-f8c5-4aa2-8e62-497056315b3a",
-        "07f73016-9b45-4a07-861d-1f64c99a547b": "de7530e9-b9a8-40fd-8320-ae16b6d8854b",
-        "c136a90f-132f-4103-9062-9058b99812ca": "c07cf2a7-9dd9-43f2-8dad-2a933613ddbb",
-        "aabc02e6-1395-4ea6-9c20-7126f3b4b807": "0097163d-da64-41ce-81af-e534280ce915"
-      }
-    },
-    {
-      "__guid": "9fb3098b-039f-4b19-b29a-9f872072b33d",
-      "__version": 2,
-      "__Prefab": "entities/door/roleplay_door.prefab",
-      "__PrefabInstancePatch": {
-        "AddedObjects": [],
-        "RemovedObjects": [],
-        "PropertyOverrides": [
-          {
-            "Target": {
-              "Type": "GameObject",
-              "IdValue": "5c0b2848-2f1a-4821-8b67-7e108b715ca7"
-            },
-            "Property": "Name",
-            "Value": "roleplay_door (2)"
-          },
-          {
-            "Target": {
-              "Type": "GameObject",
-              "IdValue": "5c0b2848-2f1a-4821-8b67-7e108b715ca7"
-            },
-            "Property": "Position",
-            "Value": "-1992.99976,-888.925171,-159.375"
-          },
-          {
-            "Target": {
-              "Type": "GameObject",
-              "IdValue": "5c0b2848-2f1a-4821-8b67-7e108b715ca7"
-            },
-            "Property": "Rotation",
-            "Value": "0,0,-0.707106709,0.707106829"
-          },
-          {
-            "Target": {
-              "Type": "Component",
-              "IdValue": "0c2c81fc-beb6-4df7-a04e-de6e3dbff7ae"
-            },
-            "Property": "IsGovernment",
-            "Value": true
-          }
-        ],
-        "MovedObjects": []
-      },
-      "__PrefabIdToInstanceId": {
-        "5c0b2848-2f1a-4821-8b67-7e108b715ca7": "9fb3098b-039f-4b19-b29a-9f872072b33d",
-        "37ddcf29-6df0-46c6-ac21-9e4c05d34e87": "ae03ce48-4940-4efe-8f83-acea43e49e74",
-        "0c2c81fc-beb6-4df7-a04e-de6e3dbff7ae": "e5fc41c8-e6c4-4be3-a464-50f8a528333d",
-        "012ba01a-c345-4855-be53-6a942c1d21e9": "48afa75a-8745-46ff-abab-de17d699523a",
-        "4c7bf97a-1c50-40b0-8bde-8477712a7fdf": "a1cbb5e7-0aa6-4ab7-bcff-fb44943f4a87",
-        "aa7b02ca-2781-4188-af14-7bff30b20362": "f724a78f-a295-4143-aeff-1164eb6245ff",
-        "363d322d-e56d-422a-aa43-de0ec59d498b": "4b9b1b0a-ec62-4a32-aa8a-a215bde861c9",
-        "07f73016-9b45-4a07-861d-1f64c99a547b": "ab009131-4c84-4015-86e7-d370032c9513",
-        "c136a90f-132f-4103-9062-9058b99812ca": "00419571-9e72-4c7d-984c-d3abbb9a52aa",
-        "aabc02e6-1395-4ea6-9c20-7126f3b4b807": "0afee310-9849-421b-9366-ea01178371e4"
-      }
-    },
-    {
-      "__guid": "53fbba39-3505-4f24-9cab-3d2225bbae6e",
-      "__version": 2,
-      "__Prefab": "entities/door/roleplay_door.prefab",
-      "__PrefabInstancePatch": {
-        "AddedObjects": [],
-        "RemovedObjects": [],
-        "PropertyOverrides": [
-          {
-            "Target": {
-              "Type": "GameObject",
-              "IdValue": "5c0b2848-2f1a-4821-8b67-7e108b715ca7"
-            },
-            "Property": "Name",
-            "Value": "roleplay_door (3)"
-          },
-          {
-            "Target": {
-              "Type": "GameObject",
-              "IdValue": "5c0b2848-2f1a-4821-8b67-7e108b715ca7"
-            },
-            "Property": "Position",
-            "Value": "-1848.92236,-890.603882,-159.998901"
-          },
-          {
-            "Target": {
-              "Type": "GameObject",
-              "IdValue": "5c0b2848-2f1a-4821-8b67-7e108b715ca7"
-            },
-            "Property": "Rotation",
-            "Value": "0,0,-0.707106709,0.707106829"
-          },
-          {
-            "Target": {
-              "Type": "Component",
-              "IdValue": "0c2c81fc-beb6-4df7-a04e-de6e3dbff7ae"
-            },
-            "Property": "IsGovernment",
-            "Value": true
-          }
-        ],
-        "MovedObjects": []
-      },
-      "__PrefabIdToInstanceId": {
-        "5c0b2848-2f1a-4821-8b67-7e108b715ca7": "53fbba39-3505-4f24-9cab-3d2225bbae6e",
-        "37ddcf29-6df0-46c6-ac21-9e4c05d34e87": "ea2e876c-6a81-45a5-a700-01875241ca81",
-        "0c2c81fc-beb6-4df7-a04e-de6e3dbff7ae": "9bf16d2a-4a5b-4a62-a23d-569b9e5687ec",
-        "012ba01a-c345-4855-be53-6a942c1d21e9": "1e2fcc5d-a91c-4e20-9159-f67eedbcb13e",
-        "4c7bf97a-1c50-40b0-8bde-8477712a7fdf": "b783f88f-6a07-421d-a22a-138f0178ca4c",
-        "aa7b02ca-2781-4188-af14-7bff30b20362": "08544e44-83ba-4e3f-8fbe-523136be2589",
-        "363d322d-e56d-422a-aa43-de0ec59d498b": "76fc5c23-b319-44b0-8baf-4268c746e04f",
-        "07f73016-9b45-4a07-861d-1f64c99a547b": "4b7fb833-677f-455d-aa40-9512e07ceb54",
-        "c136a90f-132f-4103-9062-9058b99812ca": "9da7ed35-52a1-4eb1-92f3-65070e5e2df6",
-        "aabc02e6-1395-4ea6-9c20-7126f3b4b807": "3de8eb73-52bc-4eeb-b783-cac16b259478"
-      }
-    },
-    {
-      "__guid": "6c622614-2a9b-413b-a738-0ac504cde20c",
-      "__version": 2,
-      "__Prefab": "entities/door/roleplay_door.prefab",
-      "__PrefabInstancePatch": {
-        "AddedObjects": [],
-        "RemovedObjects": [],
-        "PropertyOverrides": [
-          {
-            "Target": {
-              "Type": "GameObject",
-              "IdValue": "5c0b2848-2f1a-4821-8b67-7e108b715ca7"
-            },
-            "Property": "Name",
-            "Value": "roleplay_door (4)"
-          },
-          {
-            "Target": {
-              "Type": "GameObject",
-              "IdValue": "5c0b2848-2f1a-4821-8b67-7e108b715ca7"
-            },
-            "Property": "Position",
-            "Value": "-1704.98901,-891.66626,-159.999847"
-          },
-          {
-            "Target": {
-              "Type": "GameObject",
-              "IdValue": "5c0b2848-2f1a-4821-8b67-7e108b715ca7"
-            },
-            "Property": "Rotation",
-            "Value": "0,0,-0.707106709,0.707106829"
-          },
-          {
-            "Target": {
-              "Type": "Component",
-              "IdValue": "0c2c81fc-beb6-4df7-a04e-de6e3dbff7ae"
-            },
-            "Property": "IsGovernment",
-            "Value": true
-          }
-        ],
-        "MovedObjects": []
-      },
-      "__PrefabIdToInstanceId": {
-        "5c0b2848-2f1a-4821-8b67-7e108b715ca7": "6c622614-2a9b-413b-a738-0ac504cde20c",
-        "37ddcf29-6df0-46c6-ac21-9e4c05d34e87": "6f495138-8399-4647-bb9c-2f129cab0cc4",
-        "0c2c81fc-beb6-4df7-a04e-de6e3dbff7ae": "4b59d371-077b-4e3d-bb68-1535438bccd2",
-        "012ba01a-c345-4855-be53-6a942c1d21e9": "7f61e328-4bf0-4ea4-ad7a-3a44fbac4173",
-        "4c7bf97a-1c50-40b0-8bde-8477712a7fdf": "511fe180-cd70-48bd-b8c5-044a3ce19cd0",
-        "aa7b02ca-2781-4188-af14-7bff30b20362": "0001aff3-281b-40c4-af53-cafcc9ea36cd",
-        "363d322d-e56d-422a-aa43-de0ec59d498b": "92218d48-c0c4-40c1-8b33-d6d90a1f50eb",
-        "07f73016-9b45-4a07-861d-1f64c99a547b": "94796093-1339-49f4-8d32-16e4c5f4d141",
-        "c136a90f-132f-4103-9062-9058b99812ca": "5056eaf9-1c15-487a-bb9a-9b7af22f78ac",
-        "aabc02e6-1395-4ea6-9c20-7126f3b4b807": "54286534-2b15-4a4f-94ee-1c835a7c85c0"
-      }
     }
   ],
   "SceneProperties": {
@@ -11007,11 +11007,6 @@
       "CustomBounds": false
     },
     "GameObjectSystems": {
-      "Sandbox.Clutter.ClutterGridSystem": {
-        "Storage": {
-          "$blob": "4eb53cf5-5e7f-47bd-b9a2-25f9ad3b2a03"
-        }
-      },
       "Sandbox.SelectionSetsSystem": {
         "Data": {
           "SelectionSets": []
@@ -11019,6 +11014,11 @@
       },
       "Sandbox.MovieMaker.MovieRecorderSystem": {
         "DisableClientRecording": false
+      },
+      "Sandbox.Clutter.ClutterGridSystem": {
+        "Storage": {
+          "$blob": "4eb53cf5-5e7f-47bd-b9a2-25f9ad3b2a03"
+        }
       }
     }
   },

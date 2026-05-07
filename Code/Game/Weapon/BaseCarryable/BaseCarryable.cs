@@ -9,7 +9,7 @@ using Sandbox.Rendering;
 /// <param name="Position"></param>
 /// <param name="Origin"></param>
 /// <param name="Hitbox"></param>
-public record struct TraceAttackInfo( GameObject Target, float Damage, TagSet Tags = null, Vector3 Position = default, Vector3 Origin = default, Hitbox Hitbox = null )
+public record struct TraceAttackInfo( GameObject Target, float Damage, TagSet Tags = null, Vector3 Position = default, Vector3 Origin = default )
 {
 	/// <summary>
 	/// Constructs a <see cref="TraceAttackInfo"/> from a trace and input damage.
@@ -23,7 +23,8 @@ public record struct TraceAttackInfo( GameObject Target, float Damage, TagSet Ta
 			tags.Add( tr.Hitbox?.Tags );
 		}
 
-		return new TraceAttackInfo( tr.GameObject, damage, tags, tr.HitPosition, tr.StartPosition, tr.Hitbox );
+		// Hitbox retiré du record — non sérialisable via RPC
+		return new TraceAttackInfo( tr.GameObject, damage, tags, tr.HitPosition, tr.StartPosition );
 	}
 }
 
@@ -339,7 +340,8 @@ public partial class BaseCarryable : Component, IKillIcon
 		var damagable = attack.Target.GetComponentInParent<IDamageable>();
 		if ( damagable is not null )
 		{
-			var info = new DamageInfo( attack.Damage, attacker, GameObject, attack.Hitbox );
+			// Hitbox n'est pas sérialisable via RPC — on ne le passe pas dans DamageInfo
+			var info = new DamageInfo( attack.Damage, attacker, GameObject );
 			info.Position = attack.Position;
 			info.Origin = attack.Origin;
 			info.Tags = attack.Tags;
