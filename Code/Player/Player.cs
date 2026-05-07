@@ -247,7 +247,7 @@ public sealed partial class Player : Component, Component.IDamageable, PlayerCon
 	/// <summary>
 	/// Called on the host when a player dies
 	/// </summary>
-	void Kill( in DamageInfo d )
+	internal void Kill ( in DamageInfo d )
 	{
 		//
 		// Play the flatline sound on the owner

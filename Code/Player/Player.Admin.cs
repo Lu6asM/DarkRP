@@ -149,17 +149,21 @@ public sealed partial class Player
 
 	// ── Slay ─────────────────────────────────────────────────────────────
 
-	[Rpc.Host]
-	public void RequestAdminSlay( Guid targetId )
-	{
-		if ( !AdminSystem.Current.HasAdminAccess( Rpc.Caller ) ) return;
+[Rpc.Host]
+public void RequestAdminSlay( Guid targetId )
+{
+    if ( !AdminSystem.Current.HasAdminAccess( Rpc.Caller ) ) return;
 
-		var target = Player.For( targetId );
-		if ( target is null ) return;
+    var target = Player.For( targetId );
+    if ( target is null ) return;
 
-		target.OnDamage( new DamageInfo { Damage = 9999f } );
-		Notices.SendNotice( Rpc.Caller, "bolt", Color.Green, $"{target.DisplayName} a été slayé(e).", 3 );
-	}
+    // On appelle Kill() directement via la méthode interne
+    // sans passer par OnDamage qui tente de sérialiser DamageInfo
+    target.Health = 0;
+    var dmg = new DamageInfo();
+    target.Kill( dmg );
+    Notices.SendNotice( Rpc.Caller, "bolt", Color.Green, $"{target.DisplayName} a été slayé(e).", 3 );
+}
 
 	// ── God Mode ─────────────────────────────────────────────────────────
 
